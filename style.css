@@ -126,3 +126,56 @@ p { margin: 0; color: #666; }
     cursor: pointer;
     margin-top: 15px;
 }
+
+/* style.css 수정/추가 */
+
+/* 퀴즈 화면 헤더 정렬 (버튼과 진행바를 나란히 or 깔끔하게 배치) */
+#quiz-screen header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 버튼과 진행바 사이 간격 */
+    margin-bottom: 30px;
+}
+
+/* 못생긴 버튼 -> 깔끔한 아이콘 버튼으로 변경 */
+#back-btn {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 20px; /* 둥글게 */
+    transition: all 0.2s;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#back-btn:hover {
+    background-color: #f0f2f5;
+    border-color: #ccc;
+    color: #333;
+    transform: translateX(-3px); /* 살짝 왼쪽으로 움직이는 애니메이션 */
+}
+
+/* 진행 바가 사라진 문제 해결 & 디자인 개선 */
+.progress-bar {
+    width: 100%; /* 남은 공간 다 차지 */
+    height: 12px; /* 조금 더 두껍게 */
+    background-color: #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    /* 만약 flex container 안에 있다면 */
+    flex-grow: 1; 
+}
+
+.progress-fill {
+    height: 100%;
+    width: 5%; /* 시작할 때 살짝 보여주기 (0%면 아예 안 보여서 사라진 줄 알 수 있음) */
+    background-color: #58cc02;
+    border-radius: 6px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* 부드러운 움직임 */
+}

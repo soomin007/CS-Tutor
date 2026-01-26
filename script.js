@@ -2,6 +2,9 @@ let currentQuestionIndex = 0;
 let score = 0;
 let questions = [];
 
+const correctSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.mp3');
+const wrongSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3');
+
 // 메인 화면으로 돌아가기
 function goHome() {
     document.getElementById('menu-screen').classList.remove('hidden');
@@ -43,6 +46,7 @@ function loadQuestion() {
     
     // 프로그레스 바
     const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
+    if (progressPercent < 5) progressPercent = 5; // 최소 너비 설정
     document.getElementById('progress-fill').style.width = `${progressPercent}%`;
 
     const optionsContainer = document.getElementById('options-container');
@@ -61,23 +65,52 @@ function checkAnswer(selectedIndex, correctIndex) {
     const optionsContainer = document.getElementById('options-container');
     const buttons = optionsContainer.getElementsByClassName('option-btn');
 
+    // 버튼 잠금
     for (let btn of buttons) btn.disabled = true;
 
     if (selectedIndex === correctIndex) {
+        // 정답 처리
         buttons[selectedIndex].classList.add('correct');
         document.getElementById('feedback-title').innerText = "정답! 🎉";
         document.getElementById('feedback-title').style.color = "#58cc02";
         score++;
+        
+        // 소리 재생 (크롬 정책상 사용자 인터랙션 후 재생 가능)
+        correctSound.volume = 0.5;
+        correctSound.play().catch(e => console.log("소리 재생 차단됨")); // 에러 방지
+        
     } else {
+        // 오답 처리
         buttons[selectedIndex].classList.add('wrong');
-        buttons[correctIndex].classList.add('correct');
-        document.getElementById('feedback-title').innerText = "오답 😅";
+        buttons[correctIndex].classList.add('correct'); // 정답 알려주기
+        document.getElementById('feedback-title').innerText = "땡! 😅";
         document.getElementById('feedback-title').style.color = "#ff4b4b";
+        
+        wrongSound.volume = 0.3;
+        wrongSound.play().catch(e => console.log("소리 재생 차단됨"));
+
+        // [기능 추가] 오답 노트에 저장 (localStorage)
+        saveWrongAnswer(questions[currentQuestionIndex]);
     }
 
     document.getElementById('feedback-text').innerText = questions[currentQuestionIndex].explanation;
     document.getElementById('feedback-area').classList.remove('hidden');
+
     document.getElementById('next-btn').onclick = nextQuestion;
+}
+
+// [기능 추가] 오답 저장 함수
+function saveWrongAnswer(questionObj) {
+    // 기존 오답 목록 불러오기 (없으면 빈 배열)
+    let wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
+    
+    // 이미 저장된 문제인지 확인 (중복 방지)
+    const exists = wrongNotes.find(q => q.id === questionObj.id);
+    if (!exists) {
+        wrongNotes.push(questionObj);
+        localStorage.setItem('cs-tutor-wrong', JSON.stringify(wrongNotes));
+        console.log("오답 노트에 저장됨:", questionObj.question);
+    }
 }
 
 function nextQuestion() {
