@@ -35,9 +35,8 @@
                     <p>선형대수와 군 (이인석 저)</p>
                 </button>
             </div>
-            <button onclick="alert('지금까지 틀린 문제는 브라우저 저장소에 안전하게 쌓이고 있어요! (뷰어 기능 개발 중)')" 
-                style="margin-top: 20px; background: #fff; border: 2px dashed #ff4b4b; color: #ff4b4b; padding: 10px 20px; border-radius: 12px; cursor: pointer; width: 100%;">
-            🔥 오답 노트 확인하기 (준비 중)
+            <button onclick="openWrongNote()" class="wrong-note-btn">
+                🔥 내 오답 노트 확인하기
             </button>
         </div>
 
@@ -60,6 +59,16 @@
                     <p id="feedback-text">해설</p>
                     <button id="next-btn">다음 문제</button>
                 </div>
+            </main>
+        </div>
+
+        <div id="wrong-screen" class="hidden">
+            <header>
+                <button id="back-btn-wrong" onclick="goHome()">← 메인으로</button>
+                <h1>🔥 오답 노트</h1>
+            </header>
+            <main id="wrong-list">
+                <div class="empty-message">아직 틀린 문제가 없어요! 완벽하시군요 😎</div>
             </main>
         </div>
     </div>

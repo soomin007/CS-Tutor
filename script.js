@@ -10,6 +10,7 @@ const wrongSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-wrong-
 function goHome() {
     document.getElementById('menu-screen').classList.remove('hidden');
     document.getElementById('quiz-screen').classList.add('hidden');
+    document.getElementById('wrong-screen').classList.add('hidden'); // 이 줄 추가됨
     currentQuestionIndex = 0;
     score = 0;
 }
@@ -129,4 +130,61 @@ function showResult() {
             <button onclick="location.reload()" style="margin-top:10px; padding:15px 30px; background:#fff; color:#555; border:1px solid #ddd; border-radius:12px; font-weight:bold; cursor:pointer;">다시 풀기</button>
         </div>
     `;
+}
+
+// --- script.js 맨 아래에 추가 ---
+
+// 오답 노트 화면 열기
+function openWrongNote() {
+    document.getElementById('menu-screen').classList.add('hidden');
+    document.getElementById('quiz-screen').classList.add('hidden');
+    document.getElementById('wrong-screen').classList.remove('hidden');
+
+    renderWrongNotes();
+}
+
+// 오답 리스트 화면에 그리기
+function renderWrongNotes() {
+    const listContainer = document.getElementById('wrong-list');
+    const wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
+
+    // 목록 초기화
+    listContainer.innerHTML = '';
+
+    if (wrongNotes.length === 0) {
+        listContainer.innerHTML = '<div class="empty-message">틀린 문제가 없습니다.<br>완벽하시군요! 😎</div>';
+        return;
+    }
+
+    // 최신순으로 정렬 (뒤집기)
+    wrongNotes.reverse().forEach((q, index) => {
+        // 실제 인덱스 (삭제할 때 필요)
+        const realIndex = wrongNotes.length - 1 - index;
+
+        const card = document.createElement('div');
+        card.className = 'wrong-card';
+        
+        // 정답 텍스트 찾기
+        const correctAnsText = q.options[q.answer];
+
+        card.innerHTML = `
+            <div class="tag">${q.category || '일반'}</div>
+            <button class="delete-btn" onclick="deleteWrongNote(${realIndex})">×</button>
+            <h3>${q.question}</h3>
+            <p style="font-size: 0.9rem; color: #555;">정답: <span class="answer-text">${correctAnsText}</span></p>
+            <p style="font-size: 0.85rem; color: #888; margin-top:5px;">💡 ${q.explanation}</p>
+        `;
+        listContainer.appendChild(card);
+    });
+}
+
+// 오답 삭제하기
+function deleteWrongNote(index) {
+    let wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
+    
+    if (confirm("이 오답 기록을 삭제할까요?")) {
+        wrongNotes.splice(index, 1); // 배열에서 해당 항목 삭제
+        localStorage.setItem('cs-tutor-wrong', JSON.stringify(wrongNotes));
+        renderWrongNotes(); // 화면 다시 그리기
+    }
 }
