@@ -1,0 +1,67 @@
+[
+    {
+        "id": 1,
+        "category": "Vector Space",
+        "question": "체(Field) F 위의 벡터공간 V에 대하여, 다음 중 벡터공간의 공리(Axiom)에 포함되지 않는 것은?",
+        "options": [
+            "덧셈에 대한 교환법칙 (Commutativity)",
+            "스칼라 곱에 대한 결합법칙 (Associativity)",
+            "벡터의 곱셈에 대한 닫힘 성질 (Closure under vector multiplication)",
+            "영벡터(Zero vector)의 존재"
+        ],
+        "answer": 2,
+        "explanation": "벡터공간의 정의에는 '벡터끼리의 덧셈'과 '스칼라와 벡터의 곱셈'만 정의되어 있습니다. 벡터끼리의 곱셈(내적, 외적 등)은 벡터공간의 기본 공리가 아니라 추가적인 구조(예: 내적공간)입니다."
+    },
+    {
+        "id": 2,
+        "category": "Linear Independence",
+        "question": "부분집합 S가 '선형종속(Linearly Dependent)'이라는 것의 정확한 정의는?",
+        "options": [
+            "S의 어떤 벡터가 다른 벡터들의 합으로 표현된다.",
+            "S의 서로 다른 벡터들의 일차결합이 영벡터가 되는 '자명하지 않은(non-trivial)' 계수들이 존재한다.",
+            "S가 전체 공간을 생성(Span)하지 못한다.",
+            "S의 원소 개수가 차원(Dimension)보다 많다."
+        ],
+        "answer": 1,
+        "explanation": "가장 엄밀한 정의는 c1*v1 + ... + ck*vk = 0 을 만족하는 스칼라 c가 모두 0인 경우(자명한 해) 외에 다른 해가 존재할 때입니다. (1번 보기는 영벡터가 포함된 경우 등 예외가 있어 엄밀하지 않을 수 있습니다.)"
+    },
+    {
+        "id": 3,
+        "category": "Basis & Dimension",
+        "question": "n차원 벡터공간 V의 부분공간 W에 대하여, dim(W) = dim(V)일 때 성립하는 명제는? (단, 유한차원)",
+        "options": [
+            "W = V",
+            "W는 V의 진부분집합(Proper subset)이다.",
+            "W의 기저는 V의 기저보다 원소 개수가 적다.",
+            "알 수 없다."
+        ],
+        "answer": 0,
+        "explanation": "유한차원 벡터공간에서 부분공간의 차원이 전체공간의 차원과 같으면, 그 부분공간은 전체공간과 일치합니다(W = V). 이는 <선형대수와 군>에서 차원을 이용해 두 공간이 같음을 증명할 때 자주 쓰이는 테크닉입니다."
+    },
+    {
+        "id": 4,
+        "category": "Linear Map",
+        "question": "선형사상 T: V -> W 가 '단사(Injective)'일 필요충분조건은?",
+        "options": [
+            "dim(V) = dim(W)",
+            "Ker(T) = {0} (영공간이 영벡터만 포함한다)",
+            "Im(T) = W (치역이 공역과 같다)",
+            "T가 행렬로 표현될 때 행렬식이 0이 아니다."
+        ],
+        "answer": 1,
+        "explanation": "선형대수학의 핵심 정리 중 하나입니다. 선형사상이 단사함수인 것과 커널(Kernel, 핵)이 영공간인 것은 동치입니다."
+    },
+    {
+        "id": 5,
+        "category": "System of Linear Equations",
+        "question": "Ax = b 꼴의 선형 연립방정식에서 해가 존재할(Consistent) 필요충분조건은? (Rank 이용)",
+        "options": [
+            "rank(A) = rank([A|b]) (확대행렬의 랭크와 같다)",
+            "rank(A) = 행의 개수",
+            "rank(A) = 열의 개수",
+            "b = 0"
+        ],
+        "answer": 0,
+        "explanation": "해가 존재한다는 것은 b가 A의 열벡터(Column vector)들이 생성하는 공간(Column space) 안에 있다는 뜻입니다. 즉, b를 추가해도 차원이 늘어나지 않아야 하므로 계수행렬 A와 확대행렬 [A|b]의 랭크가 같아야 합니다."
+    }
+]
