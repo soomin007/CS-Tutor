@@ -1,0 +1,189 @@
+/* 전체 폰트 및 배경 설정 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 앱 전체 컨테이너 (스마트폰 화면처럼 보이게) */
+.app-container {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    min-height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 진행 상황 바 (게이미피케이션 요소) */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #58cc02; /* 듀오링고 그린 */
+    transition: width 0.3s ease;
+}
+
+/* 문제 영역 */
+.question-area {
+    margin-bottom: 20px;
+}
+
+.category-tag {
+    background-color: #e5e5e5;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #555;
+    font-weight: bold;
+}
+
+#question-text {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+/* 보기 버튼들 */
+.options-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-btn {
+    padding: 15px;
+    border: 2px solid #e5e5e5;
+    background-color: white;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    background-color: #f7f7f7;
+    border-color: #d7d7d7;
+}
+
+/* 정답/오답 스타일 */
+.option-btn.correct {
+    background-color: #d7ffb8;
+    border-color: #58cc02;
+    color: #58cc02;
+    font-weight: bold;
+}
+
+.option-btn.wrong {
+    background-color: #ffdfe0;
+    border-color: #ff4b4b;
+    color: #ff4b4b;
+    font-weight: bold;
+}
+
+/* 피드백 및 다음 버튼 영역 */
+.feedback-area {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+.feedback-area.hidden {
+    display: none;
+}
+
+#next-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #58cc02;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#next-btn:hover {
+    background-color: #46a302;
+}
+
+/* 화면 전환용 유틸리티 */
+.hidden { display: none !important; }
+
+/* 메인 메뉴 스타일 */
+.subject-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 모바일: 1줄 */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.subject-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.subject-card:hover {
+    transform: translateY(-3px);
+    border-color: #58cc02;
+    box-shadow: 0 4px 12px rgba(88, 204, 2, 0.2);
+}
+
+.subject-card .icon {
+    font-size: 2rem;
+    background: #f0f2f5;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.subject-card h3 { margin: 0; font-size: 1.1rem; color: #333; }
+.subject-card p { margin: 5px 0 0; font-size: 0.85rem; color: #777; }
+
+/* 뒤로가기 버튼 */
+#back-btn {
+    background: none;
+    border: none;
+    color: #777;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 0;
+}

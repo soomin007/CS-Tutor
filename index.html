@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Tutor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="menu-screen">
+            <header>
+                <h1>오늘의 공부 📚</h1>
+                <p>자투리 시간을 활용해보세요!</p>
+            </header>
+            <div class="subject-grid">
+                <button class="subject-card" onclick="startQuiz('math1.json')">
+                    <span class="icon">📐</span>
+                    <h3>공학수학 1</h3>
+                    <p>선형대수, 미분방정식</p>
+                </button>
+                <button class="subject-card" onclick="startQuiz('logic.json')">
+                    <span class="icon">⚡</span>
+                    <h3>논리설계</h3>
+                    <p>게이트, 불 대수</p>
+                </button>
+                <button class="subject-card" onclick="startQuiz('archi.json')">
+                    <span class="icon">💻</span>
+                    <h3>컴퓨터 구조</h3>
+                    <p>MIPS, 파이프라인</p>
+                </button>
+            </div>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <header>
+                <button id="back-btn" onclick="goHome()">← 메인으로</button>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </header>
+
+            <main id="quiz-box">
+                <div class="question-area">
+                    <span class="category-tag" id="category-tag">Subject</span>
+                    <h2 id="question-text">문제 로딩 중...</h2>
+                </div>
+                <div class="options-area" id="options-container"></div>
+                <div class="feedback-area hidden" id="feedback-area">
+                    <h3 id="feedback-title">정답!</h3>
+                    <p id="feedback-text">해설</p>
+                    <button id="next-btn">다음 문제</button>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
