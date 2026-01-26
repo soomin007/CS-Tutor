@@ -2,6 +2,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let questions = [];
 
+// 효과음 파일 (무료 소스)
 const correctSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.mp3');
 const wrongSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3');
 
@@ -13,7 +14,7 @@ function goHome() {
     score = 0;
 }
 
-// 퀴즈 시작하기 (파일 이름을 인자로 받음)
+// 퀴즈 시작하기
 async function startQuiz(fileName) {
     // 화면 전환
     document.getElementById('menu-screen').classList.add('hidden');
@@ -21,18 +22,22 @@ async function startQuiz(fileName) {
     
     // 데이터 불러오기
     try {
-        // data 폴더 안에 있는 파일을 찾습니다.
         const response = await fetch(`data/${fileName}`);
-        if (!response.ok) throw new Error("파일을 찾을 수 없음");
+        
+        // 파일이 없는 경우 에러 처리
+        if (!response.ok) {
+            throw new Error(`파일을 찾을 수 없음: data/${fileName}`);
+        }
+        
         questions = await response.json();
         
-        // 문제 섞기 (매번 순서 다르게)
+        // 문제 섞기
         questions.sort(() => Math.random() - 0.5);
         
         loadQuestion();
     } catch (error) {
-        console.error(error);
-        alert("아직 준비 중인 과목입니다! (JSON 파일을 data 폴더에 만들어주세요)");
+        console.error("데이터 로딩 실패:", error);
+        alert(`오류 발생! JSON 파일을 확인해주세요.\n(에러 내용: ${error.message})`);
         goHome();
     }
 }
@@ -44,9 +49,9 @@ function loadQuestion() {
     document.getElementById('question-text').innerText = questionData.question;
     document.getElementById('feedback-area').classList.add('hidden');
     
-    // 프로그레스 바
-    const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
-    if (progressPercent < 5) progressPercent = 5; // 최소 너비 설정
+    // 프로그레스 바 업데이트 (최소 5%는 보이게)
+    let progressPercent = (currentQuestionIndex / questions.length) * 100;
+    if (progressPercent < 5) progressPercent = 5;
     document.getElementById('progress-fill').style.width = `${progressPercent}%`;
 
     const optionsContainer = document.getElementById('options-container');
@@ -65,43 +70,36 @@ function checkAnswer(selectedIndex, correctIndex) {
     const optionsContainer = document.getElementById('options-container');
     const buttons = optionsContainer.getElementsByClassName('option-btn');
 
-    // 버튼 잠금
     for (let btn of buttons) btn.disabled = true;
 
     if (selectedIndex === correctIndex) {
-        // 정답 처리
+        // 정답
         buttons[selectedIndex].classList.add('correct');
         document.getElementById('feedback-title').innerText = "정답! 🎉";
         document.getElementById('feedback-title').style.color = "#58cc02";
         score++;
-        
-        // 소리 재생 (크롬 정책상 사용자 인터랙션 후 재생 가능)
         correctSound.volume = 0.5;
-        correctSound.play().catch(e => console.log("소리 재생 차단됨")); // 에러 방지
-        
+        correctSound.play().catch(() => {}); // 소리 재생 에러 무시
     } else {
-        // 오답 처리
+        // 오답
         buttons[selectedIndex].classList.add('wrong');
-        buttons[correctIndex].classList.add('correct'); // 정답 알려주기
+        buttons[correctIndex].classList.add('correct');
         document.getElementById('feedback-title').innerText = "땡! 😅";
         document.getElementById('feedback-title').style.color = "#ff4b4b";
-        
         wrongSound.volume = 0.3;
-        wrongSound.play().catch(e => console.log("소리 재생 차단됨"));
-
-        // [기능 추가] 오답 노트에 저장 (localStorage)
+        wrongSound.play().catch(() => {});
+        
+        // 오답 노트 저장
         saveWrongAnswer(questions[currentQuestionIndex]);
     }
 
     document.getElementById('feedback-text').innerText = questions[currentQuestionIndex].explanation;
     document.getElementById('feedback-area').classList.remove('hidden');
-
     document.getElementById('next-btn').onclick = nextQuestion;
 }
 
-// [기능 추가] 오답 저장 함수
+// 오답 저장 함수
 function saveWrongAnswer(questionObj) {
-    // 기존 오답 목록 불러오기 (없으면 빈 배열)
     let wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
     
     // 이미 저장된 문제인지 확인 (중복 방지)
@@ -109,7 +107,6 @@ function saveWrongAnswer(questionObj) {
     if (!exists) {
         wrongNotes.push(questionObj);
         localStorage.setItem('cs-tutor-wrong', JSON.stringify(wrongNotes));
-        console.log("오답 노트에 저장됨:", questionObj.question);
     }
 }
 
