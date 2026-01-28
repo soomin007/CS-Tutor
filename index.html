@@ -66,8 +66,14 @@
 
         <div id="wrong-screen" class="hidden">
             <header>
-                <button id="back-btn-wrong" onclick="goHome()">← 메인으로</button>
-                <h1>🔥 오답 노트</h1>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button id="back-btn-wrong" onclick="goHome()">← 메인으로</button>
+                    <button onclick="clearWrongNotes()"
+                        style="background:none; border:none; color:#ff4b4b; cursor:pointer; font-weight:bold;">
+                        🗑️ 전체 삭제
+                    </button>
+                </div>
+                <h1 style="margin-top: 10px;">🔥 오답 노트</h1>
             </header>
             <main id="wrong-list">
                 <div class="empty-message">아직 틀린 문제가 없어요! 완벽하시군요 😎</div>

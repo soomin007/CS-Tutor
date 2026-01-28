@@ -203,3 +203,19 @@ function deleteWrongNote(index) {
         renderWrongNotes(); // 화면 다시 그리기
     }
 }
+
+// 오답 노트 전체 초기화 (Reset)
+function clearWrongNotes() {
+    const wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
+    
+    if (wrongNotes.length === 0) {
+        alert("지울 오답이 없습니다!");
+        return;
+    }
+
+    if (confirm("정말로 오답 노트를 전부 비우시겠습니까?\n(삭제된 내용은 복구할 수 없습니다)")) {
+        localStorage.removeItem('cs-tutor-wrong'); // 저장소 비우기
+        renderWrongNotes(); // 화면 즉시 갱신
+        alert("오답 노트가 초기화되었습니다.");
+    }
+}
