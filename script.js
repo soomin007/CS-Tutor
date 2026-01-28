@@ -1,6 +1,7 @@
 let currentQuestionIndex = 0;
 let score = 0;
 let questions = [];
+let currentDifficulty = 0; // 0: 전체, 1: 기초, 2: 응용, 3: 실전
 
 // 효과음 파일 (무료 소스)
 const correctSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-changing-tab-206.mp3');
@@ -10,32 +11,41 @@ const wrongSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-wrong-
 function goHome() {
     document.getElementById('menu-screen').classList.remove('hidden');
     document.getElementById('quiz-screen').classList.add('hidden');
-    document.getElementById('wrong-screen').classList.add('hidden'); // 이 줄 추가됨
+    document.getElementById('wrong-screen').classList.add('hidden');
+    document.getElementById('result-screen').classList.add('hidden');
     currentQuestionIndex = 0;
     score = 0;
 }
 
 // 퀴즈 시작하기
-async function startQuiz(fileName) {
+async function startQuiz(fileName, difficultyLevel = 0) {
     // 화면 전환
     document.getElementById('menu-screen').classList.add('hidden');
     document.getElementById('quiz-screen').classList.remove('hidden');
-    
+
     // 데이터 불러오기
     try {
         const response = await fetch(`data/${fileName}`);
-        
-        // 파일이 없는 경우 에러 처리
-        if (!response.ok) {
-            throw new Error(`파일을 찾을 수 없음: data/${fileName}`);
+        if (!response.ok) throw new Error("파일 없음");
+
+        let allQuestions = await response.json();
+
+        // 난이도 필터링 로직
+        if (difficultyLevel > 0) {
+            questions = allQuestions.filter(q => q.difficulty === difficultyLevel);
+            if (questions.length === 0) {
+                alert("해당 난이도의 문제가 아직 없습니다! 전체 문제로 진행합니다.");
+                questions = allQuestions;
+            }
+        } else {
+            questions = allQuestions;
         }
-        
-        questions = await response.json();
-        
-        // 문제 섞기
+
         questions.sort(() => Math.random() - 0.5);
-        
-        loadQuestion();
+        currentQuestionIndex = 0;
+        score = 0;
+        loadQuestion(); // 문제 로딩
+
     } catch (error) {
         console.error("데이터 로딩 실패:", error);
         alert(`오류 발생! JSON 파일을 확인해주세요.\n(에러 내용: ${error.message})`);
@@ -45,11 +55,11 @@ async function startQuiz(fileName) {
 
 function loadQuestion() {
     const questionData = questions[currentQuestionIndex];
-    
+
     document.getElementById('category-tag').innerText = questionData.category || "Quiz";
     document.getElementById('question-text').innerText = questionData.question;
     document.getElementById('feedback-area').classList.add('hidden');
-    
+
     // 프로그레스 바 업데이트 (최소 5%는 보이게)
     let progressPercent = (currentQuestionIndex / questions.length) * 100;
     if (progressPercent < 5) progressPercent = 5;
@@ -80,7 +90,7 @@ function checkAnswer(selectedIndex, correctIndex) {
         document.getElementById('feedback-title').style.color = "#58cc02";
         score++;
         correctSound.volume = 0.5;
-        correctSound.play().catch(() => {}); // 소리 재생 에러 무시
+        correctSound.play().catch(() => { }); // 소리 재생 에러 무시
     } else {
         // 오답
         buttons[selectedIndex].classList.add('wrong');
@@ -88,8 +98,8 @@ function checkAnswer(selectedIndex, correctIndex) {
         document.getElementById('feedback-title').innerText = "땡! 😅";
         document.getElementById('feedback-title').style.color = "#ff4b4b";
         wrongSound.volume = 0.3;
-        wrongSound.play().catch(() => {});
-        
+        wrongSound.play().catch(() => { });
+
         // 오답 노트 저장
         saveWrongAnswer(questions[currentQuestionIndex]);
     }
@@ -102,7 +112,7 @@ function checkAnswer(selectedIndex, correctIndex) {
 // 오답 저장 함수
 function saveWrongAnswer(questionObj) {
     let wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
-    
+
     // 이미 저장된 문제인지 확인 (중복 방지)
     const exists = wrongNotes.find(q => q.id === questionObj.id);
     if (!exists) {
@@ -120,19 +130,24 @@ function nextQuestion() {
     }
 }
 
+// 결과 보여주기 함수 (HTML 덮어쓰기 -> 화면 전환으로 변경)
 function showResult() {
-    const quizBox = document.getElementById('quiz-box');
-    quizBox.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-            <h1>🎉 완주 성공!</h1>
-            <p>총 ${questions.length}문제 중 <strong>${score}</strong>개를 맞췄어요.</p>
-            <button onclick="goHome()" style="margin-top:20px; padding:15px 30px; background:#58cc02; color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer;">다른 과목 도전하기</button>
-            <button onclick="location.reload()" style="margin-top:10px; padding:15px 30px; background:#fff; color:#555; border:1px solid #ddd; border-radius:12px; font-weight:bold; cursor:pointer;">다시 풀기</button>
-        </div>
-    `;
+    document.getElementById('quiz-screen').classList.add('hidden');
+    document.getElementById('result-screen').classList.remove('hidden');
+
+    const msg = `총 ${questions.length}문제 중 <strong>${score}</strong>개를 맞췄어요.`;
+    document.getElementById('result-message').innerHTML = msg;
 }
 
-// --- script.js 맨 아래에 추가 ---
+// 같은 과목 다시 풀기
+function restartQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('result-screen').classList.add('hidden');
+    document.getElementById('quiz-screen').classList.remove('hidden');
+    questions.sort(() => Math.random() - 0.5); // 다시 섞기
+    loadQuestion();
+}
 
 // 오답 노트 화면 열기
 function openWrongNote() {
@@ -163,7 +178,7 @@ function renderWrongNotes() {
 
         const card = document.createElement('div');
         card.className = 'wrong-card';
-        
+
         // 정답 텍스트 찾기
         const correctAnsText = q.options[q.answer];
 
@@ -181,7 +196,7 @@ function renderWrongNotes() {
 // 오답 삭제하기
 function deleteWrongNote(index) {
     let wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
-    
+
     if (confirm("이 오답 기록을 삭제할까요?")) {
         wrongNotes.splice(index, 1); // 배열에서 해당 항목 삭제
         localStorage.setItem('cs-tutor-wrong', JSON.stringify(wrongNotes));

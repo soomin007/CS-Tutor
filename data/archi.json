@@ -1,0 +1,67 @@
+[
+  {
+    "id": 301,
+    "category": "ISA (Instruction Set Architecture)",
+    "question": "RISC-V 아키텍처를 'Load-Store Architecture'라고 부르는 이유는?",
+    "options": [
+      "모든 명령어가 메모리에 자유롭게 접근할 수 있어서",
+      "ALU 연산은 레지스터 간에서만 수행되고, 메모리 접근은 오직 Load/Store 명령어로만 가능해서",
+      "명령어 길이가 가변적이라서",
+      "스택(Stack)을 사용하여 연산을 수행하기 때문에"
+    ],
+    "answer": 1,
+    "explanation": "RISC 계열(RISC-V, MIPS 등)은 하드웨어 단순화를 위해 연산은 레지스터에서만 수행하고, 메모리 접근은 적재(Load)와 저장(Store) 명령어로만 제한합니다. (참고: 2025 중간고사 복기 Part 1)"
+  },
+  {
+    "id": 302,
+    "category": "Pipelining Hazard",
+    "question": "파이프라인 프로세서에서 '데이터 해저드'를 해결하기 위해, 연산 결과를 메모리에 쓰기(WB) 전에 다음 명령어의 입력으로 미리 전달하는 기법은?",
+    "options": [
+      "Forwarding (Bypassing)",
+      "Branch Prediction",
+      "Stalling (Bubble)",
+      "Cache Prefetching"
+    ],
+    "answer": 0,
+    "explanation": "Forwarding(또는 Bypassing)은 EX 단계 등에서 생성된 결과를 WB 단계까지 기다리지 않고 즉시 다음 명령어의 입력으로 연결하여 파이프라인 멈춤(Stall)을 방지하는 기법입니다. (참고: 2018 중간고사)"
+  },
+  {
+    "id": 303,
+    "category": "Performance Iron Law",
+    "question": "프로세서 성능 공식(CPU Time)의 3가지 요소가 아닌 것은? (Time = IC × CPI × Cycle Time)",
+    "options": [
+      "Instruction Count (명령어 수)",
+      "CPI (Cycles Per Instruction)",
+      "Clock Cycle Time (클럭 주기)",
+      "Cache Hit Rate (캐시 적중률)"
+    ],
+    "answer": 3,
+    "explanation": "CPU 실행 시간은 '명령어 개수(IC)', '명령어당 사이클(CPI)', '사이클 시간'의 곱으로 결정됩니다. 이를 'Iron Law of Processor Performance'라고 합니다. 캐시 적중률은 CPI에 영향을 주는 요소입니다. (참고: 2018 중간고사)"
+  },
+  {
+    "id": 304,
+    "category": "Control Hazard",
+    "question": "파이프라인 효율을 높이기 위해, 분기(Branch) 명령어 바로 다음 위치(Delay Slot)의 명령어를 분기 여부와 상관없이 항상 실행하게 만드는 기법은?",
+    "options": [
+      "Dynamic Branch Prediction",
+      "Delayed Branch",
+      "Loop Unrolling",
+      "Speculative Execution"
+    ],
+    "answer": 1,
+    "explanation": "Delayed Branch는 컴파일러가 분기 명령어 뒤(Delay Slot)에 유용한 명령어(또는 NOP)를 배치하여, 파이프라인을 비우지 않고 계속 실행하게 만드는 소프트웨어적 해결책입니다. (참고: 2024 중간고사 Problem 9)"
+  },
+  {
+    "id": 305,
+    "category": "Synchronization",
+    "question": "RISC-V에서 멀티코어 동기화(Lock 등)를 구현하기 위해 사용하는 특수한 명령어 쌍은?",
+    "options": [
+      "Test-and-Set",
+      "Compare-and-Swap (CAS)",
+      "Load Reserved (lr) / Store Conditional (sc)",
+      "Push / Pop"
+    ],
+    "answer": 2,
+    "explanation": "RISC-V는 하드웨어 복잡도를 낮추기 위해 단일 원자적 명령어 대신, 실패 시 재시도할 수 있는 lr(예약 로드)과 sc(조건부 저장) 명령어 쌍을 사용하여 동기화를 구현합니다. (참고: 2025 중간고사 복기 Part 6)"
+  }
+]

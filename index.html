@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS Tutor</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
         <div id="menu-screen">
@@ -29,7 +31,7 @@
                     <h3>컴퓨터 구조</h3>
                     <p>MIPS, 파이프라인</p>
                 </button>
-                    <button class="subject-card" onclick="startQuiz('linear.json')">
+                <button class="subject-card" onclick="startQuiz('linear.json')">
                     <span class="icon">💎</span>
                     <h3>선형대수학 (심화)</h3>
                     <p>선형대수와 군 (이인석 저)</p>
@@ -71,7 +73,21 @@
                 <div class="empty-message">아직 틀린 문제가 없어요! 완벽하시군요 😎</div>
             </main>
         </div>
+
+        <div id="result-screen" class="hidden" style="text-align: center; padding: 40px;">
+            <h1>🎉 완주 성공!</h1>
+            <p id="result-message">결과를 계산 중입니다...</p>
+            <div style="margin-top: 30px;">
+                <button onclick="goHome()"
+                    style="padding:15px 30px; background:#58cc02; color:white; border:none; border-radius:12px; font-weight:bold; cursor:pointer;">다른
+                    과목 도전하기</button>
+                <button onclick="restartQuiz()"
+                    style="margin-left:10px; padding:15px 30px; background:#fff; color:#555; border:1px solid #ddd; border-radius:12px; font-weight:bold; cursor:pointer;">다시
+                    풀기</button>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
