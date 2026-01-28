@@ -1,67 +1,902 @@
 [
   {
-    "id": 101,
-    "category": "ODE (미분방정식)",
-    "question": "다음 미분방정식 y'' + y' + 2y - y^2 = 0 은 선형(Linear)인가 비선형(Non-linear)인가?",
-    "options": [
-      "선형 상미분방정식이다.",
-      "선형 편미분방정식이다.",
-      "비선형 상미분방정식이다.",
-      "정보가 부족하여 알 수 없다."
-    ],
+    "id": 1,
+    "difficulty": 1,
+    "category": "ODE Basics",
+    "question": "미분방정식 y'' + 3y' + 2y = 0 의 계수(Order)와 선형성(Linearity)은?",
+    "options": ["1계 비선형", "2계 비선형", "2계 선형", "3계 선형"],
     "answer": 2,
-    "explanation": "종속 변수 y의 제곱항(-y^2)이 포함되어 있으므로 '비선형(Non-linear)'입니다. 선형 방정식은 종속 변수와 그 도함수들이 1차 결합으로만 이루어져야 합니다. (참고: 최형규 교수님 기출 1번)"
+    "explanation": "가장 높은 도함수가 2계(y'')이고, 종속변수 y와 그 도함수들이 1차 결합으로만 이루어져 있으므로 2계 선형 상미분방정식입니다."
   },
   {
-    "id": 102,
-    "category": "Linear Algebra (선형대수)",
-    "question": "행렬 A의 고유값(Eigenvalue)들의 합(Sum)은 행렬의 무엇과 동일한가?",
-    "options": [
-      "행렬식 (Determinant)",
-      "대각합 (Trace)",
-      "랭크 (Rank)",
-      "영공간의 차원 (Nullity)"
-    ],
+    "id": 2,
+    "difficulty": 1,
+    "category": "Separable ODE",
+    "question": "변수분리형 미분방정식 y' = x/y 의 일반해는?",
+    "options": ["y = x + C", "y^2 - x^2 = C", "y = x^2 + C", "y^2 + x^2 = C"],
     "answer": 1,
-    "explanation": "모든 정사각행렬에서 고유값들의 합은 주대각선 성분들의 합인 Trace(A)와 항상 일치합니다. 반대로 고유값들의 곱은 Determinant(A)와 같습니다. (참고: 이영민 교수님 기출 1-d)"
+    "explanation": "y dy = x dx 로 분리하여 양변을 적분하면 (1/2)y^2 = (1/2)x^2 + C' 이므로 y^2 - x^2 = C 가 됩니다."
   },
   {
-    "id": 103,
-    "category": "ODE (응용)",
-    "question": "뉴턴의 냉각 법칙(Newton's Law of Cooling)에 따르면, 물체의 온도 변화율 T'는 무엇에 비례하는가?",
-    "options": [
-      "현재 온도 T 그 자체",
-      "시간 t",
-      "현재 온도 T와 주변 온도(M)의 차이 (T-M)",
-      "주변 온도의 제곱"
-    ],
-    "answer": 2,
-    "explanation": "냉각 법칙 모델링 식은 T' = -k(T - M) 입니다. 즉, 온도 변화율은 '현재 물체의 온도'와 '주변 환경의 온도' 차이에 비례합니다. (참고: 송용수 교수님 기출 7번)"
+    "id": 3,
+    "difficulty": 2,
+    "category": "Integrating Factor",
+    "question": "1계 선형 미분방정식 y' + P(x)y = Q(x)를 풀기 위한 적분인자(Integrating Factor) I(x)는?",
+    "options": ["e^∫Q(x)dx", "e^∫P(x)dx", "∫P(x)dx", "e^-∫P(x)dx"],
+    "answer": 1,
+    "explanation": "양변에 적분인자 I(x) = e^∫P(x)dx 를 곱하면 좌변이 (I*y)' 형태로 묶여 적분이 가능해집니다."
   },
   {
-    "id": 104,
-    "category": "Linear Algebra",
-    "question": "행렬 A가 역행렬을 가지지 않을(Singular) 필요충분조건은?",
-    "options": [
-      "det(A) = 0",
-      "det(A) = 1",
-      "Trace(A) = 0",
-      "A가 대칭행렬일 때"
-    ],
+    "id": 4,
+    "difficulty": 2,
+    "category": "Exact ODE",
+    "question": "미분방정식 M(x,y)dx + N(x,y)dy = 0 이 완전(Exact) 미분방정식이 되기 위한 필요충분조건은?",
+    "options": ["∂M/∂x = ∂N/∂y", "∂M/∂y = ∂N/∂x", "M = N", "∂M/∂x = -∂N/∂y"],
+    "answer": 1,
+    "explanation": "완전 미분방정식은 어떤 포텐셜 함수 u(x,y)의 전미분 du = 0 꼴이어야 하므로, 혼합 편미분의 교환 법칙에 의해 My = Nx 여야 합니다."
+  },
+  {
+    "id": 5,
+    "difficulty": 3,
+    "category": "Bernoulli Equation",
+    "question": "베르누이 방정식 y' + p(x)y = g(x)y^a (a≠0,1)을 선형화하기 위한 치환 u는?",
+    "options": ["u = y^a", "u = y^(1-a)", "u = y^-a", "u = ln(y)"],
+    "answer": 1,
+    "explanation": "양변을 y^a로 나누고 u = y^(1-a)로 치환하면 u' + (1-a)p(x)u = (1-a)g(x) 형태의 1계 선형 미분방정식이 됩니다."
+  },
+  {
+    "id": 6,
+    "difficulty": 1,
+    "category": "Initial Value Problem",
+    "question": "초기값 문제(IVP) y' = y, y(0) = 3 의 해는?",
+    "options": ["y = 3e^x", "y = e^3x", "y = 3e^-x", "y = 3x"],
     "answer": 0,
-    "explanation": "행렬식(Determinant)이 0이면 역행렬이 존재하지 않습니다. 이를 특이 행렬(Singular Matrix)이라고 합니다. (참고: 송용수 교수님 기출 3번)"
+    "explanation": "일반해는 y = Ce^x 이고, 초기조건 x=0일 때 y=3을 대입하면 C=3 입니다."
   },
   {
-    "id": 105,
-    "category": "ODE (Wronskian)",
-    "question": "함수 y1, y2가 어떤 구간에서 일차 독립(Linearly Independent)임을 확인하기 위해 사용하는 행렬식 W(y1, y2)의 이름은?",
-    "options": [
-      "Jacobian (자코비안)",
-      "Hessian (헤시안)",
-      "Wronskian (론스키안)",
-      "Laplacian (라플라시안)"
-    ],
+    "id": 7,
+    "difficulty": 2,
+    "category": "Characteristic Eq",
+    "question": "상수계수 2계 제차 미분방정식 y'' - 5y' + 6y = 0 의 기저(Basis)는?",
+    "options": ["e^2x, e^3x", "e^-2x, e^-3x", "e^2x, xe^2x", "e^3x, xe^3x"],
+    "answer": 0,
+    "explanation": "특성방정식 λ^2 - 5λ + 6 = (λ-2)(λ-3) = 0 에서 서로 다른 두 실근 2, 3이 나오므로 기저는 e^2x, e^3x 입니다."
+  },
+  {
+    "id": 8,
+    "difficulty": 2,
+    "category": "Characteristic Eq",
+    "question": "특성방정식이 중근 λ = 4 를 가질 때, 일반해의 형태는?",
+    "options": ["c1 e^4x + c2 e^-4x", "c1 e^4x + c2 e^4x", "c1 e^4x + c2 x e^4x", "c1 cos(4x) + c2 sin(4x)"],
     "answer": 2,
-    "explanation": "Wronskian이 0이 아니면 두 해는 일차 독립입니다. 공학수학 1에서 기저(Basis)를 형성하는지 확인할 때 필수적으로 사용됩니다. (참고: 박정필 교수님 기출 2번)"
+    "explanation": "중근을 가질 때는 일차 독립인 두 번째 해를 찾기 위해 x를 곱해줍니다. (계수내림법의 결과)"
+  },
+  {
+    "id": 9,
+    "difficulty": 2,
+    "category": "Characteristic Eq",
+    "question": "특성방정식의 근이 복소수 λ = 3 ± 4i 일 때, 실함수 형태의 일반해는?",
+    "options": ["e^3x (c1 cos 4x + c2 sin 4x)", "e^4x (c1 cos 3x + c2 sin 3x)", "c1 e^3x + c2 e^4x", "c1 cos 4x + c2 sin 4x"],
+    "answer": 0,
+    "explanation": "복소근 α ± βi 가 나오면 해는 e^αx (A cos βx + B sin βx) 형태가 됩니다. (오일러 공식 적용)"
+  },
+  {
+    "id": 10,
+    "difficulty": 3,
+    "category": "Wronskian",
+    "question": "두 해 y1, y2의 론스키안(Wronskian) W(y1, y2)가 0이 아니라는 것은 무엇을 의미하는가?",
+    "options": ["두 해가 선형 종속이다.", "두 해가 선형 독립이다.", "두 해가 서로 수직이다.", "두 해가 상수다."],
+    "answer": 1,
+    "explanation": "Wronskian이 0이 아니면 두 함수는 선형 독립(Linearly Independent)이며, 이는 2계 미분방정식의 기본 해 집합을 구성할 수 있음을 뜻합니다."
+  },
+  {
+    "id": 11,
+    "difficulty": 1,
+    "category": "Existence Uniqueness",
+    "question": "초기값 문제 y' = f(x,y), y(x0)=y0 의 해가 유일하게 존재하기 위한 충분조건은?",
+    "options": ["f가 연속이어야 한다.", "f와 ∂f/∂y 가 연속이어야 한다.", "f가 미분 가능해야 한다.", "f가 선형이어야 한다."],
+    "answer": 1,
+    "explanation": "피카드(Picard)의 존재성 및 유일성 정리에 따르면, f와 y에 대한 편미분 ∂f/∂y가 모두 연속이면 국소적으로 유일한 해가 존재합니다."
+  },
+  {
+    "id": 12,
+    "difficulty": 3,
+    "category": "Euler-Cauchy",
+    "question": "오일러-코시 방정식 x^2 y'' + ax y' + by = 0 의 해를 구하기 위해 대입해야 하는 보조해 형태는?",
+    "options": ["y = e^mx", "y = x^m", "y = sin(mx)", "y = e^(x^2)"],
+    "answer": 1,
+    "explanation": "계수가 x의 거듭제곱 형태인 오일러-코시 방정식은 y = x^m 을 대입하여 특성방정식 m(m-1) + am + b = 0 을 풀어 해를 구합니다."
+  },
+  {
+    "id": 13,
+    "difficulty": 2,
+    "category": "Undetermined Coefficients",
+    "question": "비제차 미분방정식 y'' + y = e^x 의 특수해(Particular Solution) 형태 yp는?",
+    "options": ["A e^x", "A x e^x", "A e^-x", "A cos x"],
+    "answer": 0,
+    "explanation": "우변이 e^x 이고, 제차해(cos x, sin x)와 겹치지 않으므로 기본 형태인 A e^x 로 가정하면 됩니다."
+  },
+  {
+    "id": 14,
+    "difficulty": 3,
+    "category": "Variation of Parameters",
+    "question": "매개변수 변환법(Variation of Parameters)을 사용할 때 특수해의 형태는?",
+    "options": ["y_p = u(x)y1 + v(x)y2", "y_p = A y1 + B y2", "y_p = y1 * y2", "y_p = y1 / y2"],
+    "answer": 0,
+    "explanation": "제차해 y1, y2에 대해 상수를 함수 u(x), v(x)로 바꾼 형태를 가정하고, Wronskian을 이용한 공식으로 u'와 v'를 구합니다."
+  },
+  {
+    "id": 15,
+    "difficulty": 1,
+    "category": "Laplace Transform",
+    "question": "함수 f(t) = 1 의 라플라스 변환 L{1} 은?",
+    "options": ["1", "s", "1/s", "1/s^2"],
+    "answer": 2,
+    "explanation": "L{1} = ∫(0 to ∞) e^-st dt = [-1/s e^-st] (0 to ∞) = 1/s (s>0)."
+  },
+  {
+    "id": 16,
+    "difficulty": 1,
+    "category": "Laplace Transform",
+    "question": "L{e^at} 의 값은?",
+    "options": ["1/(s-a)", "1/(s+a)", "s/(s^2+a^2)", "a/(s^2+a^2)"],
+    "answer": 0,
+    "explanation": "지수함수의 라플라스 변환은 s-shifting 정리의 기초가 되며, 1/(s-a) 입니다."
+  },
+  {
+    "id": 17,
+    "difficulty": 2,
+    "category": "Laplace Transform",
+    "question": "L{sin(wt)} 의 값은?",
+    "options": ["w/(s^2+w^2)", "s/(s^2+w^2)", "1/(s^2+w^2)", "w/(s-w)^2"],
+    "answer": 0,
+    "explanation": "사인 함수의 라플라스 변환은 분자가 상수 w, 코사인 함수는 분자가 변수 s 입니다."
+  },
+  {
+    "id": 18,
+    "difficulty": 2,
+    "category": "Laplace Property",
+    "question": "L{f'(t)} 를 f(0)와 L{f(t)}=F(s)로 표현하면?",
+    "options": ["s F(s)", "s F(s) - f(0)", "F(s) - f(0)", "F(s)/s"],
+    "answer": 1,
+    "explanation": "도함수의 라플라스 변환 성질입니다. 미분방정식을 대수방정식으로 바꾸는 핵심 원리입니다."
+  },
+  {
+    "id": 19,
+    "difficulty": 3,
+    "category": "Convolution",
+    "question": "합성곱(Convolution) f * g 의 정의는?",
+    "options": ["∫ f(τ)g(t-τ) dτ", "∫ f(τ)g(τ) dτ", "f(t)g(t)", "L{f}L{g}"],
+    "answer": 0,
+    "explanation": "f * g = ∫(0 to t) f(τ)g(t-τ) dτ 입니다. 라플라스 변환의 곱은 시간 영역에서의 합성곱에 대응됩니다."
+  },
+  {
+    "id": 20,
+    "difficulty": 2,
+    "category": "Unit Step Function",
+    "question": "단위 계단 함수 u(t-a)의 라플라스 변환은?",
+    "options": ["e^-as / s", "e^as / s", "1/s", "e^-as"],
+    "answer": 0,
+    "explanation": "t-shifting 정리에 의해 L{u(t-a)} = e^-as * L{1} = e^-as / s 입니다."
+  },
+  {
+    "id": 21,
+    "difficulty": 3,
+    "category": "Dirac Delta",
+    "question": "디락 델타 함수 δ(t-a)의 라플라스 변환은?",
+    "options": ["e^-as", "1", "0", "u(t-a)"],
+    "answer": 0,
+    "explanation": "델타 함수는 임펄스 입력을 모델링하며, 샘플링 성질에 의해 L{δ(t-a)} = e^-as 입니다. (a=0이면 1)"
+  },
+  {
+    "id": 22,
+    "difficulty": 2,
+    "category": "Inverse Laplace",
+    "question": "L^-1 { 1 / (s^2 - 1) } 은?",
+    "options": ["sin t", "sinh t", "cos t", "cosh t"],
+    "answer": 1,
+    "explanation": "분모가 s^2 - a^2 형태이면 쌍곡선 함수(Hyperbolic)입니다. 1/(s^2 - 1)은 sinh t 의 변환입니다."
+  },
+  {
+    "id": 23,
+    "difficulty": 1,
+    "category": "Matrix Operations",
+    "question": "행렬 A와 B의 곱 AB가 정의되려면?",
+    "options": ["A의 열 수 = B의 행 수", "A의 행 수 = B의 열 수", "A와 B의 크기가 같아야 함", "조건 없음"],
+    "answer": 0,
+    "explanation": "(m x n) 행렬과 (n x p) 행렬만 곱할 수 있습니다. 내항(n)이 일치해야 합니다."
+  },
+  {
+    "id": 24,
+    "difficulty": 2,
+    "category": "Determinant",
+    "question": "행렬식(Determinant)이 0인 행렬을 무엇이라 하는가?",
+    "options": ["특이 행렬 (Singular Matrix)", "정칙 행렬 (Non-singular Matrix)", "단위 행렬", "대각 행렬"],
+    "answer": 0,
+    "explanation": "행렬식이 0이면 역행렬이 존재하지 않으며, 이를 특이 행렬이라고 합니다."
+  },
+  {
+    "id": 25,
+    "difficulty": 2,
+    "category": "Eigenvalues",
+    "question": "행렬 A의 고유값(Eigenvalue)들의 합은 행렬의 무엇과 같은가?",
+    "options": ["대각합 (Trace)", "행렬식 (Determinant)", "랭크 (Rank)", "차원 (Dimension)"],
+    "answer": 0,
+    "explanation": "모든 정사각행렬에서 고유값들의 합은 주대각 성분들의 합인 Trace와 같습니다."
+  },
+  {
+    "id": 26,
+    "difficulty": 2,
+    "category": "Eigenvalues",
+    "question": "행렬 A의 고유값들의 곱은 행렬의 무엇과 같은가?",
+    "options": ["행렬식 (Determinant)", "대각합 (Trace)", "가장 큰 고유값", "0"],
+    "answer": 0,
+    "explanation": "고유값들의 곱은 행렬식(Determinant)과 같습니다."
+  },
+  {
+    "id": 27,
+    "difficulty": 3,
+    "category": "System of ODEs",
+    "question": "연립 미분방정식 y' = Ay 의 해가 안정(Stable)하기 위한 고유값 λ의 조건은? (실수부)",
+    "options": ["모든 고유값의 실수부가 음수여야 한다.", "모든 고유값의 실수부가 양수여야 한다.", "실수부가 0이어야 한다.", "고유값이 실수여야 한다."],
+    "answer": 0,
+    "explanation": "해의 형태가 e^(λt) 꼴이므로, 시간이 지날수록(t->∞) 0으로 수렴하려면 지수부인 λ의 실수부가 음수(Negative Real Part)여야 합니다."
+  },
+  {
+    "id": 28,
+    "difficulty": 3,
+    "category": "Phase Plane",
+    "question": "2x2 선형 시스템의 고유값이 서로 다른 부호의 실수(λ1 > 0 > λ2)일 때, 임계점(Critical Point)의 유형은?",
+    "options": ["Saddle Point (안장점)", "Node (마디점)", "Center (중심)", "Spiral (나선점)"],
+    "answer": 0,
+    "explanation": "하나는 발산하고 하나는 수렴하는 방향이 공존하므로, 궤적이 안장 모양을 그리며 멀어지는 불안정한 Saddle Point가 됩니다."
+  },
+  {
+    "id": 29,
+    "difficulty": 1,
+    "category": "Vector Calculus",
+    "question": "벡터장 F = (P, Q, R) 의 회전(Curl)을 구하는 연산자는?",
+    "options": ["∇ × F", "∇ • F", "∇F", "∇^2 F"],
+    "answer": 0,
+    "explanation": "Curl은 델 연산자와 벡터장의 외적(Cross Product)으로 정의됩니다."
+  },
+  {
+    "id": 30,
+    "difficulty": 1,
+    "category": "Vector Calculus",
+    "question": "스칼라 함수 f의 기울기(Gradient) ∇f 의 결과는?",
+    "options": ["벡터장", "스칼라장", "텐서", "0"],
+    "answer": 0,
+    "explanation": "Gradient는 각 방향의 변화율을 성분으로 갖는 '벡터'를 만듭니다."
+  },
+  {
+    "id": 31,
+    "difficulty": 2,
+    "category": "Green's Theorem",
+    "question": "평면에서의 선적분과 이중적분을 연결해주는 정리는?",
+    "options": ["그린 정리 (Green's Theorem)", "스토크스 정리", "발산 정리", "중간값 정리"],
+    "answer": 0,
+    "explanation": "그린 정리는 평면 닫힌 곡선 선적분을 그 내부 영역의 이중적분으로 변환합니다."
+  },
+  {
+    "id": 32,
+    "difficulty": 2,
+    "category": "Divergence",
+    "question": "솔레노이달(Solenoidal) 벡터장의 조건은?",
+    "options": ["div F = 0", "curl F = 0", "grad F = 0", "F = 0"],
+    "answer": 0,
+    "explanation": "발산(Divergence)이 0인 벡터장을 솔레노이달이라고 하며, 이는 소스나 싱크가 없이 흐름이 보존됨을 의미합니다."
+  },
+  {
+    "id": 33,
+    "difficulty": 3,
+    "category": "Resonance",
+    "question": "비감쇠 강제 진동 시스템 y'' + w0^2 y = cos(wt) 에서 w -> w0 일 때 진폭이 무한대로 커지는 현상은?",
+    "options": ["공명 (Resonance)", "맥놀이 (Beats)", "감쇠 (Damping)", "과도 응답 (Transient)"],
+    "answer": 0,
+    "explanation": "고유 진동수 w0와 외력의 진동수 w가 일치하면 에너지가 계속 축적되어 진폭이 선형적으로(t sin wt) 증가하는 공명 현상이 발생합니다."
+  },
+  {
+    "id": 34,
+    "difficulty": 1,
+    "category": "Complex Numbers",
+    "question": "오일러 공식(Euler's Formula) e^ix 는?",
+    "options": ["cos x + i sin x", "cos x - i sin x", "sin x + i cos x", "cosh x + sinh x"],
+    "answer": 0,
+    "explanation": "e^ix = cos x + i sin x 는 복소수 지수함수와 삼각함수를 연결하는 가장 중요한 공식입니다."
+  },
+  {
+    "id": 35,
+    "difficulty": 2,
+    "category": "Power Series",
+    "question": "멱급수 해법에서 y = Σ an x^n 을 미분한 y'의 급수 표현은?",
+    "options": ["Σ n an x^(n-1)", "Σ an x^(n+1)", "Σ an x^n", "Σ (n-1) an x^n"],
+    "answer": 0,
+    "explanation": "다항식 미분 법칙에 따라 각 항 x^n이 n x^(n-1)이 됩니다."
+  },
+  {
+    "id": 36,
+    "difficulty": 3,
+    "category": "Legendre Equation",
+    "question": "르장드르 방정식 (1-x^2)y'' - 2xy' + n(n+1)y = 0 의 해인 르장드르 다항식 Pn(x)의 정의 구간은?",
+    "options": ["[-1, 1]", "(-∞, ∞)", "[0, ∞)", "[0, 1]"],
+    "answer": 0,
+    "explanation": "르장드르 다항식은 x=±1 에서 유계인 해를 찾으며 유도되었으므로, 주로 [-1, 1] 구간에서 정의되고 직교성을 가집니다."
+  },
+  {
+    "id": 37,
+    "difficulty": 3,
+    "category": "Bessel Equation",
+    "question": "베셀 방정식 x^2 y'' + x y' + (x^2 - v^2)y = 0 의 해 Jv(x)를 무엇이라 하는가?",
+    "options": ["제1종 베셀 함수", "제2종 베셀 함수 (노이만 함수)", "제1종 변형 베셀 함수", "르장드르 함수"],
+    "answer": 0,
+    "explanation": "Jv(x)는 원점에서 유한한 값을 가지는 제1종 베셀 함수입니다."
+  },
+  {
+    "id": 38,
+    "difficulty": 2,
+    "category": "Laplace Transform",
+    "question": "L{t^n} 의 값은? (n은 정수)",
+    "options": ["n! / s^(n+1)", "n! / s^n", "1 / s^(n+1)", "Gamma(n) / s^n"],
+    "answer": 0,
+    "explanation": "t의 거듭제곱의 라플라스 변환은 팩토리얼을 포함합니다. n! / s^(n+1)."
+  },
+  {
+    "id": 39,
+    "difficulty": 2,
+    "category": "RLC Circuit",
+    "question": "RLC 직렬 회로의 전하량 q(t)에 대한 미분방정식은?",
+    "options": ["Lq'' + Rq' + (1/C)q = E(t)", "Mq'' + Cq' + Kq = 0", "Lq' + Rq = E(t)", "q'' + q = 0"],
+    "answer": 0,
+    "explanation": "키르히호프 전압 법칙에 의해 인덕터(L di/dt), 저항(Ri), 커패시터(q/C) 전압의 합은 기전력 E(t)와 같습니다. (i=q')"
+  },
+  {
+    "id": 40,
+    "difficulty": 3,
+    "category": "Orthogonality",
+    "question": "함수 집합 {f_n}이 구간 [a,b]에서 가중함수 w(x)에 대해 직교(Orthogonal)한다는 뜻은?",
+    "options": ["∫ f_m(x) f_n(x) w(x) dx = 0 (m≠n)", "∫ f_m(x) f_n(x) dx = 1", "f_m(x) * f_n(x) = 0", "모든 함수가 수직선을 그린다."],
+    "answer": 0,
+    "explanation": "함수 공간에서의 내적(적분)이 0이 될 때를 직교한다고 정의합니다."
+  },
+  {
+    "id": 41,
+    "difficulty": 1,
+    "category": "Linear Algebra",
+    "question": "3x3 행렬 A의 대각 성분이 1, 2, 3 일 때 Trace(A)는?",
+    "options": ["6", "1", "5", "0"],
+    "answer": 0,
+    "explanation": "Trace는 주대각선 성분의 합이므로 1+2+3=6 입니다."
+  },
+  {
+    "id": 42,
+    "difficulty": 1,
+    "category": "Linear Algebra",
+    "question": "역행렬이 존재하는 행렬을 부르는 말은?",
+    "options": ["가역 행렬 (Invertible Matrix)", "특이 행렬 (Singular Matrix)", "영 행렬", "전치 행렬"],
+    "answer": 0,
+    "explanation": "역행렬이 존재하면 가역(Invertible) 또는 정칙(Non-singular) 행렬이라고 합니다."
+  },
+  {
+    "id": 43,
+    "difficulty": 2,
+    "category": "ODE Reduction",
+    "question": "2계 미분방정식 y'' = f(y, y') 처럼 x가 명시적으로 없는 경우(Autonomous), 차수를 낮추기 위한 치환은?",
+    "options": ["y' = v(y) 로 두고, y'' = v (dv/dy) 사용", "y' = v(x) 로 둠", "y = xv 로 둠", "y = e^rx 로 둠"],
+    "answer": 0,
+    "explanation": "독립변수 x가 없을 때는 y를 새로운 독립변수로 보고 Chain Rule을 써서 y'' = dv/dx = (dv/dy)(dy/dx) = v(dv/dy) 로 바꾸면 1계 미분방정식이 됩니다."
+  },
+  {
+    "id": 44,
+    "difficulty": 3,
+    "category": "Laplace IVP",
+    "question": "s-domain에서 Y(s) = 1 / (s^2 + 4) 일 때, t-domain의 해 y(t)는?",
+    "options": ["(1/2) sin(2t)", "sin(2t)", "cos(2t)", "e^-2t"],
+    "answer": 0,
+    "explanation": "L{sin wt} = w / (s^2 + w^2) 입니다. 여기서는 w=2 인데 분자가 1이므로, 1/2을 곱해서 형태를 맞춰줘야 합니다. (1/2) * (2 / (s^2 + 4))."
+  },
+  {
+    "id": 45,
+    "difficulty": 2,
+    "category": "Linear Independence",
+    "question": "세 벡터 (1,0,0), (0,1,0), (0,0,1) 은 선형 독립인가?",
+    "options": ["예", "아니오", "조건 부족", "알 수 없음"],
+    "answer": 0,
+    "explanation": "표준 기저 벡터들은 서로를 상쇄할 수 없으므로 선형 독립입니다. (행렬식이 1)"
+  },
+  {
+    "id": 46,
+    "difficulty": 3,
+    "category": "Systems of ODEs",
+    "question": "제차 선형 연립 미분방정식 y' = Ay 에서 A가 2x2 행렬이고 고유값이 복소수 α ± βi 일 때, 해의 거동은?",
+    "options": ["나선형 (Spiral) 또는 중심 (Center)", "안장점 (Saddle)", "마디점 (Node)", "직선"],
+    "answer": 0,
+    "explanation": "복소수 고유값은 회전 성분을 포함하므로 나선형(실수부≠0)이나 타원/원형(실수부=0, Center) 궤적을 그립니다."
+  },
+  {
+    "id": 47,
+    "difficulty": 1,
+    "category": "Partial Derivatives",
+    "question": "f(x,y) = x^2 y 일 때, 편미분 ∂f/∂x 는?",
+    "options": ["2xy", "x^2", "2x", "y"],
+    "answer": 0,
+    "explanation": "x에 대해 편미분할 때 y는 상수로 취급합니다. x^2 미분(2x) * y = 2xy."
+  },
+  {
+    "id": 48,
+    "difficulty": 2,
+    "category": "Critical Point",
+    "question": "자율계 y' = f(y) 에서 임계점(Critical Point)의 정의는?",
+    "options": ["f(c) = 0 인 점 c", "f'(c) = 0 인 점 c", "f(c) 가 무한대인 점", "y(0) = c"],
+    "answer": 0,
+    "explanation": "자율 미분방정식에서 우변이 0이 되는 지점은 y' = 0 이므로 변화가 없는 평형 상태(Equilibrium solution)입니다."
+  },
+  {
+    "id": 49,
+    "difficulty": 3,
+    "category": "Stability",
+    "question": "임계점 c 근처에서 f'(c) < 0 이면 이 임계점은?",
+    "options": ["안정 (Stable, Attractor)", "불안정 (Unstable, Repeller)", "준안정 (Semi-stable)", "알 수 없음"],
+    "answer": 0,
+    "explanation": "1차원 위상 평면 분석에서 f'(c) < 0 이면 작은 섭동에 대해 복원력이 작용하여 원래 위치로 돌아오려는 안정 평형점입니다."
+  },
+  {
+    "id": 50,
+    "difficulty": 2,
+    "category": "Laplace Final Value",
+    "question": "최종값 정리(Final Value Theorem): lim(t->∞) f(t) 는 s-domain에서 무엇과 같은가?",
+    "options": ["lim(s->0) sF(s)", "lim(s->∞) sF(s)", "lim(s->0) F(s)", "F(0)"],
+    "answer": 0,
+    "explanation": "최종값 정리는 s가 0으로 갈 때 sF(s)의 극한값으로 시간 영역의 최종 상태를 예측합니다. (단, 폴이 좌반평면에 있어야 함)"
+  },
+  {
+    "id": 51,
+    "difficulty": 1,
+    "category": "ODE Basics",
+    "question": "y' + y = 0 의 일반해는?",
+    "options": ["y = C e^-x", "y = C e^x", "y = sin x", "y = x"],
+    "answer": 0,
+    "explanation": "가장 기본적인 1계 선형 ODE입니다. 특성근 λ = -1 이므로 e^-x 입니다."
+  },
+  {
+    "id": 52,
+    "difficulty": 2,
+    "category": "Sturm-Liouville",
+    "question": "스텀-리우빌 문제(Sturm-Liouville Problem)에서 서로 다른 고유값에 대응하는 고유함수들의 관계는?",
+    "options": ["가중함수 w(x)에 대해 직교한다.", "서로 평행하다.", "미분하면 같다.", "관계없다."],
+    "answer": 0,
+    "explanation": "스텀-리우빌 이론의 핵심 결과는 고유함수들의 직교성(Orthogonality) 보장입니다."
+  },
+  {
+    "id": 53,
+    "difficulty": 3,
+    "category": "Frobenius Method",
+    "question": "프로베니우스 해법은 미분방정식의 어떤 점 근방에서 해를 구할 때 사용하는가?",
+    "options": ["정칙 특이점 (Regular Singular Point)", "정칙점 (Ordinary Point)", "불규칙 특이점", "무한대"],
+    "answer": 0,
+    "explanation": "계수 함수가 발산하지만 (x-x0)를 곱하면 수렴하는 '정칙 특이점'에서 일반화된 멱급수 해를 찾는 방법입니다."
+  },
+  {
+    "id": 54,
+    "difficulty": 1,
+    "category": "Cramer's Rule",
+    "question": "크래머 공식은 무엇을 이용하여 연립방정식의 해를 구하는가?",
+    "options": ["행렬식 (Determinant)", "역행렬", "가우스 소거법", "고유값"],
+    "answer": 0,
+    "explanation": "크래머 공식은 행렬식을 이용해 변수 각각의 해를 구하는 공식입니다."
+  },
+  {
+    "id": 55,
+    "difficulty": 2,
+    "category": "Newton's Law of Cooling",
+    "question": "뉴턴의 냉각 법칙 T' = k(T - Tm) 에서 k의 부호는?",
+    "options": ["음수 (-)", "양수 (+)", "0", "상관없음"],
+    "answer": 0,
+    "explanation": "온도 차이에 비례하여 온도가 '변화(감소 또는 증가)'하므로, 평형 상태로 가려면 k는 음수여야 합니다. (혹은 식을 -k(...)로 쓰고 k>0이라 하기도 함)"
+  },
+  {
+    "id": 56,
+    "difficulty": 3,
+    "category": "Heaviside Function",
+    "question": "L{ f(t) u(t-a) } 의 변환 공식은? (제2 이동 정리)",
+    "options": ["e^-as L{f(t+a)}", "e^-as F(s)", "e^as F(s)", "F(s-a)"],
+    "answer": 0,
+    "explanation": "함수 f(t)가 t=a 만큼 잘리고 이동되었으므로, 변환 시 f(t+a)의 라플라스 변환에 지수항을 곱해야 합니다."
+  },
+  {
+    "id": 57,
+    "difficulty": 2,
+    "category": "Linearization",
+    "question": "비선형 시스템 y' = f(y)를 평형점 y* 근처에서 선형화하면 어떤 식이 되는가?",
+    "options": ["u' = f'(y*) u (단, u = y - y*)", "u' = f(y*) u", "u' = u", "u' = 0"],
+    "answer": 0,
+    "explanation": "테일러 급수 전개를 이용해 1차항까지만 근사하면 f(y) ≈ f(y*) + f'(y*)(y-y*) 이 되고, f(y*)=0 이므로 u' = f'(y*)u 가 됩니다. (야코비안 선형화)"
+  },
+  {
+    "id": 58,
+    "difficulty": 1,
+    "category": "Matrix Transpose",
+    "question": "(AB)^T 와 같은 것은?",
+    "options": ["B^T A^T", "A^T B^T", "A^T + B^T", "AB"],
+    "answer": 0,
+    "explanation": "행렬 곱의 전치는 순서가 바뀝니다. (AB)^T = B^T A^T."
+  },
+  {
+    "id": 59,
+    "difficulty": 2,
+    "category": "Rank",
+    "question": "행렬의 랭크(Rank)는 행 사다리꼴(REF)에서 무엇의 개수와 같은가?",
+    "options": ["피벗(Pivot)이 있는 행의 개수", "모든 행의 개수", "0인 행의 개수", "열의 개수"],
+    "answer": 0,
+    "explanation": "랭크는 선형 독립인 행(또는 열)의 최대 개수이며, 이는 가우스 소거 후 0이 아닌 피벗 행의 개수와 같습니다."
+  },
+  {
+    "id": 60,
+    "difficulty": 3,
+    "category": "Resonance",
+    "question": "L{ t sin(wt) } 의 결과는? (공명과 관련)",
+    "options": ["2ws / (s^2 + w^2)^2", "1 / (s^2 + w^2)^2", "s / (s^2 + w^2)^2", "2w / (s^2 + w^2)"],
+    "answer": 0,
+    "explanation": "-d/ds (w/(s^2+w^2)) 를 계산하면 나옵니다. 분모의 제곱 꼴은 시간 영역에서의 t 곱하기(공명)를 의미합니다."
+  },
+  {
+    "id": 61,
+    "difficulty": 1,
+    "category": "Trigonometric Identity",
+    "question": "오일러 공식에서 cos x 는 복소 지수함수로 어떻게 표현되는가?",
+    "options": ["(e^ix + e^-ix) / 2", "(e^ix - e^-ix) / 2i", "e^ix + e^-ix", "e^ix / 2"],
+    "answer": 0,
+    "explanation": "e^ix = c+is, e^-ix = c-is 이므로 둘을 더하면 2cos x가 됩니다."
+  },
+  {
+    "id": 62,
+    "difficulty": 2,
+    "category": "Orthogonal Trajectories",
+    "question": "곡선군 y = cx^2 의 직교 절선(Orthogonal Trajectory)을 구하기 위한 미분방정식은?",
+    "options": ["y' = -1 / (2y/x)", "y' = 2y/x", "y' = -x/2y", "y' = x/y"],
+    "answer": 0,
+    "explanation": "원래 곡선의 기울기 y' = 2cx = 2(y/x^2)x = 2y/x 입니다. 직교하려면 기울기 곱이 -1이어야 하므로 y_new' = -1 / (2y/x) = -x/2y 가 됩니다."
+  },
+  {
+    "id": 63,
+    "difficulty": 3,
+    "category": "Matrix Diagonalization",
+    "question": "행렬 A가 대각화 가능(Diagonalizable)하려면?",
+    "options": ["n개의 선형 독립인 고유벡터를 가져야 한다.", "고유값이 모두 달라야 한다.", "대칭행렬이어야 한다.", "가역행렬이어야 한다."],
+    "answer": 0,
+    "explanation": "가장 일반적인 필요충분조건은 고유벡터들이 공간 전체를 생성할 수 있어야(Full set of eigenvectors) 한다는 점입니다. 고유값이 다르면 항상 가능하지만, 중근이어도 고유벡터가 충분하면 가능합니다."
+  },
+  {
+    "id": 64,
+    "difficulty": 1,
+    "category": "Integral",
+    "question": "∫ e^ax dx 의 값은?",
+    "options": ["(1/a) e^ax + C", "a e^ax + C", "e^ax + C", "ln(ax) + C"],
+    "answer": 0,
+    "explanation": "지수함수 적분의 기본 공식입니다."
+  },
+  {
+    "id": 65,
+    "difficulty": 2,
+    "category": "Reduction of Order",
+    "question": "하나의 해 y1을 알 때, 계수내림법(Reduction of Order)으로 구하는 두 번째 해 y2는 어떤 꼴인가?",
+    "options": ["y2 = u(x) y1", "y2 = y1'", "y2 = 1/y1", "y2 = y1^2"],
+    "answer": 0,
+    "explanation": "y2 = u(x)y1 꼴로 가정하고 대입하여 u에 대한 식을 풀어냅니다. (Wronskian 공식으로도 유도 가능)"
+  },
+  {
+    "id": 66,
+    "difficulty": 3,
+    "category": "Laplace Periodic",
+    "question": "주기함수 f(t) = f(t+T) 의 라플라스 변환 공식은?",
+    "options": ["(1 / (1 - e^-sT)) ∫(0 to T) e^-st f(t) dt", "∫(0 to T) e^-st f(t) dt", "1 / (1 - e^-sT)", "0"],
+    "answer": 0,
+    "explanation": "주기함수는 첫 주기 적분값을 (1 - e^-sT)로 나눈 형태의 급수 합 공식을 가집니다."
+  },
+  {
+    "id": 67,
+    "difficulty": 2,
+    "category": "Linear System Solution",
+    "question": "동차 연립방정식 Ax = 0 이 자명하지 않은 해(Non-trivial solution)를 가질 조건은?",
+    "options": ["det(A) = 0", "det(A) ≠ 0", "Trace(A) = 0", "A = I"],
+    "answer": 0,
+    "explanation": "det(A)=0 이어야 역행렬이 없고, 영공간(Null Space)이 존재하여 0이 아닌 해를 가질 수 있습니다."
+  },
+  {
+    "id": 68,
+    "difficulty": 1,
+    "category": "Vector Product",
+    "question": "두 벡터 a, b의 외적(Cross Product) a x b 의 결과는?",
+    "options": ["두 벡터에 모두 수직인 벡터", "두 벡터 사이의 각도", "두 벡터가 만드는 평행사변형의 넓이(스칼라)", "0"],
+    "answer": 0,
+    "explanation": "외적의 결과는 벡터이며, 방향은 두 벡터가 만드는 평면에 수직(오른손 법칙)입니다. (크기가 넓이)"
+  },
+  {
+    "id": 69,
+    "difficulty": 3,
+    "category": "Damped Vibration",
+    "question": "감쇠 진동 y'' + cy' + ky = 0 에서 과감쇠(Overdamping) 조건은?",
+    "options": ["c^2 > 4mk (판별식 양수)", "c^2 = 4mk (중근)", "c^2 < 4mk (허근)", "c = 0"],
+    "answer": 0,
+    "explanation": "특성방정식의 판별식이 양수여야 서로 다른 두 실근이 나오고, 진동 없이 지수적으로 감소하는 과감쇠 응답이 나옵니다."
+  },
+  {
+    "id": 70,
+    "difficulty": 2,
+    "category": "Laplace Derivative",
+    "question": "L{ t f(t) } 의 변환 공식은? (s-영역 미분)",
+    "options": ["-F'(s)", "F'(s)", "s F(s)", "F(s)/s"],
+    "answer": 0,
+    "explanation": "t를 곱하는 것은 s-영역에서 미분하고 부호를 바꾸는 것과 같습니다 (-d/ds)."
+  },
+  {
+    "id": 71,
+    "difficulty": 1,
+    "category": "Homogeneous ODE",
+    "question": "제차(Homogeneous) 미분방정식의 정의는?",
+    "options": ["우변(입력항)이 0인 경우 r(x)=0", "모든 항의 차수가 같은 경우", "계수가 상수인 경우", "선형인 경우"],
+    "answer": 0,
+    "explanation": "공학수학에서 '제차(Homogeneous)'는 보통 y에 관한 항만 있고 외력(Forcing function) 항이 0인 경우를 말합니다."
+  },
+  {
+    "id": 72,
+    "difficulty": 2,
+    "category": "Differential Operator",
+    "question": "미분 연산자 D = d/dx 를 이용해 (D-2)(D+3)y = 0 을 풀면?",
+    "options": ["y = c1 e^2x + c2 e^-3x", "y = c1 e^-2x + c2 e^3x", "y = c1 sin 2x + c2 cos 3x", "y = 0"],
+    "answer": 0,
+    "explanation": "연산자 분해는 특성방정식 (λ-2)(λ+3)=0 과 동일하므로 근은 2, -3입니다."
+  },
+  {
+    "id": 73,
+    "difficulty": 3,
+    "category": "Non-homogeneous System",
+    "question": "비제차 선형 연립방정식 y' = Ay + g 의 해를 구하는 방법이 아닌 것은?",
+    "options": ["분리 변수법 (Separation of Variables)", "미정계수법", "매개변수 변환법", "대각화를 이용한 디커플링"],
+    "answer": 0,
+    "explanation": "분리 변수법은 편미분방정식(PDE)이나 간단한 1계 ODE에 쓰이며, 연립 시스템의 비제차항 처리에는 적합하지 않습니다."
+  },
+  {
+    "id": 74,
+    "difficulty": 1,
+    "category": "Logarithm",
+    "question": "ln(e^x) 는?",
+    "options": ["x", "e", "1", "0"],
+    "answer": 0,
+    "explanation": "자연로그와 지수함수는 역함수 관계이므로 항등원 x가 나옵니다."
+  },
+  {
+    "id": 75,
+    "difficulty": 2,
+    "category": "Even/Odd Function",
+    "question": "기함수(Odd Function) f(x)를 대칭 구간 [-a, a]에서 적분하면?",
+    "options": ["0", "2 ∫(0 to a) f(x) dx", "무한대", "f(a)"],
+    "answer": 0,
+    "explanation": "기함수는 원점 대칭이므로 양수 구간과 음수 구간의 넓이가 상쇄되어 0이 됩니다."
+  },
+  {
+    "id": 76,
+    "difficulty": 3,
+    "category": "Cauchy-Euler",
+    "question": "코시-오일러 방정식 x^2 y'' - 2xy' + 2y = 0 의 해는?",
+    "options": ["c1 x + c2 x^2", "c1 e^x + c2 e^2x", "c1 x + c2 x ln x", "c1 cos x + c2 sin x"],
+    "answer": 0,
+    "explanation": "보조방정식 m(m-1) - 2m + 2 = m^2 - 3m + 2 = (m-1)(m-2) = 0. 근이 1, 2이므로 x^1, x^2가 기저입니다."
+  },
+  {
+    "id": 77,
+    "difficulty": 2,
+    "category": "Eigenvector",
+    "question": "고유벡터는 유일한가?",
+    "options": ["아니오, 0이 아닌 상수배만큼 자유도가 있다.", "예, 유일하다.", "크기가 1이어야만 한다.", "방향이 반대일 수 없다."],
+    "answer": 0,
+    "explanation": "Av = λv를 만족하는 v가 있다면, cv (c≠0) 도 식을 만족합니다. 따라서 고유벡터는 방향만 정해지고 크기는 자유롭습니다."
+  },
+  {
+    "id": 78,
+    "difficulty": 1,
+    "category": "Symmetric Matrix",
+    "question": "대칭행렬(Symmetric Matrix) A의 성질은?",
+    "options": ["A^T = A", "A^T = -A", "A^-1 = A", "det(A) = 1"],
+    "answer": 0,
+    "explanation": "전치(Transpose)를 해도 자기 자신과 같은 행렬을 대칭행렬이라 합니다."
+  },
+  {
+    "id": 79,
+    "difficulty": 3,
+    "category": "Matrix Exponential",
+    "question": "행렬 지수함수 e^At 의 정의는?",
+    "options": ["I + At + (At)^2/2! + ... (테일러 급수)", "각 성분에 e^t를 취한 행렬", "e^λt 들로 이루어진 대각행렬", "역행렬"],
+    "answer": 0,
+    "explanation": "스칼라 지수함수의 테일러 급수 정의를 행렬에 그대로 확장한 무한급수로 정의됩니다. 연립 미분방정식 해의 기본 행렬이기도 합니다."
+  },
+  {
+    "id": 80,
+    "difficulty": 2,
+    "category": "Mixing Problem",
+    "question": "혼합 문제(탱크 문제) 모델링 식 y'(t) = ? (y는 소금의 양)",
+    "options": ["(유입률 x 유입농도) - (유출률 x 유출농도)", "유입률 - 유출률", "유입농도 - 유출농도", "ky"],
+    "answer": 0,
+    "explanation": "변화율 = 들어오는 양 - 나가는 양. 나가는 양은 (유출률) * (현재 양 y / 현재 부피 V) 로 계산합니다."
+  },
+  {
+    "id": 81,
+    "difficulty": 1,
+    "category": "Differentiation",
+    "question": "d/dx (sin x) = ?",
+    "options": ["cos x", "-cos x", "sin x", "-sin x"],
+    "answer": 0,
+    "explanation": "사인의 미분은 코사인입니다."
+  },
+  {
+    "id": 82,
+    "difficulty": 2,
+    "category": "Integration by Parts",
+    "question": "부분적분 공식 ∫ u v' dx = ?",
+    "options": ["uv - ∫ u' v dx", "uv + ∫ u' v dx", "u'v - ∫ u v' dx", "uv"],
+    "answer": 0,
+    "explanation": "곱의 미분법 역연산입니다. uv - 인테그랄 v du."
+  },
+  {
+    "id": 83,
+    "difficulty": 3,
+    "category": "Predator-Prey",
+    "question": "로트카-볼테라(Lotka-Volterra) 방정식은 무엇을 모델링하는가?",
+    "options": ["포식자-피식자 개체수 모델", "전염병 확산 모델", "화학 반응 속도", "용수철 진동"],
+    "answer": 0,
+    "explanation": "여우와 토끼처럼 잡아먹고 먹히는 관계의 비선형 연립 미분방정식입니다."
+  },
+  {
+    "id": 84,
+    "difficulty": 1,
+    "category": "Hyperbolic Functions",
+    "question": "cosh x 의 정의는?",
+    "options": ["(e^x + e^-x) / 2", "(e^x - e^-x) / 2", "e^x + e^-x", "2 / (e^x + e^-x)"],
+    "answer": 0,
+    "explanation": "쌍곡코사인 함수는 지수함수의 우함수(Even part) 성분입니다."
+  },
+  {
+    "id": 85,
+    "difficulty": 2,
+    "category": "Curve Sketching",
+    "question": "y = e^-x sin x 의 그래프 개형은?",
+    "options": ["진폭이 점점 줄어드는 진동 (Damped Oscillation)", "진폭이 커지는 진동", "일정한 진동", "직선"],
+    "answer": 0,
+    "explanation": "sin x는 진동하고 e^-x는 0으로 수렴하므로, 포락선(Envelope)이 줄어드는 감쇠 진동 형태입니다."
+  },
+  {
+    "id": 86,
+    "difficulty": 3,
+    "category": "Laplace Convolution",
+    "question": "L^-1 { F(s)G(s) } = ?",
+    "options": ["f(t) * g(t) (합성곱)", "f(t) g(t)", "f(t) + g(t)", "L^-1{F} L^-1{G}"],
+    "answer": 0,
+    "explanation": "주파수(s) 영역에서의 곱은 시간(t) 영역에서의 합성곱(Convolution)으로 변환됩니다. (Convolution Theorem)"
+  },
+  {
+    "id": 87,
+    "difficulty": 2,
+    "category": "Step Response",
+    "question": "RL 회로에 스위치를 닫아 직류 전압 E를 가했을 때 전류 i(t)의 변화는? (초기 전류 0)",
+    "options": ["서서히 증가하여 E/R에 수렴", "즉시 E/R이 됨", "서서히 감소하여 0이 됨", "진동함"],
+    "answer": 0,
+    "explanation": "인덕터의 관성 때문에 전류는 급격히 변하지 못하고 지수적으로 상승(Exponential rise)하여 최종값(Ohm's law)에 도달합니다."
+  },
+  {
+    "id": 88,
+    "difficulty": 1,
+    "category": "Complex Roots",
+    "question": "i^2 = ?",
+    "options": ["-1", "1", "0", "i"],
+    "answer": 0,
+    "explanation": "허수단위 i의 정의입니다."
+  },
+  {
+    "id": 89,
+    "difficulty": 3,
+    "category": "Orthogonal Trajectories",
+    "question": "등전위선(Equipotential lines)과 전기력선(Lines of force)의 기하학적 관계는?",
+    "options": ["서로 직교한다 (Orthogonal)", "서로 평행하다", "일치한다", "45도를 이룬다"],
+    "answer": 0,
+    "explanation": "기울기 벡터(Gradient, 힘)는 등위곡선(등전위선)에 항상 수직이므로 두 곡선군은 직교합니다."
+  },
+  {
+    "id": 90,
+    "difficulty": 2,
+    "category": "Population Model",
+    "question": "로지스틱 방정식 P' = rP(1 - P/K) 에서 K가 의미하는 것은?",
+    "options": ["환경 수용력 (Carrying Capacity)", "초기 인구", "성장률", "사망률"],
+    "answer": 0,
+    "explanation": "인구가 무한히 늘지 못하고 수렴하게 되는 한계치를 환경 수용력 K라고 합니다."
+  },
+  {
+    "id": 91,
+    "difficulty": 1,
+    "category": "Basic Integral",
+    "question": "∫ 1/x dx = ?",
+    "options": ["ln |x| + C", "-1/x^2", "x + C", "e^x"],
+    "answer": 0,
+    "explanation": "1/x의 부정적분은 자연로그입니다."
+  },
+  {
+    "id": 92,
+    "difficulty": 2,
+    "category": "Phase Angle",
+    "question": "A cos wt + B sin wt 를 R cos(wt - δ) 로 합성할 때 위상각 δ는?",
+    "options": ["tan^-1 (B/A)", "tan^-1 (A/B)", "A^2 + B^2", "0"],
+    "answer": 0,
+    "explanation": "삼각함수의 합성 공식에 의해 진폭 R = sqrt(A^2+B^2) 이고 위상각은 tan δ = B/A 입니다."
+  },
+  {
+    "id": 93,
+    "difficulty": 3,
+    "category": "Laplace Delta",
+    "question": "L { ∫(0 to t) δ(τ-a) dτ } 의 값은? (a > 0)",
+    "options": ["e^-as / s", "e^-as", "1/s", "u(t-a)"],
+    "answer": 0,
+    "explanation": "델타 함수의 적분은 단위 계단 함수 u(t-a) 입니다. 따라서 u(t-a)의 라플라스 변환인 e^-as / s 가 됩니다."
+  },
+  {
+    "id": 94,
+    "difficulty": 1,
+    "category": "Scalar vs Vector",
+    "question": "다음 중 스칼라(Scalar)량이 아닌 것은?",
+    "options": ["속도 (Velocity)", "속력 (Speed)", "질량 (Mass)", "온도 (Temperature)"],
+    "answer": 0,
+    "explanation": "속도는 크기와 방향을 모두 가지는 벡터이고, 속력은 크기만 있는 스칼라입니다."
+  },
+  {
+    "id": 95,
+    "difficulty": 2,
+    "category": "Direction Field",
+    "question": "미분방정식을 풀지 않고 도함수 y'의 값을 이용해 해곡선의 개형을 그리는 방법은?",
+    "options": ["방향장 (Direction Field)", "오일러 방법", "룬게-쿠타 방법", "라플라스 변환"],
+    "answer": 0,
+    "explanation": "격자점마다 기울기(y')를 짧은 선분으로 그려 해의 흐름을 시각화하는 것을 방향장이라고 합니다."
+  },
+  {
+    "id": 96,
+    "difficulty": 3,
+    "category": "Regular Singular Point",
+    "question": "x=0 이 미분방정식의 정칙 특이점(Regular Singular Point)이 되기 위한 조건은?",
+    "options": ["x p(x) 와 x^2 q(x) 가 해석적(Analytic)이어야 한다.", "p(0) 와 q(0) 가 유한해야 한다.", "1/p(x) 가 해석적이어야 한다.", "조건 없음"],
+    "answer": 0,
+    "explanation": "계수 함수가 발산하더라도, 그 발산 속도가 x의 1차, 2차 이내로 제어될 때 정칙 특이점이라 하며 프로베니우스 해법을 쓸 수 있습니다."
+  },
+  {
+    "id": 97,
+    "difficulty": 1,
+    "category": "Chain Rule",
+    "question": "합성함수 미분법 (Chain Rule): d/dx f(g(x)) = ?",
+    "options": ["f'(g(x)) g'(x)", "f'(x) g'(x)", "f'(g'(x))", "f(g(x)) g'(x)"],
+    "answer": 0,
+    "explanation": "겉미분 곱하기 속미분입니다."
+  },
+  {
+    "id": 98,
+    "difficulty": 2,
+    "category": "Linear Algebra",
+    "question": "행렬 A가 직교행렬(Orthogonal Matrix)일 때 성립하는 식은?",
+    "options": ["A^T = A^-1", "A^T = A", "A^2 = I", "det(A) = 0"],
+    "answer": 0,
+    "explanation": "직교행렬의 정의는 전치행렬이 곧 역행렬인 행렬입니다. (A A^T = I)"
+  },
+  {
+    "id": 99,
+    "difficulty": 3,
+    "category": "Heat Equation",
+    "question": "1차원 열 방정식(Heat Equation) ∂u/∂t = c^2 ∂^2u/∂x^2 의 해를 구하는 대표적인 방법은?",
+    "options": ["변수분리법 (Separation of Variables)", "특성곡선법", "크래머 공식", "미정계수법"],
+    "answer": 0,
+    "explanation": "u(x,t) = X(x)T(t) 로 가정하여 공간 성분과 시간 성분의 상미분방정식으로 쪼개서 푸는 변수분리법을 씁니다."
+  },
+  {
+    "id": 100,
+    "difficulty": 1,
+    "category": "Complex Numbers",
+    "question": "복소수 z = x + iy 의 크기(Modulus) |z| 는?",
+    "options": ["sqrt(x^2 + y^2)", "x^2 + y^2", "x + y", "sqrt(x^2 - y^2)"],
+    "answer": 0,
+    "explanation": "복소평면에서 원점까지의 거리이므로 피타고라스 정리를 따릅니다."
   }
 ]

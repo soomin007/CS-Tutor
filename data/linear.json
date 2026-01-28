@@ -1,67 +1,1402 @@
 [
     {
-        "id": 1,
+        "id": 101,
+        "difficulty": 1,
         "category": "Vector Space",
-        "question": "체(Field) F 위의 벡터공간 V에 대하여, 다음 중 벡터공간의 공리(Axiom)에 포함되지 않는 것은?",
+        "question": "체(Field) F 위의 벡터공간 V의 정의에 포함되지 않는 성질은?",
         "options": [
-            "덧셈에 대한 교환법칙 (Commutativity)",
-            "스칼라 곱에 대한 결합법칙 (Associativity)",
-            "벡터의 곱셈에 대한 닫힘 성질 (Closure under vector multiplication)",
-            "영벡터(Zero vector)의 존재"
+            "덧셈에 대한 교환법칙",
+            "덧셈에 대한 결합법칙",
+            "벡터의 곱셈에 대한 닫힘",
+            "스칼라 곱에 대한 분배법칙"
         ],
         "answer": 2,
-        "explanation": "벡터공간의 정의에는 '벡터끼리의 덧셈'과 '스칼라와 벡터의 곱셈'만 정의되어 있습니다. 벡터끼리의 곱셈(내적, 외적 등)은 벡터공간의 기본 공리가 아니라 추가적인 구조(예: 내적공간)입니다."
+        "explanation": "벡터공간의 정의에는 벡터끼리의 덧셈과 스칼라배만 정의되어 있습니다. 벡터끼리의 곱셈(내적, 외적 등)은 벡터공간의 기본 정의가 아니라 추가적인 구조입니다."
     },
     {
-        "id": 2,
-        "category": "Linear Independence",
-        "question": "부분집합 S가 '선형종속(Linearly Dependent)'이라는 것의 정확한 정의는?",
+        "id": 102,
+        "difficulty": 1,
+        "category": "Subspace",
+        "question": "벡터공간 V의 부분집합 W가 부분공간(Subspace)이 되기 위한 필요충분조건은?",
         "options": [
-            "S의 어떤 벡터가 다른 벡터들의 합으로 표현된다.",
-            "S의 서로 다른 벡터들의 일차결합이 영벡터가 되는 '자명하지 않은(non-trivial)' 계수들이 존재한다.",
-            "S가 전체 공간을 생성(Span)하지 못한다.",
-            "S의 원소 개수가 차원(Dimension)보다 많다."
+            "W가 유한집합이다.",
+            "W가 영벡터를 포함하고, 덧셈과 스칼라배에 대해 닫혀있다.",
+            "W가 기저를 포함한다.",
+            "W의 차원이 V의 차원과 같다."
         ],
         "answer": 1,
-        "explanation": "가장 엄밀한 정의는 c1*v1 + ... + ck*vk = 0 을 만족하는 스칼라 c가 모두 0인 경우(자명한 해) 외에 다른 해가 존재할 때입니다. (1번 보기는 영벡터가 포함된 경우 등 예외가 있어 엄밀하지 않을 수 있습니다.)"
+        "explanation": "부분공간 판정법에 따르면, 공집합이 아니며(영벡터 포함), 덧셈과 스칼라배에 대해 닫혀있으면(Closed under addition & scalar multiplication) 부분공간입니다."
     },
     {
-        "id": 3,
-        "category": "Basis & Dimension",
-        "question": "n차원 벡터공간 V의 부분공간 W에 대하여, dim(W) = dim(V)일 때 성립하는 명제는? (단, 유한차원)",
+        "id": 103,
+        "difficulty": 2,
+        "category": "Linear Independence",
+        "question": "집합 S = {v1, v2, v3}가 선형독립(Linearly Independent)이라는 것의 정의는?",
         "options": [
+            "c1v1 + c2v2 + c3v3 = 0 을 만족하는 c1, c2, c3가 모두 0뿐이다.",
+            "c1v1 + c2v2 + c3v3 = 0 을 만족하는 c1, c2, c3가 적어도 하나는 0이 아니다.",
+            "v1, v2, v3가 서로 수직이다.",
+            "S가 공간 전체를 생성(Span)한다."
+        ],
+        "answer": 0,
+        "explanation": "선형독립의 정의는 영벡터를 만드는 방법이 모든 계수가 0인 '자명한 해(Trivial solution)'밖에 없는 경우를 말합니다."
+    },
+    {
+        "id": 104,
+        "difficulty": 2,
+        "category": "Basis",
+        "question": "R^3의 부분집합 중 기저(Basis)가 될 수 없는 것은?",
+        "options": [
+            "{(1,0,0), (0,1,0), (0,0,1)}",
+            "{(1,1,1), (1,1,0), (1,0,0)}",
+            "{(1,2,3), (4,5,6), (7,8,9)}",
+            "{(2,0,0), (0,3,0), (0,0,4)}"
+        ],
+        "answer": 2,
+        "explanation": "(1,2,3), (4,5,6), (7,8,9)는 선형종속입니다. (v2 - v1 = v3 - v2 = (3,3,3) 이므로 v1 - 2v2 + v3 = 0). 따라서 기저가 될 수 없습니다."
+    },
+    {
+        "id": 105,
+        "difficulty": 1,
+        "category": "Dimension",
+        "question": "n차원 벡터공간 V의 부분공간 W에 대하여, dim(W) = n 이면 성립하는 사실은?",
+        "options": [
+            "W = {0}",
             "W = V",
-            "W는 V의 진부분집합(Proper subset)이다.",
-            "W의 기저는 V의 기저보다 원소 개수가 적다.",
+            "W는 V의 진부분집합이다.",
+            "알 수 없다."
+        ],
+        "answer": 1,
+        "explanation": "유한차원 벡터공간에서 부분공간의 차원이 전체 공간의 차원과 같으면, 그 부분공간은 전체 공간과 일치합니다."
+    },
+    {
+        "id": 106,
+        "difficulty": 3,
+        "category": "Sum of Subspaces",
+        "question": "두 부분공간 U, W에 대하여 dim(U+W)를 구하는 공식은? (단, 유한차원)",
+        "options": [
+            "dim(U) + dim(W)",
+            "dim(U) + dim(W) - dim(U ∩ W)",
+            "dim(U) * dim(W)",
+            "max(dim(U), dim(W))"
+        ],
+        "answer": 1,
+        "explanation": "포함배제의 원리와 유사하게, 두 공간의 합공간(Sum)의 차원은 각각의 차원을 더한 뒤 교집합(Intersection)의 차원을 빼주어야 합니다."
+    },
+    {
+        "id": 107,
+        "difficulty": 1,
+        "category": "Linear Map",
+        "question": "선형사상 T: V -> W 가 보존해야 하는 두 가지 연산은?",
+        "options": [
+            "미분과 적분",
+            "덧셈과 스칼라배",
+            "곱셈과 나눗셈",
+            "내적과 외적"
+        ],
+        "answer": 1,
+        "explanation": "선형사상(Linear Map)의 정의는 T(u+v) = T(u)+T(v) (가법성) 와 T(cv) = cT(v) (동차성)를 만족하는 함수입니다."
+    },
+    {
+        "id": 108,
+        "difficulty": 2,
+        "category": "Kernel & Image",
+        "question": "선형사상 T: V -> W 에 대하여 Ker(T) = {0} 일 필요충분조건은?",
+        "options": [
+            "T가 전사(Surjective)이다.",
+            "T가 단사(Injective)이다.",
+            "T가 항등사상이다.",
+            "dim(V) = dim(W)"
+        ],
+        "answer": 1,
+        "explanation": "핵(Kernel)이 영벡터 하나뿐이라는 것은 영벡터로 가는 입력이 영벡터밖에 없다는 뜻이며, 이는 선형사상의 단사(일대일) 조건과 동치입니다."
+    },
+    {
+        "id": 109,
+        "difficulty": 3,
+        "category": "Rank-Nullity Theorem",
+        "question": "차원 정리(Rank-Nullity Theorem)의 올바른 식은? (T: V -> W, V는 유한차원)",
+        "options": [
+            "dim(V) = rank(T) + nullity(T)",
+            "dim(W) = rank(T) + nullity(T)",
+            "dim(V) = rank(T) - nullity(T)",
+            "rank(T) = nullity(T)"
+        ],
+        "answer": 0,
+        "explanation": "정의구역(Domain)의 차원은 상(Image)의 차원(Rank)과 핵(Kernel)의 차원(Nullity)의 합과 같습니다."
+    },
+    {
+        "id": 110,
+        "difficulty": 1,
+        "category": "Matrix",
+        "question": "m x n 행렬 A의 전치행렬(Transpose) A^t의 크기는?",
+        "options": [
+            "m x n",
+            "n x m",
+            "m x m",
+            "n x n"
+        ],
+        "answer": 1,
+        "explanation": "전치행렬은 행과 열을 바꾼 행렬이므로, m행 n열 행렬은 n행 m열 행렬이 됩니다."
+    },
+    {
+        "id": 111,
+        "difficulty": 2,
+        "category": "Trace",
+        "question": "행렬의 대각합(Trace)에 대한 성질로 옳지 않은 것은?",
+        "options": [
+            "tr(A+B) = tr(A) + tr(B)",
+            "tr(cA) = c tr(A)",
+            "tr(AB) = tr(BA)",
+            "tr(AB) = tr(A) tr(B)"
+        ],
+        "answer": 3,
+        "explanation": "Trace는 덧셈과 스칼라배에 대해 선형이며 tr(AB)=tr(BA)가 성립하지만, 곱셈을 보존하지는 않습니다. (tr(AB) ≠ tr(A)tr(B))"
+    },
+    {
+        "id": 112,
+        "difficulty": 1,
+        "category": "Inverse Matrix",
+        "question": "2x2 행렬 [[a, b], [c, d]]가 역행렬을 가질 조건은?",
+        "options": [
+            "ad - bc = 0",
+            "ad - bc ≠ 0",
+            "a + d = 0",
+            "ab - cd ≠ 0"
+        ],
+        "answer": 1,
+        "explanation": "행렬식(Determinant)인 ad-bc가 0이 아니어야 역행렬이 존재합니다."
+    },
+    {
+        "id": 113,
+        "difficulty": 2,
+        "category": "System of Equations",
+        "question": "선형 연립방정식 Ax = b 가 무수히 많은 해를 가질 조건은? (A는 n x n)",
+        "options": [
+            "det(A) ≠ 0",
+            "rank(A) = n",
+            "rank(A) < n 이고 rank(A) = rank([A|b])",
+            "rank(A) < rank([A|b])"
+        ],
+        "answer": 2,
+        "explanation": "rank(A) < n 이면 A는 특이행렬(Singular)이고, 이때 확대행렬과 랭크가 같으면 해가 존재하며(Consistent), 자유변수가 생겨 해가 무수히 많습니다."
+    },
+    {
+        "id": 114,
+        "difficulty": 3,
+        "category": "Coordinate Vector",
+        "question": "기저 B = {v1, ..., vn}에 대한 좌표벡터 [v]_B 의 선형성에 대한 설명으로 옳은 것은?",
+        "options": [
+            "좌표 변환은 V에서 F^n으로 가는 선형 동형사상(Isomorphism)이다.",
+            "좌표 변환은 선형사상이 아니다.",
+            "좌표 변환은 전사이지만 단사는 아니다.",
+            "기저에 따라 선형성 여부가 달라진다."
+        ],
+        "answer": 0,
+        "explanation": "어떤 기저를 선택하든, 추상적인 벡터공간 V를 구체적인 좌표공간 F^n으로 대응시키는 사상은 선형이며 전단사(Isomorphism)입니다."
+    },
+    {
+        "id": 115,
+        "difficulty": 2,
+        "category": "Matrix Multiplication",
+        "question": "행렬 곱셈 AB가 정의되기 위해 필요한 조건은?",
+        "options": [
+            "A의 열의 개수와 B의 행의 개수가 같아야 한다.",
+            "A의 행의 개수와 B의 열의 개수가 같아야 한다.",
+            "A와 B의 크기가 같아야 한다.",
+            "조건이 없다."
+        ],
+        "answer": 0,
+        "explanation": "(m x n) 행렬과 (n x p) 행렬의 곱셈이 가능합니다. 즉, 앞 행렬의 열 개수와 뒤 행렬의 행 개수가 일치해야 합니다."
+    },
+    {
+        "id": 116,
+        "difficulty": 3,
+        "category": "Elementary Matrix",
+        "question": "기본 행 연산(Elementary Row Operation)이 행렬 A에 가해질 때, 변하지 않는 것은?",
+        "options": [
+            "행렬식(Determinant)",
+            "대각합(Trace)",
+            "고유값(Eigenvalue)",
+            "행 공간(Row Space)"
+        ],
+        "answer": 3,
+        "explanation": "기본 행 연산은 행들의 선형결합으로 다른 행을 대체하는 것이므로, 행들이 생성하는 공간(Row Space) 자체는 변하지 않습니다. (행렬식이나 고유값은 변할 수 있습니다.)"
+    },
+    {
+        "id": 117,
+        "difficulty": 1,
+        "category": "Determinant",
+        "question": "대각행렬(Diagonal Matrix)의 행렬식 값은?",
+        "options": [
+            "0",
+            "1",
+            "대각 성분들의 합",
+            "대각 성분들의 곱"
+        ],
+        "answer": 3,
+        "explanation": "대각행렬, 상삼각행렬, 하삼각행렬의 행렬식은 주대각선 성분들을 모두 곱한 값입니다."
+    },
+    {
+        "id": 118,
+        "difficulty": 2,
+        "category": "Determinant Properties",
+        "question": "행렬 A의 두 행을 서로 맞바꾸었을 때, 행렬식의 변화는?",
+        "options": [
+            "변하지 않는다.",
+            "부호가 반대로 바뀐다.",
+            "0이 된다.",
+            "역수가 된다."
+        ],
+        "answer": 1,
+        "explanation": "행렬식의 교대성(Alternating property)에 의해, 두 행(또는 열)을 교환하면 부호가 바뀝니다 (det(A') = -det(A))."
+    },
+    {
+        "id": 119,
+        "difficulty": 3,
+        "category": "Determinant & Volume",
+        "question": "R^n 공간에서 n개의 벡터가 만드는 평행육면체의 부피(Volume)는 무엇과 같은가?",
+        "options": [
+            "벡터들을 열로 하는 행렬의 대각합",
+            "벡터들을 열로 하는 행렬의 랭크",
+            "벡터들을 열로 하는 행렬의 행렬식의 절댓값",
+            "항상 0"
+        ],
+        "answer": 2,
+        "explanation": "행렬식의 기하학적 의미는 기저 벡터들이 형성하는 부호 있는 부피(Signed Volume)입니다."
+    },
+    {
+        "id": 120,
+        "difficulty": 1,
+        "category": "Cramer's Rule",
+        "question": "크래머 공식(Cramer's Rule)은 어떤 경우에 유용한가?",
+        "options": [
+            "변수의 개수가 많을 때",
+            "행렬이 특이행렬(Singular)일 때",
+            "변수의 개수가 적고 계수가 문자로 주어졌을 때",
+            "근사해를 구할 때"
+        ],
+        "answer": 2,
+        "explanation": "크래머 공식은 행렬식을 이용해 해를 구하므로 계산량이 많아(O(n!)), 변수가 적거나 이론적인 식을 유도할 때 주로 사용됩니다."
+    },
+    {
+        "id": 121,
+        "difficulty": 2,
+        "category": "Vector Space",
+        "question": "모든 n차 다항식들의 집합 P_n(R)의 차원은?",
+        "options": [
+            "n",
+            "n-1",
+            "n+1",
+            "무한대"
+        ],
+        "answer": 2,
+        "explanation": "n차 이하의 다항식의 표준 기저는 {1, x, x^2, ..., x^n} 이므로 원소의 개수는 n+1개입니다."
+    },
+    {
+        "id": 122,
+        "difficulty": 2,
+        "category": "Linear Map Matrix",
+        "question": "선형사상 T(x, y) = (2x, 3y)의 표준기저에 대한 행렬 표현은?",
+        "options": [
+            "[[2, 0], [0, 3]]",
+            "[[0, 2], [3, 0]]",
+            "[[2, 3], [0, 0]]",
+            "[[3, 0], [0, 2]]"
+        ],
+        "answer": 0,
+        "explanation": "T(1,0) = (2,0), T(0,1) = (0,3) 이므로 이를 열벡터로 나열하면 [[2, 0], [0, 3]] 대각행렬이 됩니다."
+    },
+    {
+        "id": 123,
+        "difficulty": 3,
+        "category": "Change of Basis",
+        "question": "기저 변환 행렬(Transition Matrix) P에 대하여, 좌표변환 식 [v]_B' = P [v]_B 에서 P의 특징은?",
+        "options": [
+            "항상 대칭행렬이다.",
+            "항상 가역행렬(Invertible)이다.",
+            "항상 직교행렬이다.",
+            "행렬식이 0일 수 있다."
+        ],
+        "answer": 1,
+        "explanation": "기저 변환 행렬은 하나의 기저를 다른 기저로 바꾸는 것이므로 정보를 잃지 않아야 하며, 따라서 항상 역행렬이 존재합니다."
+    },
+    {
+        "id": 124,
+        "difficulty": 1,
+        "category": "Eigenvalue",
+        "question": "Ax = λx (x ≠ 0)를 만족하는 λ를 무엇이라 하는가?",
+        "options": [
+            "고유벡터 (Eigenvector)",
+            "고유값 (Eigenvalue)",
+            "특성값 (Characteristic Value)",
+            "2번과 3번 모두"
+        ],
+        "answer": 3,
+        "explanation": "λ는 고유값 또는 특성값이라고 불리며, 행렬 A가 벡터 x에 작용했을 때 방향은 바꾸지 않고 크기만 변환시키는 비율을 의미합니다."
+    },
+    {
+        "id": 125,
+        "difficulty": 2,
+        "category": "Characteristic Polynomial",
+        "question": "행렬 A의 고유값을 구하기 위해 풀어야 하는 방정식은?",
+        "options": [
+            "det(A) = 0",
+            "det(A - λI) = 0",
+            "tr(A - λI) = 0",
+            "Ax = 0"
+        ],
+        "answer": 1,
+        "explanation": "Ax = λx => (A - λI)x = 0 에서 x가 0이 아닌 해를 가져야 하므로, 계수행렬의 행렬식 det(A - λI)가 0이 되어야 합니다. 이를 특성방정식이라 합니다."
+    },
+    {
+        "id": 126,
+        "difficulty": 3,
+        "category": "Diagonalization",
+        "question": "n x n 행렬 A가 대각화 가능(Diagonalizable)할 필요충분조건은?",
+        "options": [
+            "A가 n개의 서로 다른 고유값을 가진다.",
+            "A가 n개의 선형독립인 고유벡터를 가진다.",
+            "A가 대칭행렬이다.",
+            "det(A) ≠ 0"
+        ],
+        "answer": 1,
+        "explanation": "가장 일반적인 필요충분조건은 A가 n개의 선형독립인 고유벡터(Eigenbasis)를 가지는 것입니다. (서로 다른 고유값은 충분조건일 뿐입니다.)"
+    },
+    {
+        "id": 127,
+        "difficulty": 2,
+        "category": "Eigenspace",
+        "question": "고유값 λ에 대응하는 고유공간(Eigenspace) E_λ는 무엇인가?",
+        "options": [
+            "Im(A - λI)",
+            "Ker(A - λI)",
+            "Row(A)",
+            "Col(A)"
+        ],
+        "answer": 1,
+        "explanation": "고유공간은 (A - λI)x = 0 을 만족하는 해집합이므로, 행렬 (A - λI)의 영공간(Kernel/Null Space)과 같습니다."
+    },
+    {
+        "id": 128,
+        "difficulty": 3,
+        "category": "Cayley-Hamilton",
+        "question": "케일리-해밀턴 정리(Cayley-Hamilton Theorem)가 의미하는 것은?",
+        "options": [
+            "모든 행렬은 대각화 가능하다.",
+            "행렬 A는 자신의 특성방정식의 해가 된다. (p(A) = O)",
+            "고유값들의 합은 Trace와 같다.",
+            "대칭행렬의 고유값은 실수다."
+        ],
+        "answer": 1,
+        "explanation": "특성다항식 p(t) = det(A - tI)에 대하여, t 자리에 행렬 A를 대입하면 영행렬이 된다는 정리입니다."
+    },
+    {
+        "id": 129,
+        "difficulty": 1,
+        "category": "Inner Product",
+        "question": "내적공간(Inner Product Space)에서 두 벡터 u, v가 수직(Orthogonal)일 조건은?",
+        "options": [
+            "u + v = 0",
+            "<u, v> = 0",
+            "u = kv",
+            "||u|| = ||v||"
+        ],
+        "answer": 1,
+        "explanation": "내적의 값이 0일 때 두 벡터는 직교(수직)한다고 정의합니다."
+    },
+    {
+        "id": 130,
+        "difficulty": 2,
+        "category": "Norm",
+        "question": "벡터의 길이(Norm)와 내적의 관계식은?",
+        "options": [
+            "||v|| = <v, v>",
+            "||v|| = sqrt(<v, v>)",
+            "||v|| = <v, v>^2",
+            "관계없음"
+        ],
+        "answer": 1,
+        "explanation": "벡터의 길이는 자기 자신과의 내적의 양의 제곱근으로 정의됩니다."
+    },
+    {
+        "id": 131,
+        "difficulty": 3,
+        "category": "Orthogonal Projection",
+        "question": "벡터 v를 부분공간 W로 정사영(Orthogonal Projection)시킨 벡터 proj_W(v)의 특징은?",
+        "options": [
+            "v - proj_W(v) 가 W와 수직이다.",
+            "proj_W(v) 가 W와 수직이다.",
+            "proj_W(v)의 길이가 v보다 길다.",
+            "v와 proj_W(v) 사이의 각도가 90도이다."
+        ],
+        "answer": 0,
+        "explanation": "정사영의 핵심 성질은 오차 벡터(v - proj_W(v))가 부분공간 W의 모든 벡터와 직교한다는 점입니다. (최단 거리 성질)"
+    },
+    {
+        "id": 132,
+        "difficulty": 2,
+        "category": "Gram-Schmidt",
+        "question": "그람-슈미트(Gram-Schmidt) 과정의 목적은?",
+        "options": [
+            "행렬의 역행렬을 구하기 위해",
+            "선형독립인 집합을 정규직교기저(Orthonormal Basis)로 바꾸기 위해",
+            "고유값을 구하기 위해",
+            "행렬식을 계산하기 위해"
+        ],
+        "answer": 1,
+        "explanation": "그람-슈미트 과정은 임의의 기저를 서로 수직이고 길이가 1인 정규직교기저로 변환하는 알고리즘입니다."
+    },
+    {
+        "id": 133,
+        "difficulty": 3,
+        "category": "Orthogonal Matrix",
+        "question": "직교행렬(Orthogonal Matrix) Q의 성질로 옳은 것은?",
+        "options": [
+            "Q = Q^t",
+            "Q^-1 = Q^t",
+            "det(Q) = 0",
+            "고유값이 모두 0이다."
+        ],
+        "answer": 1,
+        "explanation": "직교행렬의 정의는 Q^t Q = I 인 행렬로, 즉 역행렬이 전치행렬과 같은 행렬입니다."
+    },
+    {
+        "id": 134,
+        "difficulty": 1,
+        "category": "Symmetric Matrix",
+        "question": "대칭행렬(Symmetric Matrix) A의 정의는?",
+        "options": [
+            "A = -A",
+            "A = A^t",
+            "A^-1 = A",
+            "det(A) = 1"
+        ],
+        "answer": 1,
+        "explanation": "대칭행렬은 전치(Transpose)를 해도 자기 자신과 같은 행렬입니다."
+    },
+    {
+        "id": 135,
+        "difficulty": 3,
+        "category": "Spectral Theorem",
+        "question": "실대칭행렬(Real Symmetric Matrix)에 대한 스펙트럼 정리(Spectral Theorem)의 내용은?",
+        "options": [
+            "모든 고유값이 복소수다.",
+            "항상 직교 대각화 가능하다 (Orthogonally Diagonalizable).",
+            "대각화가 불가능할 수도 있다.",
+            "랭크가 항상 n이다."
+        ],
+        "answer": 1,
+        "explanation": "실대칭행렬은 항상 실수 고유값을 가지며, 서로 수직인 고유벡터들로 대각화할 수 있다는 매우 강력한 정리입니다."
+    },
+    {
+        "id": 136,
+        "difficulty": 2,
+        "category": "Similar Matrices",
+        "question": "두 행렬 A와 B가 닮음(Similar) 관계일 때 (B = P^-1AP), 공유하지 않는 성질은?",
+        "options": [
+            "행렬식 (Determinant)",
+            "대각합 (Trace)",
+            "고유값 (Eigenvalue)",
+            "고유벡터 (Eigenvector)"
+        ],
+        "answer": 3,
+        "explanation": "닮음 행렬은 본질적으로 같은 선형사상을 다른 기저에서 표현한 것이므로 행렬식, Trace, 고유값 등은 같지만, 좌표계가 다르므로 고유벡터 자체는 다릅니다 (v' = P^-1v)."
+    },
+    {
+        "id": 137,
+        "difficulty": 3,
+        "category": "Positive Definite",
+        "question": "양의 정부호(Positive Definite) 행렬 A의 특징이 아닌 것은?",
+        "options": [
+            "모든 고유값이 양수다.",
+            "모든 주소행렬식(Principal Minor)이 양수다.",
+            "x^t Ax > 0 (for all nonzero x)",
+            "행렬식이 음수일 수 있다."
+        ],
+        "answer": 3,
+        "explanation": "양의 정부호 행렬은 모든 고유값이 양수이므로, 그 곱인 행렬식도 반드시 양수여야 합니다."
+    },
+    {
+        "id": 138,
+        "difficulty": 1,
+        "category": "Rank",
+        "question": "행렬 A의 랭크(Rank)의 정의는?",
+        "options": [
+            "행렬의 성분의 개수",
+            "선형독립인 열(또는 행) 벡터의 최대 개수",
+            "영이 아닌 성분의 개수",
+            "행렬식의 값"
+        ],
+        "answer": 1,
+        "explanation": "랭크는 행렬이 생성하는 이미지 공간의 차원으로, 선형독립인 열(또는 행)의 개수와 같습니다."
+    },
+    {
+        "id": 139,
+        "difficulty": 2,
+        "category": "Direct Sum",
+        "question": "벡터공간 V가 U와 W의 직합(Direct Sum, V = U ⊕ W)이라는 뜻은?",
+        "options": [
+            "V = U + W 이고 U ∩ W = {0}",
+            "V = U + W 이고 U ⊥ W",
+            "V = U ∪ W",
+            "dim(V) = dim(U) + dim(W) 만 만족하면 됨"
+        ],
+        "answer": 0,
+        "explanation": "직합은 두 부분공간이 겹치지 않고(교집합이 영벡터뿐) 전체를 생성하는 경우를 말합니다. 수직일 필요는 없습니다."
+    },
+    {
+        "id": 140,
+        "difficulty": 3,
+        "category": "Dual Space",
+        "question": "벡터공간 V의 쌍대공간(Dual Space) V*의 원소는 무엇인가?",
+        "options": [
+            "V의 부분공간들",
+            "V에서 체 F로 가는 선형사상(Linear Functional)들",
+            "V의 기저들",
+            "V와 직교하는 벡터들"
+        ],
+        "answer": 1,
+        "explanation": "쌍대공간 V*는 V에서 스칼라(Field)로 가는 모든 선형함수(Linear Functional)들의 집합입니다."
+    },
+    {
+        "id": 141,
+        "difficulty": 2,
+        "category": "Minimal Polynomial",
+        "question": "행렬 A의 최소다항식(Minimal Polynomial) m(t)에 대한 설명으로 옳은 것은?",
+        "options": [
+            "m(t)는 특성다항식(Characteristic Polynomial)을 항상 나눈다.",
+            "m(t)의 차수는 항상 n이다.",
+            "m(t) = 0 의 해는 고유값과 무관하다.",
+            "m(A) ≠ O (영행렬) 일 수도 있다."
+        ],
+        "answer": 0,
+        "explanation": "최소다항식은 행렬 A를 근으로 갖는 최소 차수의 모닉 다항식이며, 케일리-해밀턴 정리에 의해 특성다항식을 반드시 나눕니다(Divide). 또한 고유값들을 모두 근으로 가집니다."
+    },
+    {
+        "id": 142,
+        "difficulty": 3,
+        "category": "Jordan Canonical Form",
+        "question": "어떤 5x5 행렬 A의 고유값이 2 하나뿐이고(중복도 5), 최소다항식이 (t-2)^3 일 때, 조르당 표준형(JCF)에서 가장 큰 조르당 블록의 크기는?",
+        "options": [
+            "1x1",
+            "2x2",
+            "3x3",
+            "5x5"
+        ],
+        "answer": 2,
+        "explanation": "최소다항식의 인자 (t-λ)^k 에서 지수 k는 해당 고유값 λ에 대응하는 가장 큰 조르당 블록의 크기를 결정합니다. 따라서 3x3 블록이 존재합니다."
+    },
+    {
+        "id": 143,
+        "difficulty": 1,
+        "category": "Quotient Space",
+        "question": "벡터공간 V와 그 부분공간 W에 대하여, 상공간(Quotient Space) V/W의 차원은? (V는 유한차원)",
+        "options": [
+            "dim(V) + dim(W)",
+            "dim(V) * dim(W)",
+            "dim(V) - dim(W)",
+            "dim(W) / dim(V)"
+        ],
+        "answer": 2,
+        "explanation": "상공간 V/W는 W에 의해 '뭉개지고' 남은 공간이므로, 그 차원은 전체 차원에서 부분공간의 차원을 뺀 값입니다."
+    },
+    {
+        "id": 144,
+        "difficulty": 2,
+        "category": "Hermitian Matrix",
+        "question": "복소행렬 A가 에르미트 행렬(Hermitian Matrix, A* = A)일 때, 고유값의 성질은?",
+        "options": [
+            "모두 실수(Real)이다.",
+            "모두 순허수(Pure Imaginary)이다.",
+            "절댓값이 1이다.",
+            "0이다."
+        ],
+        "answer": 0,
+        "explanation": "에르미트 행렬은 실대칭행렬의 복소수 버전으로, 모든 고유값이 실수라는 중요한 성질을 가집니다."
+    },
+    {
+        "id": 145,
+        "difficulty": 2,
+        "category": "Unitary Matrix",
+        "question": "유니타리 행렬(Unitary Matrix, U*U = I)의 고유값 λ의 성질은?",
+        "options": [
+            "λ는 실수다.",
+            "λ는 0 또는 1이다.",
+            "|λ| = 1 이다.",
+            "λ는 순허수다."
+        ],
+        "answer": 2,
+        "explanation": "유니타리 행렬은 벡터의 길이를 보존하는 회전 변환과 유사하므로, 고유값의 크기(절댓값)가 항상 1입니다. (복소평면의 단위원 위에 존재)"
+    },
+    {
+        "id": 146,
+        "difficulty": 3,
+        "category": "Dual Basis",
+        "question": "기저 {v1, ..., vn}에 대한 쌍대기저(Dual Basis) {f1, ..., fn}의 정의는? (단, δij는 크로네커 델타)",
+        "options": [
+            "fi(vj) = 0",
+            "fi(vj) = 1",
+            "fi(vj) = δij",
+            "fi = vi"
+        ],
+        "answer": 2,
+        "explanation": "쌍대기저는 원래 기저 벡터들에 대해 fi(vj)가 i=j일 때만 1이고 나머지는 0이 되도록 정의된 선형함수들입니다."
+    },
+    {
+        "id": 147,
+        "difficulty": 1,
+        "category": "Complex Inner Product",
+        "question": "복소내적공간에서 내적 <u, v>의 성질 중 실수 내적과 다른 점은? (수학 관례: 첫 번째 변수에 대해 선형)",
+        "options": [
+            "<v, u> = <u, v>",
+            "<v, u> = <u, v>의 켤레복소수 (Conjugate)",
+            "<u, u> < 0 일 수 있다.",
+            "분배법칙이 성립하지 않는다."
+        ],
+        "answer": 1,
+        "explanation": "복소내적은 순서를 바꾸면 켤레복소수(Conjugate)가 됩니다. 이를 켤레대칭성(Conjugate Symmetry) 또는 에르미트 대칭성이라 합니다."
+    },
+    {
+        "id": 148,
+        "difficulty": 2,
+        "category": "Adjoint Operator",
+        "question": "선형사상 T: V->V에 대하여 수반사상(Adjoint Operator) T*의 정의를 만족하는 식은?",
+        "options": [
+            "<T(u), v> = <u, T*(v)>",
+            "<T(u), v> = <u, -T*(v)>",
+            "<T(u), v> = <T*(u), v>",
+            "T*(u) = T(u)^-1"
+        ],
+        "answer": 0,
+        "explanation": "수반사상 T*는 내적 안에서 T를 오른쪽으로 넘길 때 생기는 사상으로, <Tu, v> = <u, T*v>를 만족합니다. 행렬 표현으로는 켤레전치(Conjugate Transpose)에 해당합니다."
+    },
+    {
+        "id": 149,
+        "difficulty": 3,
+        "category": "Normal Matrix",
+        "question": "행렬 A가 정규 행렬(Normal Matrix)이라는 것의 정의는?",
+        "options": [
+            "A*A = I",
+            "A = A*",
+            "A*A = AA*",
+            "A = -A*"
+        ],
+        "answer": 2,
+        "explanation": "정규 행렬은 자신과 자신의 수반행렬(A*)이 교환 가능한(Commute) 행렬입니다. 에르미트, 유니타리, 반에르미트 행렬 등을 모두 포함하는 개념이며, 복소수 범위에서 유니타리 대각화가 가능할 필요충분조건입니다."
+    },
+    {
+        "id": 150,
+        "difficulty": 2,
+        "category": "Isomorphism Theorem",
+        "question": "제1 동형 정리(First Isomorphism Theorem)에 따르면, 선형사상 T: V->W 에 대하여 V/Ker(T)는 무엇과 동형(Isomorphic)인가?",
+        "options": [
+            "V",
+            "W",
+            "Im(T) (치역)",
+            "Ker(T)"
+        ],
+        "answer": 2,
+        "explanation": "정의구역 V를 커널로 잘라낸 상공간(Quotient Space)은 치역 Im(T)와 구조적으로 완전히 동일합니다."
+    },
+    {
+        "id": 151,
+        "difficulty": 1,
+        "category": "Schur's Theorem",
+        "question": "슈어의 정리(Schur's Triangularization)에 따르면, 모든 복소행렬 A는 어떤 행렬과 닮음인가?",
+        "options": [
+            "대각행렬",
+            "상삼각행렬 (Upper Triangular)",
+            "단위행렬",
+            "영행렬"
+        ],
+        "answer": 1,
+        "explanation": "모든 복소행렬은 유니타리 행렬을 통해 상삼각행렬로 만들 수 있습니다(Unitary Triangularization). 대각화는 불가능할 수 있어도 삼각화는 항상 가능합니다."
+    },
+    {
+        "id": 152,
+        "difficulty": 3,
+        "category": "Annihilator",
+        "question": "부분공간 W의 소멸자(Annihilator) W°의 차원은? (V는 n차원, W는 k차원)",
+        "options": [
+            "k",
+            "n",
+            "n - k",
+            "n + k"
+        ],
+        "answer": 2,
+        "explanation": "소멸자는 W의 모든 벡터를 0으로 보내는 쌍대공간 V*의 원소들입니다. 그 차원은 전체 차원에서 W의 차원을 뺀 n-k가 됩니다."
+    },
+    {
+        "id": 153,
+        "difficulty": 2,
+        "category": "Quadratic Form",
+        "question": "이차형식(Quadratic Form) q(x) = x^t A x 에서 교차항(예: xy)을 없애는 과정을 무엇이라 하는가?",
+        "options": [
+            "대각화 (Diagonalization)",
+            "직교화 (Orthogonalization)",
+            "미분 (Differentiation)",
+            "전치 (Transposition)"
+        ],
+        "answer": 0,
+        "explanation": "이차형식의 교차항을 없애는 것은 행렬 A를 대칭행렬로 보고 주축 정리(Principal Axis Thm)를 이용해 직교 대각화하여 제곱항들의 합으로만 나타내는 과정입니다."
+    },
+    {
+        "id": 154,
+        "difficulty": 3,
+        "category": "Sylvester's Law",
+        "question": "실베스터의 관성 법칙(Sylvester's Law of Inertia)에 따르면, 이차형식을 대각화했을 때 변하지 않는 불변량은?",
+        "options": [
+            "고유값의 합",
+            "양의 계수, 음의 계수, 0의 개수",
+            "고유벡터의 방향",
+            "행렬의 성분"
+        ],
+        "answer": 1,
+        "explanation": "어떤 좌표변환을 쓰더라도 대각화된 식에서 양수 제곱항의 개수, 음수 제곱항의 개수, 0의 개수(이를 Signature라 함)는 일정합니다."
+    },
+    {
+        "id": 155,
+        "difficulty": 1,
+        "category": "Skew-Hermitian",
+        "question": "반에르미트 행렬(Skew-Hermitian, A* = -A)의 고유값은?",
+        "options": [
+            "실수",
+            "순허수 (Pure Imaginary)",
+            "0 또는 1",
+            "복소수 평면의 단위원 위"
+        ],
+        "answer": 1,
+        "explanation": "반에르미트 행렬의 고유값은 항상 순허수(또는 0)입니다. 이는 실수 반대칭행렬(Skew-symmetric)의 일반화입니다."
+    },
+    {
+        "id": 156,
+        "difficulty": 2,
+        "category": "Double Dual",
+        "question": "유한차원 벡터공간 V와 그 이중쌍대공간(Double Dual) V** 사이의 자연스러운 동형사상(Natural Isomorphism) Ψ의 정의는? (v는 V의 원소, f는 V*의 원소)",
+        "options": [
+            "Ψ(v)(f) = f(v)",
+            "Ψ(v)(f) = v",
+            "Ψ(v)(f) = 0",
+            "Ψ(v)(f) = f(0)"
+        ],
+        "answer": 0,
+        "explanation": "V의 원소 v를 V**의 원소로 볼 때, '함수 f를 입력받아 f(v)를 뱉어내는 함수'로 정의합니다. 이를 Evaluation Map이라고도 합니다."
+    },
+    {
+        "id": 157,
+        "difficulty": 3,
+        "category": "Nilpotent Operator",
+        "question": "멱영 연산자(Nilpotent Operator) N에 대하여, N^k = O 이 되는 최소의 k를 멱영 지수라 한다. 이때 N의 고유값은?",
+        "options": [
+            "모두 0이다.",
+            "모두 1이다.",
+            "0과 1이 섞여 있다.",
             "알 수 없다."
         ],
         "answer": 0,
-        "explanation": "유한차원 벡터공간에서 부분공간의 차원이 전체공간의 차원과 같으면, 그 부분공간은 전체공간과 일치합니다(W = V). 이는 <선형대수와 군>에서 차원을 이용해 두 공간이 같음을 증명할 때 자주 쓰이는 테크닉입니다."
+        "explanation": "N^k = O 이면 고유값 λ에 대해 λ^k = 0 이어야 하므로, λ는 무조건 0일 수밖에 없습니다."
     },
     {
-        "id": 4,
-        "category": "Linear Map",
-        "question": "선형사상 T: V -> W 가 '단사(Injective)'일 필요충분조건은?",
+        "id": 158,
+        "difficulty": 2,
+        "category": "Geometric Multiplicity",
+        "question": "고유값 λ의 기하적 중복도(Geometric Multiplicity)란?",
         "options": [
-            "dim(V) = dim(W)",
-            "Ker(T) = {0} (영공간이 영벡터만 포함한다)",
-            "Im(T) = W (치역이 공역과 같다)",
-            "T가 행렬로 표현될 때 행렬식이 0이 아니다."
+            "특성다항식에서 (t-λ) 인자의 지수",
+            "고유공간 E_λ의 차원",
+            "최소다항식에서 (t-λ) 인자의 지수",
+            "행렬의 랭크"
         ],
         "answer": 1,
-        "explanation": "선형대수학의 핵심 정리 중 하나입니다. 선형사상이 단사함수인 것과 커널(Kernel, 핵)이 영공간인 것은 동치입니다."
+        "explanation": "기하적 중복도는 해당 고유값에 대응하는 일차독립인 고유벡터의 최대 개수, 즉 고유공간의 차원을 의미합니다."
     },
     {
-        "id": 5,
-        "category": "System of Linear Equations",
-        "question": "Ax = b 꼴의 선형 연립방정식에서 해가 존재할(Consistent) 필요충분조건은? (Rank 이용)",
+        "id": 159,
+        "difficulty": 1,
+        "category": "Diagonalizability",
+        "question": "대수적 중복도(Alg)와 기하적 중복도(Geo) 사이의 관계는?",
         "options": [
-            "rank(A) = rank([A|b]) (확대행렬의 랭크와 같다)",
-            "rank(A) = 행의 개수",
-            "rank(A) = 열의 개수",
-            "b = 0"
+            "Geo = Alg",
+            "Geo ≥ Alg",
+            "Geo ≤ Alg",
+            "관계없음"
+        ],
+        "answer": 2,
+        "explanation": "기하적 중복도는 항상 대수적 중복도보다 작거나 같습니다. 모든 고유값에 대해 Geo = Alg 일 때만 대각화가 가능합니다."
+    },
+    {
+        "id": 160,
+        "difficulty": 3,
+        "category": "Bilinear Form",
+        "question": "대칭 쌍선형 형식(Symmetric Bilinear Form) H가 비퇴화(Non-degenerate)라는 의미는?",
+        "options": [
+            "H(x, y) = 0 for all y => x = 0",
+            "H(x, x) > 0 for all x ≠ 0",
+            "H(x, y) = H(y, x)",
+            "행렬식이 1이다."
         ],
         "answer": 0,
-        "explanation": "해가 존재한다는 것은 b가 A의 열벡터(Column vector)들이 생성하는 공간(Column space) 안에 있다는 뜻입니다. 즉, b를 추가해도 차원이 늘어나지 않아야 하므로 계수행렬 A와 확대행렬 [A|b]의 랭크가 같아야 합니다."
+        "explanation": "비퇴화라는 것은 모든 벡터와 수직인 벡터(Radical)가 영벡터밖에 없다는 뜻이며, 행렬 표현에서 행렬식이 0이 아님을 의미합니다."
+    },
+    {
+        "id": 161,
+        "difficulty": 2,
+        "category": "Invariant Subspace",
+        "question": "선형사상 T에 대하여 부분공간 W가 T-불변(T-invariant)이라는 뜻은?",
+        "options": [
+            "T(W) = {0}",
+            "T(W) ⊆ W",
+            "T(W) = V",
+            "W ⊆ Ker(T)"
+        ],
+        "answer": 1,
+        "explanation": "W의 벡터를 T로 보냈을 때 여전히 W 안에 머무르면 T-불변 부분공간이라고 합니다. 고유공간이 대표적인 예입니다."
+    },
+    {
+        "id": 162,
+        "difficulty": 3,
+        "category": "Primary Decomposition",
+        "question": "일차분해정리(Primary Decomposition Theorem)는 최소다항식이 서로소인 다항식들의 곱으로 인수분해될 때, 전체 공간 V가 어떻게 된다고 말하는가?",
+        "options": [
+            "V가 각 인자에 해당하는 커널들의 직합(Direct Sum)으로 분해된다.",
+            "V가 대각화된다.",
+            "V가 영공간이 된다.",
+            "변화가 없다."
+        ],
+        "answer": 0,
+        "explanation": "최소다항식 m(t) = p1(t)p2(t)... 로 분해되면, V는 Ker(p1(T)) ⊕ Ker(p2(T)) ... 로 분해됩니다. 이것이 JCF의 이론적 배경입니다."
+    },
+    {
+        "id": 163,
+        "difficulty": 1,
+        "category": "Determinant",
+        "question": "행렬 A가 유니타리 행렬일 때, |det(A)|의 값은?",
+        "options": [
+            "0",
+            "1",
+            "-1",
+            "알 수 없음"
+        ],
+        "answer": 1,
+        "explanation": "유니타리 행렬 U는 U*U = I 이므로 det(U*)det(U) = |det(U)|^2 = 1. 따라서 행렬식의 절댓값은 1입니다."
+    },
+    {
+        "id": 164,
+        "difficulty": 2,
+        "category": "Linear Functional",
+        "question": "선형범함수(Linear Functional) f: V -> F 의 커널(Ker(f))의 차원은? (f는 영함수가 아님, dim V = n)",
+        "options": [
+            "0",
+            "1",
+            "n-1",
+            "n"
+        ],
+        "answer": 2,
+        "explanation": "선형범함수의 치역은 1차원(스칼라)이므로, 차원 정리에 의해 커널의 차원은 n - 1, 즉 초평면(Hyperplane)이 됩니다."
+    },
+    {
+        "id": 165,
+        "difficulty": 3,
+        "category": "Complexification",
+        "question": "실벡터공간 V를 복소수 체 위로 확장하는 과정을 무엇이라 하는가?",
+        "options": [
+            "복소화 (Complexification)",
+            "대각화",
+            "직교화",
+            "쌍대화"
+        ],
+        "answer": 0,
+        "explanation": "V의 복소화(Complexification) V_C = V ⊗ C 를 통해 실계수 행렬을 복소수 범위에서 다룰 수 있게 하여, 고유값 존재성 등을 보장받습니다."
+    },
+    {
+        "id": 166,
+        "difficulty": 2,
+        "category": "Block Matrix",
+        "question": "블록 대각 행렬(Block Diagonal Matrix)의 행렬식은?",
+        "options": [
+            "블록들의 행렬식의 합",
+            "블록들의 행렬식의 곱",
+            "0",
+            "1"
+        ],
+        "answer": 1,
+        "explanation": "대각선에 위치한 블록 행렬들의 행렬식을 모두 곱한 것이 전체 행렬식입니다."
+    },
+    {
+        "id": 167,
+        "difficulty": 1,
+        "category": "Field",
+        "question": "선형대수학에서 말하는 체(Field) F가 갖추어야 할 연산은?",
+        "options": [
+            "덧셈",
+            "덧셈과 곱셈 (사칙연산)",
+            "내적",
+            "미분"
+        ],
+        "answer": 1,
+        "explanation": "체는 덧셈, 뺄셈, 곱셈, 나눗셈(0으로 나누기 제외)이 자유롭게 가능한 집합(예: 실수 R, 복소수 C, 유리수 Q 등)을 말합니다."
+    },
+    {
+        "id": 168,
+        "difficulty": 2,
+        "category": "Cyclic Subspace",
+        "question": "벡터 v에 의해 생성된 T-순환 부분공간(Cyclic Subspace)의 기저는?",
+        "options": [
+            "{v, T(v), T^2(v), ... , T^(k-1)(v)}",
+            "{v, v^2, v^3, ...}",
+            "{v, 2v, 3v, ...}",
+            "알 수 없다"
+        ],
+        "answer": 0,
+        "explanation": "v와 T에 의해 생성되는 가장 작은 불변 부분공간은 v에 T를 계속 적용하여 얻은 벡터들로 생성됩니다."
+    },
+    {
+        "id": 169,
+        "difficulty": 3,
+        "category": "Projection",
+        "question": "선형변환 P가 사영(Projection)일 필요충분조건은?",
+        "options": [
+            "P^2 = P",
+            "P^2 = I",
+            "P^t = P",
+            "P^-1 = P"
+        ],
+        "answer": 0,
+        "explanation": "한 번 투영된 이미지를 다시 투영해도 변화가 없어야 하므로(Idempotent), P^2 = P를 만족해야 합니다."
+    },
+    {
+        "id": 170,
+        "difficulty": 1,
+        "category": "Trace",
+        "question": "행렬 A가 멱영(Nilpotent)일 때, Trace(A)의 값은?",
+        "options": [
+            "0",
+            "1",
+            "n",
+            "알 수 없음"
+        ],
+        "answer": 0,
+        "explanation": "멱영 행렬은 모든 고유값이 0이므로, 고유값들의 합인 Trace도 반드시 0입니다."
+    },
+    {
+        "id": 171,
+        "difficulty": 2,
+        "category": "Rank",
+        "question": "행렬의 곱 AB의 랭크에 대한 부등식으로 옳은 것은?",
+        "options": [
+            "rank(AB) ≤ min(rank(A), rank(B))",
+            "rank(AB) ≥ max(rank(A), rank(B))",
+            "rank(AB) = rank(A) * rank(B)",
+            "rank(AB) = rank(A) + rank(B)"
+        ],
+        "answer": 0,
+        "explanation": "곱한 행렬의 랭크는 곱해지는 각 행렬의 랭크보다 커질 수 없습니다. 이미지는 작아질 수밖에 없기 때문입니다."
+    },
+    {
+        "id": 172,
+        "difficulty": 3,
+        "category": "Vandermonde",
+        "question": "반데르몽드 행렬식(Vandermonde Determinant)이 0이 아닐 조건은?",
+        "options": [
+            "모든 변수 x_i가 서로 다를 때",
+            "모든 x_i가 0일 때",
+            "x_i의 합이 0일 때",
+            "x_i가 모두 1일 때"
+        ],
+        "answer": 0,
+        "explanation": "반데르몽드 행렬식은 Π(xi - xj) 꼴이므로, 모든 xi가 서로 다르면 0이 되지 않습니다. 이는 라그랑주 보간법 등에서 해의 유일성을 보장합니다."
+    },
+    {
+        "id": 173,
+        "difficulty": 2,
+        "category": "Orthogonal Complement",
+        "question": "유한차원 내적공간 V의 부분공간 W에 대하여, (W^⊥)^⊥ 는 무엇과 같은가?",
+        "options": [
+            "W",
+            "W^⊥",
+            "V",
+            "{0}"
+        ],
+        "answer": 0,
+        "explanation": "유한차원에서는 수직의 수직은 자기 자신이 됩니다."
+    },
+    {
+        "id": 174,
+        "difficulty": 1,
+        "category": "Definition",
+        "question": "대수적으로 닫힌 체(Algebraically Closed Field)의 예는?",
+        "options": [
+            "실수체 R",
+            "유리수체 Q",
+            "복소수체 C",
+            "정수환 Z"
+        ],
+        "answer": 2,
+        "explanation": "대수학의 기본 정리에 의해, 복소수 계수 다항식은 복소수 범위 내에서 항상 근을 가집니다. 따라서 C는 대수적으로 닫혀 있습니다."
+    },
+    {
+        "id": 175,
+        "difficulty": 3,
+        "category": "Generalized Eigenvector",
+        "question": "일반화 고유벡터(Generalized Eigenvector) v는 어떤 식을 만족하는가?",
+        "options": [
+            "(A - λI)^k v = 0 (어떤 k에 대해)",
+            "Av = λv",
+            "Av = 0",
+            "Av = v"
+        ],
+        "answer": 0,
+        "explanation": "일반 고유벡터는 (A-λI)v=0 이지만, 일반화 고유벡터는 거듭제곱해서 0이 되는 벡터를 말하며, 조르당 블록을 구성하는 기초가 됩니다."
+    },
+    {
+        "id": 176,
+        "difficulty": 2,
+        "category": "Positive Definite",
+        "question": "양의 정부호 행렬(Positive Definite Matrix) A를 B*B 꼴로 분해하는 것을 무엇이라 하는가?",
+        "options": [
+            "촐레스키 분해 (Cholesky Decomposition)",
+            "QR 분해",
+            "LU 분해",
+            "SVD"
+        ],
+        "answer": 0,
+        "explanation": "양의 정부호 행렬은 유일한 하삼각행렬 L(또는 B*)과 그 전치의 곱으로 분해될 수 있으며, 이를 촐레스키 분해라고 합니다."
+    },
+    {
+        "id": 177,
+        "difficulty": 1,
+        "category": "Matrix Operations",
+        "question": "(AB)^-1 와 같은 것은?",
+        "options": [
+            "A^-1 B^-1",
+            "B^-1 A^-1",
+            "A^-1 + B^-1",
+            "AB"
+        ],
+        "answer": 1,
+        "explanation": "역행렬 연산 시 순서가 뒤집힙니다. (AB)(B^-1 A^-1) = A(BB^-1)A^-1 = AIA^-1 = I."
+    },
+    {
+        "id": 178,
+        "difficulty": 3,
+        "category": "SVD",
+        "question": "특이값 분해(SVD) A = U Σ V* 에서 특이값(Singular Value)들은 어떤 행렬의 고유값의 제곱근인가?",
+        "options": [
+            "A*A",
+            "A",
+            "A+A*",
+            "A^-1"
+        ],
+        "answer": 0,
+        "explanation": "특이값은 A*A (또는 AA*)의 고유값들의 양의 제곱근으로 정의됩니다."
+    },
+    {
+        "id": 179,
+        "difficulty": 2,
+        "category": "Linear Independence",
+        "question": "함수들의 집합 {f, g, h}의 론스키안(Wronskian)이 0이 아니면, 이 함수들은?",
+        "options": [
+            "선형독립이다.",
+            "선형종속이다.",
+            "직교한다.",
+            "미분가능하지 않다."
+        ],
+        "answer": 0,
+        "explanation": "어떤 구간에서 론스키안이 0이 아니라면 그 함수들은 선형독립입니다. (역은 항상 성립하지는 않음)"
+    },
+    {
+        "id": 180,
+        "difficulty": 1,
+        "category": "Vector Space",
+        "question": "다음 중 벡터공간이 아닌 것은?",
+        "options": [
+            "원점을 지나는 평면",
+            "2차 이하의 다항식 집합",
+            "행렬식이 1인 행렬들의 집합",
+            "모든 실수 수열의 집합"
+        ],
+        "answer": 2,
+        "explanation": "행렬식이 1인 행렬들은 덧셈에 대해 닫혀있지 않고(I+I의 det는 1이 아님), 영행렬도 포함하지 않으므로 벡터공간이 아닙니다."
+    },
+    {
+        "id": 181,
+        "difficulty": 3,
+        "category": "Dual Map",
+        "question": "선형사상 T: V->W의 쌍대사상(Dual Map) T': W*->V* 의 정의는? (g는 W*의 원소)",
+        "options": [
+            "T'(g) = g ∘ T",
+            "T'(g) = T ∘ g",
+            "T'(g) = g^-1",
+            "T'(g) = g"
+        ],
+        "answer": 0,
+        "explanation": "쌍대사상은 함수(Functional)를 뒤로 당기는(Pull-back) 역할을 합니다. 즉, 합성함수 g(T(v))를 만들어 V*의 원소를 생성합니다."
+    },
+    {
+        "id": 182,
+        "difficulty": 2,
+        "category": "Basis Change",
+        "question": "선형연산자 T의 행렬표현이 기저 B에서 [T]_B일 때, 기저변환행렬 P에 의한 새로운 기저 B'에서의 표현 [T]_B'는?",
+        "options": [
+            "P^-1 [T]_B P",
+            "P [T]_B P^-1",
+            "P [T]_B P",
+            "[T]_B"
+        ],
+        "answer": 0,
+        "explanation": "닮음 변환(Similarity Transformation) 공식입니다. 순서에 주의해야 합니다."
+    },
+    {
+        "id": 183,
+        "difficulty": 1,
+        "category": "Row Operations",
+        "question": "행렬의 행을 스칼라배(0이 아닌)하여 다른 행에 더하는 연산은 행렬식을 변화시키는가?",
+        "options": [
+            "변화시키지 않는다.",
+            "k배 된다.",
+            "0이 된다.",
+            "부호가 바뀐다."
+        ],
+        "answer": 0,
+        "explanation": "기본 행 연산 중 '한 행의 배수를 다른 행에 더하기'는 행렬식의 값을 변화시키지 않습니다. (부피 보존 전단 변환)"
+    },
+    {
+        "id": 184,
+        "difficulty": 3,
+        "category": "Normal Operator",
+        "question": "유한차원 복소내적공간에서 정규 연산자(Normal Operator) T에 대한 스펙트럼 정리의 결론은?",
+        "options": [
+            "V의 정규직교기저(Orthonormal Basis)로 대각화 가능하다.",
+            "대각화 가능하지만 기저가 수직은 아니다.",
+            "항상 실수 고유값을 가진다.",
+            "JCF만 가능하다."
+        ],
+        "answer": 0,
+        "explanation": "복소수체 위에서 정규 연산자는 유니타리 대각화가 가능합니다. (실수체 위에서는 대칭 연산자만 가능)"
+    },
+    {
+        "id": 185,
+        "difficulty": 2,
+        "category": "Linear System",
+        "question": "동차 연립방정식 Ax=0 이 자명하지 않은 해(Non-trivial solution)를 가질 필요충분조건은?",
+        "options": [
+            "det(A) = 0 (A가 가역이 아님)",
+            "det(A) ≠ 0",
+            "A가 단위행렬임",
+            "A의 열들이 선형독립임"
+        ],
+        "answer": 0,
+        "explanation": "자명하지 않은 해(x≠0)가 존재한다는 것은 커널이 {0}이 아니라는 뜻이며, 이는 행렬이 특이행렬(Singular)임을 의미합니다."
+    },
+    {
+        "id": 186,
+        "difficulty": 2,
+        "category": "Projection Matrix",
+        "question": "벡터 x를 벡터 u 방향으로 정사영하는 행렬 P는? (u는 단위벡터 아님)",
+        "options": [
+            "uu^t / u^tu",
+            "uu^t",
+            "u^tu / uu^t",
+            "I - uu^t"
+        ],
+        "answer": 0,
+        "explanation": "Proj_u(x) = (<x,u>/<u,u>)u = (u^t x / u^t u) u = (u u^t / u^t u) x. 따라서 행렬은 uu^t / u^tu 입니다."
+    },
+    {
+        "id": 187,
+        "difficulty": 3,
+        "category": "Quotient Map",
+        "question": "자연스러운 사상(Canonical Map) π: V -> V/W 의 커널(Ker)은?",
+        "options": [
+            "W",
+            "V",
+            "{0}",
+            "V/W"
+        ],
+        "answer": 0,
+        "explanation": "π(v) = v + W 이므로, π(v)가 영벡터(W)가 되려면 v가 W에 속해야 합니다."
+    },
+    {
+        "id": 188,
+        "difficulty": 1,
+        "category": "Complex Numbers",
+        "question": "복소수 z = a+bi의 켤레복소수(Conjugate) z_bar의 성질이 아닌 것은?",
+        "options": [
+            "z * z_bar = |z|^2",
+            "z + z_bar = 2a (실수)",
+            "z = z_bar 이면 z는 실수",
+            "z * z_bar = z^2"
+        ],
+        "answer": 3,
+        "explanation": "z * z_bar는 크기의 제곱(실수)이지만, z^2은 복소수가 될 수 있습니다."
+    },
+    {
+        "id": 189,
+        "difficulty": 2,
+        "category": "Rank",
+        "question": "행렬 A의 열공간(Col A)과 행공간(Row A)의 차원은?",
+        "options": [
+            "항상 같다 (Rank A)",
+            "다를 수 있다.",
+            "합하면 n이다.",
+            "곱하면 det A이다."
+        ],
+        "answer": 0,
+        "explanation": "놀랍게도 행공간의 차원과 열공간의 차원은 항상 같으며, 이를 행렬의 랭크(Rank)라고 부릅니다."
+    },
+    {
+        "id": 190,
+        "difficulty": 3,
+        "category": "Tensor Product",
+        "question": "두 벡터공간 V(n차원)와 W(m차원)의 텐서곱(Tensor Product) V ⊗ W의 차원은?",
+        "options": [
+            "nm",
+            "n+m",
+            "n^m",
+            "m^n"
+        ],
+        "answer": 0,
+        "explanation": "텐서곱 공간의 기저는 V의 기저와 W의 기저의 순서쌍(vi ⊗ wj)으로 구성되므로 차원은 n * m 입니다."
+    },
+    {
+        "id": 191,
+        "difficulty": 1,
+        "category": "Triangle Inequality",
+        "question": "삼각부등식(Triangle Inequality)은 무엇인가?",
+        "options": [
+            "||u + v|| ≤ ||u|| + ||v||",
+            "||u + v|| = ||u|| + ||v||",
+            "||u + v|| ≥ ||u|| + ||v||",
+            "||u|| ≤ ||v||"
+        ],
+        "answer": 0,
+        "explanation": "삼각형의 두 변의 길이의 합은 나머지 한 변의 길이보다 크거나 같다는 기하학적 성질의 일반화입니다."
+    },
+    {
+        "id": 192,
+        "difficulty": 2,
+        "category": "Orthogonal Basis",
+        "question": "정규직교기저 {u1, ..., un}에 대한 벡터 v의 좌표값 c_i (v = Σ c_i u_i)는 어떻게 구하는가?",
+        "options": [
+            "c_i = <v, u_i>",
+            "c_i = v / u_i",
+            "c_i = <v, v>",
+            "연립방정식을 풀어야 한다."
+        ],
+        "answer": 0,
+        "explanation": "정규직교기저의 강력한 장점은 복잡한 연립방정식(가우스 소거법) 없이 내적만으로 좌표(계수)를 바로 구할 수 있다는 점입니다. (푸리에 급수의 원리)"
+    },
+    {
+        "id": 193,
+        "difficulty": 3,
+        "category": "Signature",
+        "question": "이차형식의 부호수(Signature) (p, q)에서 p와 q는 무엇을 의미하는가?",
+        "options": [
+            "p는 양의 고유값 개수, q는 음의 고유값 개수",
+            "p는 0인 고유값 개수, q는 0이 아닌 것",
+            "p는 랭크, q는 널리티",
+            "아무 의미 없음"
+        ],
+        "answer": 0,
+        "explanation": "실베스터 관성 법칙에 의해 결정되는 고유한 값으로, 대각화했을 때 양수 계수의 개수와 음수 계수의 개수를 뜻합니다."
+    },
+    {
+        "id": 194,
+        "difficulty": 1,
+        "category": "Identity Matrix",
+        "question": "단위행렬 I의 고유값은?",
+        "options": [
+            "모두 1",
+            "모두 0",
+            "1과 0",
+            "알 수 없음"
+        ],
+        "answer": 0,
+        "explanation": "Ix = 1x 이므로 모든 벡터가 고유벡터이며, 고유값은 모두 1입니다."
+    },
+    {
+        "id": 195,
+        "difficulty": 2,
+        "category": "Similar Matrices",
+        "question": "행렬 A가 B와 닮음이면, A^k는 무엇과 닮음인가?",
+        "options": [
+            "B^k",
+            "B",
+            "B^-1",
+            "k B"
+        ],
+        "answer": 0,
+        "explanation": "A = PBP^-1 이면 A^k = (PBP^-1)...(PBP^-1) = P B^k P^-1 이므로 B^k와 닮음입니다."
+    },
+    {
+        "id": 196,
+        "difficulty": 3,
+        "category": "Direct Sum Decomposition",
+        "question": "사영 P (P^2=P)에 대하여 공간 V는 어떻게 분해되는가?",
+        "options": [
+            "V = Im(P) ⊕ Ker(P)",
+            "V = Im(P) ∪ Ker(P)",
+            "V = Im(P) ⊥ Ker(P)",
+            "분해되지 않는다."
+        ],
+        "answer": 0,
+        "explanation": "모든 벡터 v는 v = Pv + (v-Pv)로 쓸 수 있으며, 앞항은 Im(P), 뒷항은 Ker(P)에 속하고 교집합이 0이므로 직합 분해됩니다."
+    },
+    {
+        "id": 197,
+        "difficulty": 1,
+        "category": "Function Space",
+        "question": "구간 [0, 1]에서 연속인 함수들의 집합 C[0,1]은 벡터공간인가?",
+        "options": [
+            "예",
+            "아니오",
+            "함수에 따라 다름",
+            "조건 부족"
+        ],
+        "answer": 0,
+        "explanation": "함수들의 덧셈과 스칼라배가 정의되고 벡터공간 공리를 모두 만족하므로 무한차원 벡터공간입니다."
+    },
+    {
+        "id": 198,
+        "difficulty": 2,
+        "category": "Matrix Rank",
+        "question": "n x n 행렬 A의 랭크가 n-1 일 때, 수반행렬 adj(A)의 랭크는?",
+        "options": [
+            "1",
+            "0",
+            "n",
+            "n-1"
+        ],
+        "answer": 0,
+        "explanation": "Rank(A) = n-1 이면 nullity가 1이고, A * adj(A) = det(A)I = O 이므로 adj(A)의 열들은 A의 커널에 속합니다. 따라서 adj(A)의 랭크는 1입니다."
+    },
+    {
+        "id": 199,
+        "difficulty": 3,
+        "category": "Unitary Diag",
+        "question": "행렬 A가 유니타리 대각화 가능하려면 A는 어떤 행렬이어야 하는가?",
+        "options": [
+            "정규 행렬 (Normal Matrix)",
+            "대칭 행렬",
+            "가역 행렬",
+            "삼각 행렬"
+        ],
+        "answer": 0,
+        "explanation": "복소수체에서 유니타리 대각화가 가능할 필요충분조건은 행렬이 정규 행렬(AA* = A*A)인 것입니다."
+    },
+    {
+        "id": 200,
+        "difficulty": 1,
+        "category": "Zero Vector",
+        "question": "벡터공간의 영벡터(Zero Vector) 0에 스칼라 k를 곱하면?",
+        "options": [
+            "0",
+            "k",
+            "1",
+            "정의되지 않음"
+        ],
+        "answer": 0,
+        "explanation": "k * 0 = k * (0 + 0) = k * 0 + k * 0 이므로 양변을 소거하면 k * 0 = 0 입니다."
     }
 ]

@@ -1,67 +1,902 @@
 [
   {
     "id": 201,
+    "difficulty": 1,
     "category": "Number System",
-    "question": "디지털 시스템에서 '2의 보수(2's Complement)'를 사용하는 가장 주된 이유는 무엇인가?",
-    "options": [
-      "사람이 읽기 편해서",
-      "0을 표현하는 방법이 두 가지라서",
-      "덧셈 회로 하나로 뺄셈까지 처리할 수 있어서",
-      "부동 소수점을 표현하기 위해서"
-    ],
+    "question": "디지털 시스템에서 음수를 표현할 때 '2의 보수(2's Complement)'를 주로 사용하는 이유는?",
+    "options": ["사람이 이해하기 쉬워서", "0에 대한 표현이 두 가지라서", "덧셈 회로 하나로 뺄셈까지 처리할 수 있어서", "표현 범위가 가장 좁아서"],
     "answer": 2,
-    "explanation": "2의 보수를 사용하면 부호 비트 처리를 위한 별도의 감산기(Subtractor) 없이, 가산기(Adder)만으로 덧셈과 뺄셈을 모두 수행할 수 있어 회로가 단순해집니다. (2019 Midterm 기출)"
+    "explanation": "2의 보수를 사용하면 부호 비트를 따로 처리할 필요 없이, 덧셈기(Adder) 하나로 뺄셈 연산까지 수행할 수 있어 회로가 효율적입니다."
   },
   {
     "id": 202,
-    "category": "Sequential Logic",
-    "question": "플립플롭(Flip-Flop)에서 데이터가 클럭 엣지 전후로 일정 시간 동안 유지되어야 하는 조건을 무엇이라 하는가?",
-    "options": [
-      "Setup Time & Hold Time",
-      "Propagation Delay",
-      "Rise Time & Fall Time",
-      "Fan-in & Fan-out"
-    ],
-    "answer": 0,
-    "explanation": "클럭이 튀기(Trigger) 직전에 입력이 안정되어야 하는 시간(Setup)과 직후에 유지되어야 하는 시간(Hold)을 위반하면 메타스테이블(Metastability) 상태에 빠질 수 있습니다. (2014 Final 기출)"
+    "difficulty": 1,
+    "category": "Boolean Algebra",
+    "question": "불 대수 법칙 중 A + A'B = A + B 와 동일한 것은?",
+    "options": ["드모르간 법칙", "흡수 법칙 (Absorption Law)", "결합 법칙", "분배 법칙"],
+    "answer": 3,
+    "explanation": "A + A'B = (A + A')(A + B) = 1 * (A + B) = A + B 이므로 분배 법칙을 응용한 간소화 공식입니다."
   },
   {
     "id": 203,
-    "category": "FSM Design",
-    "question": "Moore Machine의 출력(Output)은 무엇에 의해 결정되는가?",
-    "options": [
-      "현재 입력(Input)에 의해서만",
-      "현재 상태(Current State)에 의해서만",
-      "현재 상태와 현재 입력 모두에 의해",
-      "이전 상태(Next State)에 의해"
-    ],
-    "answer": 1,
-    "explanation": "Moore Machine의 출력은 오직 '현재 상태'에만 의존합니다. 반면 Mealy Machine은 '현재 상태'와 '입력' 모두에 의존합니다. (2016 Final 기출)"
+    "difficulty": 2,
+    "category": "Logic Gates",
+    "question": "다음 중 'Universal Gate' (하나만으로 모든 논리 회로를 구성할 수 있는 게이트)는?",
+    "options": ["AND", "OR", "XOR", "NAND"],
+    "answer": 3,
+    "explanation": "NAND와 NOR 게이트는 그 자체만 조합하여 AND, OR, NOT 등 모든 게이트를 만들어낼 수 있어 Universal Gate라고 합니다."
   },
   {
     "id": 204,
-    "category": "Logic Gate",
-    "question": "다음 중 'Universal Gate' (조합해서 어떤 논리식이라도 만들 수 있는 게이트)인 것은?",
-    "options": [
-      "AND",
-      "OR",
-      "NAND",
-      "XOR"
-    ],
-    "answer": 2,
-    "explanation": "NAND와 NOR 게이트는 그 자체만으로 AND, OR, NOT 등 모든 논리 연산을 구현할 수 있어 Universal Gate라고 부릅니다."
+    "difficulty": 3,
+    "category": "K-Map",
+    "question": "Karnaugh Map에서 'Essential Prime Implicant (필수 주항)'의 정의는?",
+    "options": ["가장 많은 1을 묶은 항", "어떤 1을 포함하는 유일한 Prime Implicant", "모든 1을 다 포함하는 항", "Don't care를 포함하지 않는 항"],
+    "answer": 1,
+    "explanation": "EPI는 특정 1(minterm)을 묶을 수 있는 방법이 그 항밖에 없는 경우를 말하며, 논리식 간소화 결과에 반드시 포함되어야 합니다."
   },
   {
     "id": 205,
-    "category": "Memory",
-    "question": "SRAM과 DRAM의 차이점으로 틀린 것은?",
-    "options": [
-      "SRAM은 리프레시(Refresh)가 필요 없다.",
-      "DRAM은 커패시터에 전하를 저장한다.",
-      "SRAM이 DRAM보다 집적도(Density)가 높다.",
-      "DRAM이 가격이 더 저렴하다."
-    ],
+    "difficulty": 2,
+    "category": "Combinational Logic",
+    "question": "4:1 MUX (Multiplexer)를 이용하여 2입력 XOR 게이트(A ⊕ B)를 구현하려 한다. 선택 신호 S1, S0에 A, B를 연결했을 때, 입력 I0, I1, I2, I3의 값은?",
+    "options": ["0, 1, 1, 0", "0, 0, 1, 1", "1, 0, 0, 1", "0, 1, 0, 1"],
+    "answer": 0,
+    "explanation": "XOR의 진리표는 00->0, 01->1, 10->1, 11->0 입니다. 따라서 입력은 순서대로 0, 1, 1, 0이 되어야 합니다."
+  },
+  {
+    "id": 206,
+    "difficulty": 1,
+    "category": "Flip-Flop",
+    "question": "SR 래치(Latch)에서 S=1, R=1일 때의 상태는?",
+    "options": ["Set (Q=1)", "Reset (Q=0)", "Hold (이전 상태 유지)", "Invalid (금지됨)"],
+    "answer": 3,
+    "explanation": "SR 래치(NOR 기반)에서 S와 R이 둘 다 1이면 출력 Q와 Q'가 모두 0이 되어, Q' = not Q 관계가 깨지므로 사용을 금지합니다."
+  },
+  {
+    "id": 207,
+    "difficulty": 2,
+    "category": "Timing",
+    "question": "플립플롭의 Setup Time 위반(Violation)이 발생했을 때 나타날 수 있는 현상은?",
+    "options": ["Propagation Delay 증가", "Metastability (메타스테이블)", "Fan-out 감소", "전력 소모 감소"],
+    "answer": 1,
+    "explanation": "클럭 엣지 근처에서 입력 데이터가 변하면, 플립플롭이 0인지 1인지 결정하지 못하고 중간 전압 상태에서 흔들리는 메타스테이블 상태에 빠질 수 있습니다."
+  },
+  {
+    "id": 208,
+    "difficulty": 1,
+    "category": "FSM",
+    "question": "Moore Machine의 출력(Output)은 무엇에 의해 결정되는가?",
+    "options": ["현재 상태 (Current State)", "현재 입력 (Input)", "현재 상태와 현재 입력", "다음 상태 (Next State)"],
+    "answer": 0,
+    "explanation": "Moore Machine은 출력이 오직 '현재 상태'에만 의존합니다. 반면 Mealy Machine은 '현재 상태'와 '입력' 모두에 의존합니다."
+  },
+  {
+    "id": 209,
+    "difficulty": 3,
+    "category": "Counter",
+    "question": "4비트 리플 카운터(Ripple Counter)의 최대 동작 주파수(Max Frequency)를 제한하는 주된 요인은?",
+    "options": ["클럭 스큐", "각 플립플롭의 누적된 전파 지연 (Propagation Delay)", "Setup Time", "Hold Time"],
+    "answer": 1,
+    "explanation": "리플 카운터는 앞단 FF의 출력이 뒷단 FF의 클럭으로 들어가므로, 비트 수가 늘어날수록 지연 시간이 누적되어 전체 동작 속도가 느려집니다."
+  },
+  {
+    "id": 210,
+    "difficulty": 2,
+    "category": "Verilog",
+    "question": "Verilog HDL에서 순차 회로(Sequential Logic)를 모델링할 때 주로 사용하는 할당문은?",
+    "options": ["= (Blocking Assignment)", "<= (Non-blocking Assignment)", "assign", "wire"],
+    "answer": 1,
+    "explanation": "플립플롭과 같은 순차 회로는 모든 상태 업데이트가 클럭 엣지에서 동시에 일어나야 하므로 Non-blocking 할당(<=)을 사용해야 경쟁 상태(Race Condition)를 피할 수 있습니다."
+  },
+  {
+    "id": 211,
+    "difficulty": 1,
+    "category": "Code",
+    "question": "Gray Code의 가장 큰 특징은?",
+    "options": ["가중치(Weight)가 있다.", "연속된 수 간에 1비트만 변한다.", "에러 검출이 불가능하다.", "BCD 코드와 같다."],
+    "answer": 1,
+    "explanation": "그레이 코드는 인접한 숫자끼리 오직 한 비트만 달라지므로, 카운터나 인코더 등에서 글리치(Glitch) 발생을 줄이는 데 유리합니다."
+  },
+  {
+    "id": 212,
+    "difficulty": 2,
+    "category": "Decoder",
+    "question": "3x8 Decoder를 활성화(Enable) 신호를 이용하여 구현하려 한다. 만약 4x16 Decoder를 만들려면 3x8 Decoder가 몇 개 필요한가?",
+    "options": ["1개", "2개", "3개", "4개"],
+    "answer": 1,
+    "explanation": "입력 최상위 비트(MSB)를 Enable 신호로 사용하여, 0일 때 첫 번째 디코더, 1일 때 두 번째 디코더를 선택하면 되므로 2개가 필요합니다."
+  },
+  {
+    "id": 213,
+    "difficulty": 3,
+    "category": "Hazard",
+    "question": "조합 회로에서 입력이 변할 때, 잠시동안 원치 않는 펄스(Glitch)가 발생하는 'Static-1 Hazard'는 주로 어떤 구조에서 발생하는가?",
+    "options": ["인접한 1끼리 묶이지 않았을 때 (SOP 구조)", "POS 구조", "모든 0이 묶였을 때", "XOR 게이트 사용 시"],
+    "answer": 0,
+    "explanation": "K-map에서 인접한 두 그룹 사이를 건너뛸 때, 공통으로 묶인 항(Redundant term)이 없으면 잠시 0으로 떨어지는 해저드가 발생할 수 있습니다."
+  },
+  {
+    "id": 214,
+    "difficulty": 1,
+    "category": "Master-Slave FF",
+    "question": "Master-Slave 플립플롭을 사용하는 주된 이유는?",
+    "options": ["전력 소모를 줄이기 위해", "속도를 높이기 위해", "Transparency (투명성) 문제를 해결하여 엣지 트리거링을 구현하기 위해", "회로 크기를 줄이기 위해"],
     "answer": 2,
-    "explanation": "SRAM은 하나의 비트를 저장하는 데 6개의 트랜지스터가 필요하지만, DRAM은 1개의 트랜지스터와 1개의 커패시터만 필요합니다. 따라서 DRAM의 집적도가 훨씬 높습니다. (2018 Final 관련)"
+    "explanation": "래치(Latch)는 클럭이 1인 동안 계속 입력이 출력에 반영되지만, Master-Slave 구조는 클럭의 엣지에서만 데이터를 샘플링하여 안정적인 동기화가 가능합니다."
+  },
+  {
+    "id": 215,
+    "difficulty": 2,
+    "category": "State Reduction",
+    "question": "두 상태(State)가 '등가(Equivalent)'이기 위한 조건은?",
+    "options": ["출력이 같고, 같은 입력에 대해 같은 다음 상태(또는 등가 상태)로 전이한다.", "출력이 같다.", "다음 상태가 같다.", "상태 할당 비트 수가 같다."],
+    "answer": 0,
+    "explanation": "두 상태가 구별 불가능(Indistinguishable)하려면, 현재 출력도 같아야 하고, 어떤 입력을 넣더라도 앞으로의 행동(전이)이 똑같아야 합니다."
+  },
+  {
+    "id": 216,
+    "difficulty": 3,
+    "category": "PLA vs PAL",
+    "question": "PLA(Programmable Logic Array)와 PAL(Programmable Array Logic)의 차이점은?",
+    "options": ["PLA는 AND/OR 평면 모두 프로그래밍 가능, PAL은 AND만 가능", "PLA는 OR만 가능, PAL은 AND/OR 모두 가능", "PLA가 PAL보다 빠르다.", "PAL이 PLA보다 비싸다."],
+    "answer": 0,
+    "explanation": "PLA는 유연성이 높지만(AND, OR 모두 설정 가능) 느리고 비쌉니다. PAL은 OR 평면을 고정(Fixed)시켜 유연성은 떨어지지만 속도가 빠르고 저렴합니다."
+  },
+  {
+    "id": 217,
+    "difficulty": 1,
+    "category": "Adder",
+    "question": "반가산기(Half Adder)와 전가산기(Full Adder)의 차이는?",
+    "options": ["출력 개수", "자리올림수(Carry-in) 입력 유무", "뺄셈 가능 여부", "비트 수"],
+    "answer": 1,
+    "explanation": "반가산기는 두 비트만 더하지만, 전가산기는 아랫자리에서 올라온 자리올림수(Carry-in)까지 포함하여 세 비트를 더합니다."
+  },
+  {
+    "id": 218,
+    "difficulty": 2,
+    "category": "Complement",
+    "question": "2의 보수 체계에서 4비트 수 '1010'을 십진수로 변환하면?",
+    "options": ["10", "-6", "-2", "-10"],
+    "answer": 1,
+    "explanation": "MSB가 1이므로 음수입니다. 2의 보수를 취하면 0101(5) + 1 = 0110(6). 따라서 원래 수는 -6입니다."
+  },
+  {
+    "id": 219,
+    "difficulty": 3,
+    "category": "Tri-state Buffer",
+    "question": "Tri-state Buffer의 출력 상태 3가지는 High, Low, 그리고 무엇인가?",
+    "options": ["Zero", "Negative", "High-Impedance (Hi-Z)", "Floating Point"],
+    "answer": 2,
+    "explanation": "Hi-Z 상태는 회로가 끊어진 것과 같은 상태(개방 회로)를 의미하며, 여러 장치가 버스(Bus) 라인을 공유할 때 충돌을 방지하기 위해 사용됩니다."
+  },
+  {
+    "id": 220,
+    "difficulty": 1,
+    "category": "Sequential Logic",
+    "question": "순차 회로(Sequential Logic)의 필수 구성 요소는?",
+    "options": ["AND 게이트", "메모리 소자 (Flip-Flop 등)", "클럭 생성기", "디코더"],
+    "answer": 1,
+    "explanation": "순차 회로는 현재 입력뿐만 아니라 '과거의 상태'에도 영향을 받으므로, 정보를 저장할 수 있는 메모리 소자가 반드시 필요합니다."
+  },
+  {
+    "id": 221,
+    "difficulty": 2,
+    "category": "Demultiplexer",
+    "question": "1x4 DEMUX를 이용하여 2비트 Decoder를 구현할 수 있는가?",
+    "options": ["가능하다. 데이터 입력을 1로 고정하면 된다.", "불가능하다.", "가능하다. 선택 신호를 출력으로 쓴다.", "데이터 입력을 0으로 고정하면 된다."],
+    "answer": 0,
+    "explanation": "DEMUX의 데이터 입력(D)에 항상 1을 주고, 선택 신호(S1, S0)에 입력 값을 주면, 선택된 출력 라인만 1이 되므로 디코더와 똑같이 동작합니다."
+  },
+  {
+    "id": 222,
+    "difficulty": 3,
+    "category": "Setup Time",
+    "question": "회로의 최대 동작 주파수(f_max)를 구할 때 고려하지 않아도 되는 것은?",
+    "options": ["Setup Time (t_su)", "Propagation Delay (t_pd)", "Clock Skew (t_skew)", "Hold Time (t_hold)"],
+    "answer": 3,
+    "explanation": "주기(T)는 (t_pd + t_su + t_skew)보다 커야 합니다. Hold Time은 다음 엣지 이후 데이터 유지 조건이므로 주파수(주기) 결정식에는 직접 포함되지 않습니다."
+  },
+  {
+    "id": 223,
+    "difficulty": 1,
+    "category": "Priority Encoder",
+    "question": "Priority Encoder의 기능은?",
+    "options": ["여러 입력 중 가장 높은 우선순위의 입력만 인코딩한다.", "모든 입력을 더한다.", "입력을 해독한다.", "에러를 수정한다."],
+    "answer": 0,
+    "explanation": "여러 입력이 동시에 1이 들어올 때, 사전에 정해진 우선순위가 높은 입력의 인덱스만 출력으로 내보냅니다."
+  },
+  {
+    "id": 224,
+    "difficulty": 2,
+    "category": "Parity Bit",
+    "question": "홀수 패리티(Odd Parity) 시스템에서 데이터 '1011'에 붙여야 할 패리티 비트는?",
+    "options": ["0", "1", "Don't care", "알 수 없음"],
+    "answer": 0,
+    "explanation": "홀수 패리티는 전체 1의 개수를 홀수로 맞춰야 합니다. '1011'에는 1이 3개(홀수) 있으므로 패리티 비트는 0이어야 합니다."
+  },
+  {
+    "id": 225,
+    "difficulty": 3,
+    "category": "Mealy Machine",
+    "question": "Mealy Machine에서 글리치(Glitch)가 발생하기 쉬운 이유는?",
+    "options": ["클럭과 상관없이 입력이 변하면 즉시 출력이 변하기 때문에", "상태 수가 더 많아서", "메모리를 사용하지 않아서", "피드백이 없어서"],
+    "answer": 0,
+    "explanation": "Mealy 출력은 입력(Input)에 직접 연결되어 있어, 클럭 엣지가 아닌 구간에서 입력이 흔들리면 출력도 같이 흔들리는 글리치가 발생할 수 있습니다."
+  },
+  {
+    "id": 226,
+    "difficulty": 1,
+    "category": "De Morgan",
+    "question": "(A + B)' 와 동일한 논리식은?",
+    "options": ["A' + B'", "A'B'", "AB", "A + B"],
+    "answer": 1,
+    "explanation": "드모르간의 법칙: 합의 부정은 부정의 곱과 같다. (NOR = Inverted Inputs AND)"
+  },
+  {
+    "id": 227,
+    "difficulty": 2,
+    "category": "SOP form",
+    "question": "논리식 F = (A+B)(C+D)를 SOP(Sum of Products) 형태로 바꾼 것은?",
+    "options": ["AC + AD + BC + BD", "A+B+C+D", "ABCD", "(A+C)(B+D)"],
+    "answer": 0,
+    "explanation": "분배 법칙을 적용하여 괄호를 풀면 AC + AD + BC + BD 가 됩니다."
+  },
+  {
+    "id": 228,
+    "difficulty": 3,
+    "category": "Shift Register",
+    "question": "4비트 Johnson Counter (Twisted Ring Counter)의 상태 개수는?",
+    "options": ["4개", "8개", "16개", "2개"],
+    "answer": 1,
+    "explanation": "Johnson Counter는 출력의 반전(NOT)을 입력으로 돌려주는 시프트 레지스터로, 상태 수는 2N개입니다. (4비트면 8개)"
+  },
+  {
+    "id": 229,
+    "difficulty": 1,
+    "category": "Canonical Form",
+    "question": "모든 항이 모든 변수를 포함하고 있는 곱의 합 형태를 무엇이라 하는가?",
+    "options": ["최소항 전개 (Canonical Sum of Minterms)", "최대항 전개", "간소화된 식", "POS"],
+    "answer": 0,
+    "explanation": "모든 변수가 포함된 곱항(AND항)을 민텀(Minterm)이라 하며, 이들의 합으로 표현하는 것이 표준 SOP(Canonical Form)입니다."
+  },
+  {
+    "id": 230,
+    "difficulty": 2,
+    "category": "Comparator",
+    "question": "1비트 비교기(Comparator)에서 A > B 조건을 검사하는 논리식은?",
+    "options": ["AB", "A'B", "AB'", "A XNOR B"],
+    "answer": 2,
+    "explanation": "A가 1이고 B가 0일 때만 A > B가 성립하므로 식은 AB' 입니다."
+  },
+  {
+    "id": 231,
+    "difficulty": 3,
+    "category": "Static-0 Hazard",
+    "question": "POS(Product of Sums) 회로 구현 시 인접한 0끼리 묶어주지 않으면 발생하는 해저드는?",
+    "options": ["Static-0 Hazard", "Static-1 Hazard", "Dynamic Hazard", "Metastability"],
+    "answer": 0,
+    "explanation": "POS 구현(Maxterm grouping)에서는 0이 되는 구간을 정의하는데, 인접한 0 그룹 간 전이 시 잠시 1로 튀는 Static-0 Hazard가 발생할 수 있습니다."
+  },
+  {
+    "id": 232,
+    "difficulty": 1,
+    "category": "ASCII",
+    "question": "ASCII 코드는 문자 하나를 표현하기 위해 몇 비트를 사용하는가? (표준)",
+    "options": ["4비트", "7비트", "8비트", "16비트"],
+    "answer": 1,
+    "explanation": "표준 ASCII는 7비트로 128개의 문자를 표현합니다. (통신 에러 검출용 패리티 비트를 포함해 8비트로 쓰기도 합니다.)"
+  },
+  {
+    "id": 233,
+    "difficulty": 2,
+    "category": "Multiplexer",
+    "question": "MUX를 이용한 함수 구현에서, 8x1 MUX로 3변수 함수 F(A,B,C)를 구현할 때 선택 신호(Select)에 연결해야 할 것은?",
+    "options": ["A, B, C", "A, B", "C", "F"],
+    "answer": 0,
+    "explanation": "8x1 MUX는 3개의 선택 입력(2^3=8)을 가지므로, 변수 A, B, C를 모두 선택 신호로 쓰고 데이터 입력에 진리표 값을 고정시키면 됩니다."
+  },
+  {
+    "id": 234,
+    "difficulty": 3,
+    "category": "Synchronizer",
+    "question": "서로 다른 클럭 도메인 간에 데이터를 전송할 때, 메타스테이블 문제를 해결하기 위해 사용하는 회로는?",
+    "options": ["Synchronizer (2-FF chain)", "Inverter", "Buffer", "Counter"],
+    "answer": 0,
+    "explanation": "비동기 입력을 시스템 클럭에 맞추기 위해 플립플롭 두 개를 직렬로 연결하여(Double buffering), 첫 번째 FF가 메타스테이블에 빠져도 두 번째 FF에서 안정화될 확률을 높입니다."
+  },
+  {
+    "id": 235,
+    "difficulty": 1,
+    "category": "Octal",
+    "question": "2진수 '110 101'을 8진수로 변환하면?",
+    "options": ["65", "56", "35", "75"],
+    "answer": 0,
+    "explanation": "3비트씩 끊어서 읽으면 됩니다. 110(6), 101(5) -> 65."
+  },
+  {
+    "id": 236,
+    "difficulty": 2,
+    "category": "Ring Counter",
+    "question": "4비트 Ring Counter가 가질 수 있는 유효한 상태(State)의 개수는?",
+    "options": ["4개 (1000, 0100, 0010, 0001)", "8개", "16개", "2개"],
+    "answer": 0,
+    "explanation": "링 카운터는 하나의 '1'이 뱅글뱅글 도는 형태이므로 플립플롭 개수만큼의 상태만 가집니다."
+  },
+  {
+    "id": 237,
+    "difficulty": 3,
+    "category": "CLA Adder",
+    "question": "CLA(Carry Look-ahead Adder)가 리플 캐리 가산기(RCA)보다 빠른 이유는?",
+    "options": ["캐리를 병렬로 미리 계산하기 때문", "게이트 수가 적어서", "클럭 속도가 빨라서", "반가산기를 사용해서"],
+    "answer": 0,
+    "explanation": "RCA는 캐리가 순차적으로 전달되기를 기다려야 하지만, CLA는 Generate(G)와 Propagate(P) 함수를 이용해 모든 자리의 캐리를 입력만 보고 즉시 계산해냅니다."
+  },
+  {
+    "id": 238,
+    "difficulty": 1,
+    "category": "Enable Input",
+    "question": "Tri-state 버퍼에서 Enable 신호가 비활성(Disable)일 때 출력은?",
+    "options": ["0", "1", "Hi-Z (고저항)", "이전 값"],
+    "answer": 2,
+    "explanation": "Enable이 꺼지면 스위치가 열린 것처럼 동작하여 회로에서 전기적으로 분리된 High Impedance 상태가 됩니다."
+  },
+  {
+    "id": 239,
+    "difficulty": 2,
+    "category": "Excitation Table",
+    "question": "JK 플립플롭에서 현재 상태 Q=0, 다음 상태 Q+=1 로 만들려면 입력 J, K는?",
+    "options": ["J=1, K=X", "J=0, K=X", "J=X, K=1", "J=X, K=0"],
+    "answer": 0,
+    "explanation": "0에서 1로 변하려면 Set(1,0) 또는 Toggle(1,1)이어야 합니다. 따라서 J는 무조건 1이어야 하고, K는 0이든 1이든 상관없으므로 1X 입니다."
+  },
+  {
+    "id": 240,
+    "difficulty": 3,
+    "category": "Verilog Synthesis",
+    "question": "Verilog 코드 `always @(posedge clk) q <= d;` 는 합성(Synthesis) 후 어떤 회로가 되는가?",
+    "options": ["D Flip-Flop", "D Latch", "MUX", "Buffer"],
+    "answer": 0,
+    "explanation": "클럭의 상승 엣지(posedge)에 반응하여 값을 저장하는 동작은 엣지 트리거 D 플립플롭으로 합성됩니다."
+  },
+  {
+    "id": 241,
+    "difficulty": 1,
+    "category": "Literal",
+    "question": "불 대수 식에서 변수 그 자체나 그 변수의 부정(NOT)을 의미하는 용어는?",
+    "options": ["리터럴 (Literal)", "텀 (Term)", "민텀 (Minterm)", "맥스텀 (Maxterm)"],
+    "answer": 0,
+    "explanation": "변수 x나 x' 각각을 리터럴이라고 부르며, 논리회로의 입력 개수와 관련이 있습니다."
+  },
+  {
+    "id": 242,
+    "difficulty": 2,
+    "category": "Fan-out",
+    "question": "논리 게이트의 'Fan-out'이 제한되는 주된 이유는?",
+    "options": ["전류 구동 능력의 한계 때문에", "전압이 너무 높아져서", "게이트 크기가 커져서", "논리식이 복잡해져서"],
+    "answer": 0,
+    "explanation": "하나의 출력이 너무 많은 입력에 연결되면(Fan-out이 크면), 전류가 분산되어 전압 레벨을 유지하지 못하거나 충전 시간이 길어져 속도가 느려집니다."
+  },
+  {
+    "id": 243,
+    "difficulty": 3,
+    "category": "Clock Skew",
+    "question": "클럭 스큐(Skew)가 양수(Positive)일 때, 즉 수신측 클럭이 송신측보다 늦게 도착할 때 발생할 수 있는 문제는?",
+    "options": ["Hold Time 위반", "Setup Time 위반", "전력 소모 증가", "글리치 발생"],
+    "answer": 0,
+    "explanation": "클럭이 늦게 도착하면 이전 데이터가 사라지기 전에 다음 엣지가 와버려서 데이터를 덮어쓸 위험이 있습니다. (Hold time 위반 가능성 증가)"
+  },
+  {
+    "id": 244,
+    "difficulty": 1,
+    "category": "Register",
+    "question": "n비트 레지스터는 몇 개의 플립플롭으로 구성되는가?",
+    "options": ["n개", "2n개", "n/2개", "1개"],
+    "answer": 0,
+    "explanation": "레지스터는 n비트의 데이터를 저장해야 하므로, 1비트를 저장하는 플립플롭이 n개 병렬로 연결됩니다."
+  },
+  {
+    "id": 245,
+    "difficulty": 2,
+    "category": "Verilog Blocking",
+    "question": "조합 회로(Combinational Logic)를 `always` 블록으로 짤 때 권장되는 할당문은?",
+    "options": ["= (Blocking)", "<= (Non-blocking)", "assign", "wire"],
+    "answer": 0,
+    "explanation": "조합 회로는 순서대로 즉시 계산되어야 하므로 Blocking 할당(=)을 사용하는 것이 일반적이며, 순차 회로에 Non-blocking(<=)을 씁니다."
+  },
+  {
+    "id": 246,
+    "difficulty": 3,
+    "category": "ROM Implementation",
+    "question": "3입력 2출력 진리표를 ROM으로 구현하려면 어떤 크기의 ROM이 필요한가?",
+    "options": ["8 x 2 bits", "3 x 2 bits", "8 x 1 bits", "4 x 4 bits"],
+    "answer": 0,
+    "explanation": "3입력은 2^3=8개의 주소 공간(Address)이 필요하고, 각 주소마다 2비트 데이터를 저장해야 하므로 8 words x 2 bits 크기가 필요합니다."
+  },
+  {
+    "id": 247,
+    "difficulty": 1,
+    "category": "XOR",
+    "question": "홀수 개의 1이 입력될 때 1을 출력하는 함수는?",
+    "options": ["XOR (Parity) 함수", "AND 함수", "OR 함수", "Majority 함수"],
+    "answer": 0,
+    "explanation": "XOR 연산은 입력 중 1의 개수가 홀수일 때 1이 되는 성질이 있어 패리티 생성/검사에 쓰입니다."
+  },
+  {
+    "id": 248,
+    "difficulty": 2,
+    "category": "Memory Decoding",
+    "question": "10비트 주소선을 가진 메모리의 용량(Addressable unit 개수)은?",
+    "options": ["1024개 (1K)", "512개", "2048개", "10개"],
+    "answer": 0,
+    "explanation": "2^10 = 1024 이므로 1K 개의 주소를 지정할 수 있습니다."
+  },
+  {
+    "id": 249,
+    "difficulty": 3,
+    "category": "Sequence Detector",
+    "question": "중복을 허용하는(Overlapping) '101' 시퀀스 검출기를 설계할 때 필요한 최소 상태 수는?",
+    "options": ["3개", "4개", "2개", "5개"],
+    "answer": 0,
+    "explanation": "Reset(S0) -> 1받음(S1) -> 10받음(S2) -> 1받음(S1로 돌아가며 출력). 따라서 최소 3개의 상태가 필요합니다."
+  },
+  {
+    "id": 250,
+    "difficulty": 1,
+    "category": "Digital Signal",
+    "question": "아날로그 신호를 디지털로 바꿀 때, 연속적인 전압 값을 근사한 정수 값으로 변환하는 과정을 무엇이라 하는가?",
+    "options": ["양자화 (Quantization)", "샘플링 (Sampling)", "인코딩 (Encoding)", "변조 (Modulation)"],
+    "answer": 0,
+    "explanation": "샘플링은 시간을 쪼개는 것이고, 양자화는 값을 쪼개어(반올림 등) 디지털 값으로 매핑하는 과정입니다."
+  },
+  {
+    "id": 251,
+    "difficulty": 2,
+    "category": "Don't Care",
+    "question": "K-map 간소화에서 Don't Care (X) 항의 처리 방법은?",
+    "options": ["1을 묶을 때 유리하면 포함하고, 아니면 0 취급한다.", "무조건 포함해야 한다.", "무조건 0으로 둔다.", "무조건 1로 둔다."],
+    "answer": 0,
+    "explanation": "Don't care는 입력으로 들어오지 않거나 출력이 상관없는 경우이므로, 논리식을 간단하게 만드는 데 도움이 되면 1로 쓰고, 아니면 0으로 무시하면 됩니다."
+  },
+  {
+    "id": 252,
+    "difficulty": 3,
+    "category": "FSM Encoding",
+    "question": "FSM 상태 할당 시 인접한 상태(전이가 일어나는 상태)들의 해밍 거리를 최소화하는 이유는?",
+    "options": ["스위칭 노이즈와 전력 소모를 줄이고 글리치를 방지하기 위해", "상태 수를 줄이기 위해", "디코더를 없애기 위해", "속도를 늦추기 위해"],
+    "answer": 0,
+    "explanation": "상태가 변할 때 여러 비트가 동시에 변하면 레이싱(Racing) 문제나 글리치가 생길 수 있고 전력 소모도 큽니다. 그레이 코드 등을 써서 변화를 최소화합니다."
+  },
+  {
+    "id": 253,
+    "difficulty": 1,
+    "category": "D Flip-Flop",
+    "question": "D 플립플롭에서 Q(t+1)은 무엇과 같은가?",
+    "options": ["D", "Q(t)", "D'", "0"],
+    "answer": 0,
+    "explanation": "D 플립플롭은 데이터(Data)를 그대로 다음 상태로 전달하는 역할을 합니다. (Delay FF)"
+  },
+  {
+    "id": 254,
+    "difficulty": 2,
+    "category": "Encoder",
+    "question": "8x3 인코더에 입력이 00010000 (D4가 1) 들어왔을 때 출력은?",
+    "options": ["100 (4)", "011 (3)", "101 (5)", "000"],
+    "answer": 0,
+    "explanation": "D4 라인이 활성화되었으므로 인덱스 4에 해당하는 2진수 100이 출력됩니다."
+  },
+  {
+    "id": 255,
+    "difficulty": 3,
+    "category": "Dynamic Logic",
+    "question": "Domino Logic과 같은 Dynamic Logic의 단점은?",
+    "options": ["클럭이 멈추거나 너무 느리면 전하 누설(Leakage)로 데이터를 잃을 수 있다.", "속도가 너무 느리다.", "면적이 너무 크다.", "Static Power가 크다."],
+    "answer": 0,
+    "explanation": "Dynamic Logic은 커패시터에 전하를 충전하여 값을 저장하므로, 주기적으로 리프레시(또는 클럭킹)를 안 해주면 전하가 새어나가 값이 바뀝니다. (Minimum Frequency 제약)"
+  },
+  {
+    "id": 256,
+    "difficulty": 1,
+    "category": "BCD",
+    "question": "BCD 코드에서 십진수 9 다음의 수는?",
+    "options": ["1001 다음은 1010이 아니라 캐리가 발생하고 0000이 된다.", "1010 (A)", "1111 (F)", "0001"],
+    "answer": 0,
+    "explanation": "BCD(Binary Coded Decimal)는 0~9까지만 사용하므로, 9(1001)에 1을 더하면 1010이 되는 게 아니라 자리올림이 발생하고 0이 됩니다."
+  },
+  {
+    "id": 257,
+    "difficulty": 2,
+    "category": "Comparator",
+    "question": "n비트 비교기를 설계할 때, 상위 비트부터 비교해야 하는 이유는?",
+    "options": ["상위 비트가 크면 하위 비트와 상관없이 크기가 결정되므로", "하위 비트가 더 중요해서", "캐리 전파 때문에", "회로가 간단해서"],
+    "answer": 0,
+    "explanation": "숫자의 대소 비교는 가중치가 큰 MSB부터 차례로 비교하다가 차이가 나는 순간 결정됩니다."
+  },
+  {
+    "id": 258,
+    "difficulty": 3,
+    "category": "Timing Constraint",
+    "question": "Setup Time 여유(Slack)가 음수(Negative)라면 의미하는 바는?",
+    "options": ["회로가 원하는 주파수에서 동작하지 않는다 (Setup Violation).", "회로가 매우 안정적이다.", "주파수를 더 높여도 된다.", "홀드 타임 위반이다."],
+    "answer": 0,
+    "explanation": "Slack = Required Time - Arrival Time 입니다. 이것이 음수라는 건 데이터가 제시간에 도착하지 못했다는 뜻이며, 주파수를 낮춰야 합니다."
+  },
+  {
+    "id": 259,
+    "difficulty": 1,
+    "category": "Inverter",
+    "question": "CMOS 인버터는 어떤 트랜지스터들의 조합인가?",
+    "options": ["PMOS (Pull-up) + NMOS (Pull-down)", "NMOS + NMOS", "PMOS + PMOS", "BJT + FET"],
+    "answer": 0,
+    "explanation": "CMOS는 상보형(Complementary) 구조로, 위쪽에는 PMOS, 아래쪽에는 NMOS를 배치하여 전력 소모를 최소화합니다."
+  },
+  {
+    "id": 260,
+    "difficulty": 2,
+    "category": "Self-Correction",
+    "question": "카운터 설계에서 'Self-Correcting' 성질이란?",
+    "options": ["사용하지 않는 상태(Unused State)에 빠지더라도 결국 유효한 상태로 돌아오는 것", "에러를 스스로 고치는 것", "스스로 리셋하는 것", "전원을 끄는 것"],
+    "answer": 0,
+    "explanation": "노이즈 등으로 인해 카운터가 설계되지 않은 상태(예: 3비트 카운터의 111 상태)로 튀더라도, 다음 클럭에서 정상 시퀀스로 복귀하도록 설계하는 것입니다."
+  },
+  {
+    "id": 261,
+    "difficulty": 1,
+    "category": "Hexadecimal",
+    "question": "2진수 4자리를 묶으면 16진수 몇 자리가 되는가?",
+    "options": ["1자리", "2자리", "4자리", "1/2자리"],
+    "answer": 0,
+    "explanation": "2^4 = 16 이므로, 2진수 4비트는 16진수 1자리에 정확히 대응됩니다."
+  },
+  {
+    "id": 262,
+    "difficulty": 2,
+    "category": "Verilog Syntax",
+    "question": "Verilog에서 여러 비트를 묶어서(Concatenation) 표현하는 연산자는?",
+    "options": ["{ }", "[ ]", "( )", "< >"],
+    "answer": 0,
+    "explanation": "중괄호 {a, b} 는 신호 a와 b를 이어 붙여 하나의 버스로 만듭니다."
+  },
+  {
+    "id": 263,
+    "difficulty": 3,
+    "category": "Clock Jitter",
+    "question": "클럭 지터(Jitter)란 무엇인가?",
+    "options": ["클럭 엣지의 타이밍이 시간적으로 미세하게 떨리는 현상", "클럭 주파수가 2배가 되는 현상", "클럭 전압이 0이 되는 현상", "클럭이 멈추는 현상"],
+    "answer": 0,
+    "explanation": "이상적인 주기에서 벗어나 엣지가 조금씩 빨리 오거나 늦게 오는 현상으로, 타이밍 마진을 감소시키는 원인이 됩니다."
+  },
+  {
+    "id": 264,
+    "difficulty": 1,
+    "category": "Active Low",
+    "question": "신호 이름 위에 바(Bar)가 있거나 이름 뒤에 _n이 붙은 경우(예: RESET_n) 의미는?",
+    "options": ["Active Low (0일 때 동작)", "Active High (1일 때 동작)", "동작하지 않음", "에러 신호"],
+    "answer": 0,
+    "explanation": "부정 논리(Negative Logic) 또는 Active Low 신호임을 나타내며, 0(Low) 전압일 때 활성화됨을 뜻합니다."
+  },
+  {
+    "id": 265,
+    "difficulty": 2,
+    "category": "Shannon Expansion",
+    "question": "섀넌 확장 정리(Shannon Expansion)는 어떤 소자로 함수를 구현할 때 기초가 되는가?",
+    "options": ["Multiplexer (MUX)", "Decoder", "Adder", "Flip-Flop"],
+    "answer": 0,
+    "explanation": "F(x, y, ...) = x * F(1, y...) + x' * F(0, y...) 로 쪼개는 정리는 MUX의 동작 원리(선택 신호에 따른 출력 선택)와 정확히 일치합니다."
+  },
+  {
+    "id": 266,
+    "difficulty": 3,
+    "category": "One-hot Encoding",
+    "question": "FSM 상태를 One-hot Encoding으로 할 때의 장단점은?",
+    "options": ["디코딩 로직이 간단하고 빠르지만, 플립플롭을 많이 쓴다.", "플립플롭을 적게 쓰지만 느리다.", "가장 일반적인 방식이다.", "상태 수가 적을 때 불리하다."],
+    "answer": 0,
+    "explanation": "N개의 상태를 N개의 FF로 표현(하나만 1)하므로, '어떤 상태인가?'를 판단할 때 FF 하나만 보면 되어 빠릅니다. 하지만 FF 개수가 많이 필요합니다."
+  },
+  {
+    "id": 267,
+    "difficulty": 1,
+    "category": "Volatile Memory",
+    "question": "전원을 끄면 저장된 데이터가 사라지는 메모리는?",
+    "options": ["RAM (Random Access Memory)", "ROM", "HDD", "Flash Memory"],
+    "answer": 0,
+    "explanation": "RAM(SRAM, DRAM)은 휘발성 메모리입니다."
+  },
+  {
+    "id": 268,
+    "difficulty": 2,
+    "category": "T Flip-Flop",
+    "question": "T 플립플롭의 입력 T=1 일 때 동작은?",
+    "options": ["Toggle (반전)", "Hold (유지)", "Set (1)", "Reset (0)"],
+    "answer": 0,
+    "explanation": "T(Toggle) 플립플롭은 1이 들어올 때마다 현재 상태를 뒤집습니다. (분주기, 카운터에 사용)"
+  },
+  {
+    "id": 269,
+    "difficulty": 3,
+    "category": "Carry Lookahead",
+    "question": "4비트 CLA 블록들을 연결하여 16비트 가산기를 만들 때, 블록 간의 캐리 전파 지연을 줄이기 위해 사용하는 유닛은?",
+    "options": ["Lookahead Carry Unit (LCU)", "Ripple Carry Unit", "Multiplier", "Shifter"],
+    "answer": 0,
+    "explanation": "계층적 구조를 사용하여, 각 4비트 그룹에서 생성된 P, G 신호를 받아 상위 레벨에서 캐리를 미리 계산해주는 LCU를 사용합니다."
+  },
+  {
+    "id": 270,
+    "difficulty": 1,
+    "category": "Buffer",
+    "question": "논리값은 바꾸지 않고 신호의 세기(Drive Strength)만 키워주는 게이트는?",
+    "options": ["Buffer", "Inverter", "AND", "OR"],
+    "answer": 0,
+    "explanation": "버퍼(Buffer)는 논리적으로는 아무 일도 안 하지만(y=a), 전기적으로는 신호를 증폭하여 먼 곳까지 보내거나 팬아웃을 늘릴 때 씁니다."
+  },
+  {
+    "id": 271,
+    "difficulty": 2,
+    "category": "FPGA",
+    "question": "FPGA의 기본 구성 요소인 LUT(Look-Up Table)는 본질적으로 무엇인가?",
+    "options": ["소형 RAM (진리표 저장)", "AND 게이트 배열", "플립플롭 배열", "가산기"],
+    "answer": 0,
+    "explanation": "LUT는 입력값에 따른 출력값을 미리 저장해 놓은 메모리입니다. n-input LUT는 2^n비트 SRAM으로 구현됩니다."
+  },
+  {
+    "id": 272,
+    "difficulty": 3,
+    "category": "Race Condition",
+    "question": "래치(Latch) 기반 회로에서 투명 구간(Transparent) 동안 데이터가 한 번에 여러 스테이지를 통과해버리는 현상은?",
+    "options": ["Flow-through (Racing)", "Setup violation", "Hold violation", "Glitching"],
+    "answer": 0,
+    "explanation": "레벨 트리거 래치는 클럭이 켜져 있는 동안 문이 계속 열려 있어서, 데이터가 의도치 않게 여러 단계를 미끄러져 지나가는 레이싱 문제가 발생하기 쉽습니다."
+  },
+  {
+    "id": 273,
+    "difficulty": 1,
+    "category": "Noise Margin",
+    "question": "디지털 회로에서 노이즈 마진(Noise Margin)이란?",
+    "options": ["정상적인 동작을 보장하면서 허용할 수 있는 잡음의 최대 크기", "전원 전압의 크기", "신호의 주파수 대역폭", "게이트의 지연 시간"],
+    "answer": 0,
+    "explanation": "출력 전압과 입력 인식 전압 사이의 차이로, 이 범위 내의 잡음이 섞여도 0과 1을 오판하지 않습니다."
+  },
+  {
+    "id": 274,
+    "difficulty": 2,
+    "category": "Switch Debouncing",
+    "question": "기계식 스위치를 누를 때 접점이 튀면서 여러 번 신호가 들어가는 현상을 막는 방법은?",
+    "options": ["Debouncing 회로 (SR 래치 등) 사용", "전압 높이기", "클럭 속도 높이기", "스위치 교체"],
+    "answer": 0,
+    "explanation": "디바운싱(Debouncing)은 RC 필터나 SR 래치를 이용해 기계적 진동(Chattering)을 제거하고 깔끔한 한 번의 신호만 만듭니다."
+  },
+  {
+    "id": 275,
+    "difficulty": 3,
+    "category": "Algorithmic State Machine",
+    "question": "ASM(Algorithmic State Machine) 차트에서 '조건 박스(Conditional Box)'의 역할은?",
+    "options": ["입력 조건에 따라 다음 경로를 선택하거나 Mealy 출력을 내보낸다.", "상태를 저장한다.", "무조건 실행된다.", "Moore 출력을 내보낸다."],
+    "answer": 0,
+    "explanation": "타원형의 상태 박스와 달리, 육각형이나 둥근 사각형의 조건 박스는 입력에 따라 분기를 타거나 조건부 출력(Mealy)을 생성할 때 씁니다."
+  },
+  {
+    "id": 276,
+    "difficulty": 1,
+    "category": "Basic Gates",
+    "question": "A와 B가 모두 0일 때만 0을 출력하는 게이트는?",
+    "options": ["OR", "AND", "XOR", "NAND"],
+    "answer": 0,
+    "explanation": "OR 게이트는 하나라도 1이면 1이고, 둘 다 0일 때만 0입니다."
+  },
+  {
+    "id": 277,
+    "difficulty": 2,
+    "category": "Verilog Sensitivity List",
+    "question": "Verilog의 `always @(*)` 에서 `*` 의 의미는?",
+    "options": ["모든 입력 신호가 변할 때마다 실행 (조합회로)", "클럭이 뛸 때마다", "절대 실행하지 않음", "모든 변수 선언"],
+    "answer": 0,
+    "explanation": "Sensitivity List에 `*`를 쓰면 블록 내부에서 사용된 모든 입력 신호의 변화를 자동으로 감지하므로 실수를 줄여줍니다."
+  },
+  {
+    "id": 278,
+    "difficulty": 3,
+    "category": "Booth Algorithm",
+    "question": "부스 알고리즘(Booth's Algorithm)은 무엇을 효율적으로 수행하기 위한 것인가?",
+    "options": ["부호 있는 이진수 곱셈", "나눗셈", "덧셈", "제곱근"],
+    "answer": 0,
+    "explanation": "연속된 1의 블록을 건너뛰는 방식으로 시프트와 덧셈/뺄셈 횟수를 줄여, 부호 있는 수의 곱셈 속도를 높입니다."
+  },
+  {
+    "id": 279,
+    "difficulty": 1,
+    "category": "Fan-in",
+    "question": "Fan-in 이란 무엇인가?",
+    "options": ["논리 게이트가 받을 수 있는 입력의 수", "출력의 수", "전력 소모량", "게이트 지연 시간"],
+    "answer": 0,
+    "explanation": "Fan-in이 너무 크면 직렬로 연결된 트랜지스터 저항이 커져서 게이트 속도가 느려집니다. (보통 4~5 이하 권장)"
+  },
+  {
+    "id": 280,
+    "difficulty": 2,
+    "category": "Decade Counter",
+    "question": "BCD 카운터(Decade Counter)는 몇 진 카운터인가?",
+    "options": ["10진", "2진", "16진", "8진"],
+    "answer": 0,
+    "explanation": "0에서 9까지 세고 다시 0으로 돌아가므로 10진(Modulo-10) 카운터입니다."
+  },
+  {
+    "id": 281,
+    "difficulty": 3,
+    "category": "Transmission Gate",
+    "question": "NMOS와 PMOS를 병렬로 연결하여 양방향 스위치 역할을 하는 소자는?",
+    "options": ["Transmission Gate (Pass Gate)", "Inverter", "Tri-state Buffer", "Open Collector"],
+    "answer": 0,
+    "explanation": "NMOS는 0을 잘 전달하고 PMOS는 1을 잘 전달하므로, 둘을 합쳐서 0과 1 모두 손실 없이 전달하는 스위치를 만듭니다."
+  },
+  {
+    "id": 282,
+    "difficulty": 1,
+    "category": "Synthesis",
+    "question": "HDL 코드를 실제 게이트 수준의 네트리스트(Netlist)로 변환하는 과정을 무엇이라 하는가?",
+    "options": ["합성 (Synthesis)", "시뮬레이션", "배치 및 배선 (P&R)", "검증"],
+    "answer": 0,
+    "explanation": "Logic Synthesis는 추상적인 코드(RTL)를 실제 하드웨어 소자들의 연결로 번역하는 컴파일 과정입니다."
+  },
+  {
+    "id": 283,
+    "difficulty": 2,
+    "category": "PROM",
+    "question": "사용자가 단 한 번만 내용을 기록할 수 있는 ROM은?",
+    "options": ["PROM (Programmable ROM)", "EPROM", "EEPROM", "Mask ROM"],
+    "answer": 0,
+    "explanation": "PROM은 내부의 퓨즈(Fuse)를 끊어서 기록하므로 한 번 구우면 수정할 수 없습니다."
+  },
+  {
+    "id": 284,
+    "difficulty": 3,
+    "category": "Testing",
+    "question": "디지털 회로 테스트를 위해 스캔 체인(Scan Chain)을 삽입하는 목적은?",
+    "options": ["내부 플립플롭의 값을 외부에서 제어하고 관측하기 위해 (관측성/제어성 향상)", "속도를 높이기 위해", "전력을 줄이기 위해", "회로 면적을 줄이기 위해"],
+    "answer": 0,
+    "explanation": "순차 회로는 내부 상태 때문에 테스트 패턴 생성이 어렵습니다. 스캔 체인은 모든 FF를 시프트 레지스터로 엮어 테스트 모드에서 쉽게 값을 넣고 뺄 수 있게 해줍니다."
+  },
+  {
+    "id": 285,
+    "difficulty": 1,
+    "category": "Clock",
+    "question": "디지털 시스템의 심장박동과 같으며, 모든 동작의 기준이 되는 신호는?",
+    "options": ["Clock", "Power", "Reset", "Enable"],
+    "answer": 0,
+    "explanation": "클럭(Clock)은 주기적인 0과 1의 반복 신호로, 동기식 회로의 타이밍을 맞추는 기준입니다."
+  },
+  {
+    "id": 286,
+    "difficulty": 2,
+    "category": "Equality",
+    "question": "두 비트 A, B가 서로 같을 때 1을 출력하는 게이트는?",
+    "options": ["XNOR", "XOR", "AND", "OR"],
+    "answer": 0,
+    "explanation": "XNOR(Exclusive-NOR)는 같으면 1, 다르면 0을 출력하므로 비교기(Equality Comparator)로 쓰입니다."
+  },
+  {
+    "id": 287,
+    "difficulty": 3,
+    "category": "VHDL vs Verilog",
+    "question": "Verilog와 비교했을 때 VHDL의 특징은?",
+    "options": ["문법이 엄격하고 강타입(Strongly Typed) 언어이다.", "C언어와 비슷하다.", "대소문자를 구분한다.", "배우기 가장 쉽다."],
+    "answer": 0,
+    "explanation": "VHDL은 Ada 언어에 기반하여 자료형 검사가 매우 엄격하고 코드가 길어지는 경향이 있지만, 대규모 프로젝트에서 안정성이 높습니다."
+  },
+  {
+    "id": 288,
+    "difficulty": 1,
+    "category": "Floating Point",
+    "question": "컴퓨터에서 실수를 표현하는 표준 방식은?",
+    "options": ["IEEE 754", "ASCII", "2's Complement", "BCD"],
+    "answer": 0,
+    "explanation": "IEEE 754는 부동소수점(Floating Point) 수의 저장 형식(부호, 지수, 가수)을 정의한 국제 표준입니다."
+  },
+  {
+    "id": 289,
+    "difficulty": 2,
+    "category": "Open Collector",
+    "question": "여러 출력을 하나의 선으로 묶어 'Wired-AND' 로직을 구현할 수 있는 게이트 출력 방식은?",
+    "options": ["Open Collector (Open Drain)", "Totem Pole", "Tri-state", "Push-Pull"],
+    "answer": 0,
+    "explanation": "오픈 컬렉터는 0을 출력할 때만 강력하게 당기고, 1일 때는 끊어집니다(저항으로 당김). 여러 개를 묶으면 하나라도 0일 때 전체가 0이 되는 AND 효과가 납니다."
+  },
+  {
+    "id": 290,
+    "difficulty": 3,
+    "category": "Metastability Resolution",
+    "question": "MTBF (Mean Time Between Failures)를 늘려 메타스테이블 실패 확률을 줄이는 방법은?",
+    "options": ["동기화기(Synchronizer)의 단(Stage) 수를 늘린다.", "클럭 속도를 높인다.", "데이터 변화를 빠르게 한다.", "전압을 낮춘다."],
+    "answer": 0,
+    "explanation": "동기화용 플립플롭을 여러 개 거칠수록(시간을 많이 줄수록) 전압이 0이나 1로 안착할 확률이 지수적으로 높아져 안전해집니다."
+  },
+  {
+    "id": 291,
+    "difficulty": 1,
+    "category": "Byte",
+    "question": "1 바이트(Byte)는 몇 비트인가?",
+    "options": ["8비트", "4비트", "16비트", "32비트"],
+    "answer": 0,
+    "explanation": "1 Byte = 8 Bits 입니다."
+  },
+  {
+    "id": 292,
+    "difficulty": 2,
+    "category": "Multiplexer Tree",
+    "question": "2x1 MUX 3개로 만들 수 있는 MUX는?",
+    "options": ["4x1 MUX", "8x1 MUX", "2x1 MUX 3개일 뿐이다.", "16x1 MUX"],
+    "answer": 0,
+    "explanation": "2개의 MUX로 1단계 선택을 하고, 그 결과 2개를 마지막 MUX로 선택하면 4개의 입력 중 하나를 고르는 4x1 MUX가 됩니다."
+  },
+  {
+    "id": 293,
+    "difficulty": 3,
+    "category": "Testbench",
+    "question": "Verilog 시뮬레이션을 위한 Testbench 코드의 특징은?",
+    "options": ["입출력 포트가 없고, 입력을 자극(Stimulus)하는 코드가 포함된다.", "합성이 가능하다.", "실제 칩에 들어간다.", "always 블록만 쓴다."],
+    "answer": 0,
+    "explanation": "테스트벤치는 설계한 모듈을 감싸서 가상의 입력을 넣어주는 껍데기 모듈이므로 포트가 없고, 합성이 불가능한 구문(delay, initial 등)도 자유롭게 씁니다."
+  },
+  {
+    "id": 294,
+    "difficulty": 1,
+    "category": "Parity",
+    "question": "패리티 비트는 몇 비트의 오류를 검출할 수 있는가?",
+    "options": ["1비트", "2비트", "모든 비트", "검출 못함"],
+    "answer": 0,
+    "explanation": "패리티는 1의 개수의 홀짝성만 보므로, 비트 1개가 뒤집히면 알 수 있지만 2개가 동시에 뒤집히면 여전히 홀짝성이 같아 모릅니다."
+  },
+  {
+    "id": 295,
+    "difficulty": 2,
+    "category": "Look-up Table",
+    "question": "4-input LUT 하나로 구현할 수 있는 논리 함수의 개수는?",
+    "options": ["2^16 개", "16개", "4개", "무한대"],
+    "answer": 0,
+    "explanation": "4변수 함수의 진리표 행은 2^4=16개입니다. 각 행의 결과가 0 또는 1이 될 수 있으므로 가능한 함수의 조합은 2^16가지입니다."
+  },
+  {
+    "id": 296,
+    "difficulty": 3,
+    "category": "FSM Reset",
+    "question": "비동기 리셋(Asynchronous Reset)의 장점은?",
+    "options": ["클럭이 없어도 즉시 초기화가 가능하다.", "글리치에 강하다.", "회로가 더 복잡하다.", "동기 리셋보다 느리다."],
+    "answer": 0,
+    "explanation": "전원이 켜지거나 시스템이 먹통이라 클럭이 안 뛸 때도 강제로 리셋을 걸어 확실하게 초기 상태로 보낼 수 있습니다."
+  },
+  {
+    "id": 297,
+    "difficulty": 1,
+    "category": "Base",
+    "question": "16진수(Hexadecimal)에서 10부터 15까지를 나타내는 문자는?",
+    "options": ["A ~ F", "G ~ L", "X ~ Z", "10 ~ 15"],
+    "answer": 0,
+    "explanation": "0~9, A(10), B(11), C(12), D(13), E(14), F(15)를 사용합니다."
+  },
+  {
+    "id": 298,
+    "difficulty": 2,
+    "category": "Barrel Shifter",
+    "question": "한 클럭 만에 데이터를 n비트만큼 밀거나 회전시킬 수 있는 조합 회로는?",
+    "options": ["Barrel Shifter", "Shift Register", "Counter", "ALU"],
+    "answer": 0,
+    "explanation": "시프트 레지스터는 한 클럭에 1비트씩 밀지만, 배럴 시프터는 MUX망을 이용해 원하는 만큼 한 번에 이동시킵니다."
+  },
+  {
+    "id": 299,
+    "difficulty": 3,
+    "category": "Crosstalk",
+    "question": "인접한 두 신호선 사이의 커패시턴스 커플링으로 인해 신호가 간섭을 일으키는 현상은?",
+    "options": ["Crosstalk (누화)", "Ground Bounce", "IR Drop", "Electromigration"],
+    "answer": 0,
+    "explanation": "배선 간격이 좁아질수록 기생 커패시터(Parasitic C)가 커져서, 옆 선의 신호 변화가 내 선에 노이즈로 넘어오는 현상입니다."
+  },
+  {
+    "id": 300,
+    "difficulty": 1,
+    "category": "Binary Addition",
+    "question": "1 + 1 = ?",
+    "options": ["10 (2진수)", "2 (2진수)", "0", "1"],
+    "answer": 0,
+    "explanation": "이진수 연산에서 1+1은 2가 되며, 이는 이진수로 '10' (자리올림 1, 합 0)입니다."
   }
 ]
