@@ -16,51 +16,29 @@
                 <p>자투리 시간을 활용해보세요!</p>
             </header>
             <div class="subject-grid">
-                <button class="subject-card" onclick="startQuiz('math1.json')">
-                    <span class="icon">📐</span>
-                    <h3>공학수학 1</h3>
-                    <p>선형대수, 미분방정식</p>
-                </button>
-                <button class="subject-card" onclick="startQuiz('logic.json')">
-                    <span class="icon">⚡</span>
-                    <h3>논리설계</h3>
-                    <p>게이트, 불 대수</p>
-                </button>
-                <button class="subject-card" onclick="openLevelPopup('archi.json', '컴퓨터 구조')">
-                    <span class="icon">💻</span>
-                    <h3>컴퓨터 구조</h3>
-                    <p>RISC-V, 파이프라인 (100문제)</p>
-                </button>
-                <button class="subject-card" onclick="startQuiz('linear.json')">
-                    <span class="icon">💎</span>
-                    <h3>선형대수학 (심화)</h3>
-                    <p>선형대수와 군 (이인석 저)</p>
-                </button>
-                
-                <div id="level-popup" class="modal-overlay hidden">
-                    <div class="modal-box">
-                        <h2 id="popup-title">난이도 선택</h2>
-                        <p>자신에게 맞는 레벨을 선택하세요!</p>
+                <button class="subject-card" onclick="openLevelPopup('math1.json', '공학수학 1')">
+    <span class="icon">📐</span>
+    <h3>공학수학 1</h3>
+    <p>선형대수, 미분방정식</p>
+</button>
 
-                        <div class="level-btn-container">
-                            <button onclick="confirmStart(1)" class="lvl-btn basic">
-                                <span>🌱</span> 기초 <span>(Basic)</span>
-                            </button>
-                            <button onclick="confirmStart(2)" class="lvl-btn applied">
-                                <span>🌿</span> 응용 <span>(Applied)</span>
-                            </button>
-                            <button onclick="confirmStart(3)" class="lvl-btn hard">
-                                <span>🔥</span> 실전 <span>(Exam)</span>
-                            </button>
-                        </div>
+<button class="subject-card" onclick="openLevelPopup('logic.json', '논리설계')">
+    <span class="icon">⚡</span>
+    <h3>논리설계</h3>
+    <p>게이트, 불 대수</p>
+</button>
 
-                        <button onclick="confirmStart(0)" class="lvl-btn all">
-                            🎲 전체 문제 섞어서 풀기
-                        </button>
+<button class="subject-card" onclick="openLevelPopup('archi.json', '컴퓨터 구조')">
+    <span class="icon">💻</span>
+    <h3>컴퓨터 구조</h3>
+    <p>RISC-V, 파이프라인</p>
+</button>
 
-                        <button onclick="closeLevelPopup()" class="close-popup-btn">취소</button>
-                    </div>
-                </div>
+<button class="subject-card" onclick="openLevelPopup('linear.json', '선형대수학 (심화)')">
+    <span class="icon">💎</span>
+    <h3>선형대수학 (심화)</h3>
+    <p>선형대수와 군 (이인석 저)</p>
+</button>
             </div>
             <button onclick="openWrongNote()" class="wrong-note-btn">
                 🔥 내 오답 노트 확인하기
@@ -115,6 +93,31 @@
                 <button onclick="restartQuiz()"
                     style="margin-left:10px; padding:15px 30px; background:#fff; color:#555; border:1px solid #ddd; border-radius:12px; font-weight:bold; cursor:pointer;">다시
                     풀기</button>
+            </div>
+        </div>
+
+        <div id="level-popup" class="modal-overlay hidden">
+            <div class="modal-box">
+                <h2 id="popup-title">난이도 선택</h2>
+                <p>자신에게 맞는 레벨을 선택하세요!</p>
+
+                <div class="level-btn-container">
+                    <button onclick="confirmStart(1)" class="lvl-btn basic">
+                        <span>🌱</span> 기초 <span>(Basic)</span>
+                    </button>
+                    <button onclick="confirmStart(2)" class="lvl-btn applied">
+                        <span>🌿</span> 응용 <span>(Applied)</span>
+                    </button>
+                    <button onclick="confirmStart(3)" class="lvl-btn hard">
+                        <span>🔥</span> 실전 <span>(Exam)</span>
+                    </button>
+                </div>
+
+                <button onclick="confirmStart(0)" class="lvl-btn all">
+                    🎲 전체 문제 섞어서 풀기
+                </button>
+
+                <button onclick="closeLevelPopup()" class="close-popup-btn">취소</button>
             </div>
         </div>
     </div>

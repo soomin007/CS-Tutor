@@ -46,8 +46,10 @@ async function startQuiz(fileName, difficultyLevel = 0) {
 
         loadQuestion();
     } catch (error) {
-        console.error("데이터 로딩 실패:", error);
-        alert("오류가 발생했습니다. 메인으로 돌아갑니다.");
+        console.error("상세 에러 로그:", error);
+        alert("🛑 에러 발생!\n" +
+            "이름: " + error.name + "\n" +
+            "내용: " + error.message);
         goHome();
     }
 }
@@ -97,7 +99,7 @@ function checkAnswer(selectedIndex, correctIndex) {
         document.getElementById('feedback-title').style.color = "#58cc02";
         score++;
         correctSound.volume = 0.5;
-        correctSound.play().catch(() => { }); // 소리 재생 에러 무시
+correctSound.play().catch((e) => { console.log("소리 재생 실패:", e); });
     } else {
         // 오답
         buttons[selectedIndex].classList.add('wrong');
@@ -232,6 +234,7 @@ let selectedFile = ""; // 사용자가 누른 과목 파일명 저장
 
 // 팝업 열기 (HTML 버튼에서 호출)
 function openLevelPopup(fileName, subjectName) {
+    console.log("팝업 열기 시도:", fileName); // [디버깅] 파일명 확인
     selectedFile = fileName; // 파일명 저장해두기
     document.getElementById('popup-title').innerText = subjectName; // 제목 바꾸기
     document.getElementById('level-popup').classList.remove('hidden');
@@ -245,8 +248,10 @@ function closeLevelPopup() {
 
 // 난이도 선택 완료 -> 퀴즈 시작
 function confirmStart(difficulty) {
+    console.log("선택된 파일:", selectedFile); // [디버깅] 저장된 파일명 확인
     if (!selectedFile) return;
+    const fileToStart = selectedFile; // 지역 변수에 복사
 
     closeLevelPopup(); // 팝업 닫고
-    startQuiz(selectedFile, difficulty); // 진짜 퀴즈 시작 (기존 함수 재활용)
+    startQuiz(fileToStart, difficulty); // 진짜 퀴즈 시작 (기존 함수 재활용)
 }
