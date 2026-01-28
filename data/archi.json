@@ -1,67 +1,1402 @@
 [
   {
     "id": 301,
-    "category": "ISA (Instruction Set Architecture)",
-    "question": "RISC-V 아키텍처를 'Load-Store Architecture'라고 부르는 이유는?",
+    "difficulty": 1,
+    "category": "ISA 기초",
+    "question": "RISC-V 아키텍처에서 메모리에 접근할 수 있는 유일한 명령어 두 가지는?",
     "options": [
-      "모든 명령어가 메모리에 자유롭게 접근할 수 있어서",
-      "ALU 연산은 레지스터 간에서만 수행되고, 메모리 접근은 오직 Load/Store 명령어로만 가능해서",
-      "명령어 길이가 가변적이라서",
-      "스택(Stack)을 사용하여 연산을 수행하기 때문에"
+      "ADD, SUB",
+      "LOAD, STORE",
+      "JUMP, BRANCH",
+      "PUSH, POP"
     ],
     "answer": 1,
-    "explanation": "RISC 계열(RISC-V, MIPS 등)은 하드웨어 단순화를 위해 연산은 레지스터에서만 수행하고, 메모리 접근은 적재(Load)와 저장(Store) 명령어로만 제한합니다. (참고: 2025 중간고사 복기 Part 1)"
+    "explanation": "RISC-V는 Load-Store 아키텍처입니다. 연산은 오직 레지스터 간에서만 수행되며, 메모리 접근은 적재(Load)와 저장(Store) 명령어로만 가능합니다."
   },
   {
     "id": 302,
-    "category": "Pipelining Hazard",
-    "question": "파이프라인 프로세서에서 '데이터 해저드'를 해결하기 위해, 연산 결과를 메모리에 쓰기(WB) 전에 다음 명령어의 입력으로 미리 전달하는 기법은?",
+    "difficulty": 1,
+    "category": "Performance",
+    "question": "CPU 성능을 결정하는 'Iron Law' 공식으로 올바른 것은?",
     "options": [
-      "Forwarding (Bypassing)",
-      "Branch Prediction",
-      "Stalling (Bubble)",
-      "Cache Prefetching"
+      "실행 시간 = 명령어 수 × CPI × 클럭 주기",
+      "실행 시간 = 명령어 수 ÷ 클럭 주파수",
+      "실행 시간 = CPI × 클럭 주파수",
+      "실행 시간 = 명령어 수 × 캐시 적중률"
     ],
     "answer": 0,
-    "explanation": "Forwarding(또는 Bypassing)은 EX 단계 등에서 생성된 결과를 WB 단계까지 기다리지 않고 즉시 다음 명령어의 입력으로 연결하여 파이프라인 멈춤(Stall)을 방지하는 기법입니다. (참고: 2018 중간고사)"
+    "explanation": "CPU Time = (Instruction Count) × (Cycles Per Instruction) × (Clock Cycle Time) 입니다. 이 세 가지 요소를 줄이는 것이 성능 최적화의 핵심입니다."
   },
   {
     "id": 303,
-    "category": "Performance Iron Law",
-    "question": "프로세서 성능 공식(CPU Time)의 3가지 요소가 아닌 것은? (Time = IC × CPI × Cycle Time)",
+    "difficulty": 1,
+    "category": "Pipeline",
+    "question": "파이프라인의 5단계(5-stage) 순서로 올바른 것은?",
     "options": [
-      "Instruction Count (명령어 수)",
-      "CPI (Cycles Per Instruction)",
-      "Clock Cycle Time (클럭 주기)",
-      "Cache Hit Rate (캐시 적중률)"
+      "IF - MEM - EX - ID - WB",
+      "IF - ID - EX - MEM - WB",
+      "ID - IF - EX - MEM - WB",
+      "IF - ID - MEM - EX - WB"
     ],
-    "answer": 3,
-    "explanation": "CPU 실행 시간은 '명령어 개수(IC)', '명령어당 사이클(CPI)', '사이클 시간'의 곱으로 결정됩니다. 이를 'Iron Law of Processor Performance'라고 합니다. 캐시 적중률은 CPI에 영향을 주는 요소입니다. (참고: 2018 중간고사)"
+    "answer": 1,
+    "explanation": "일반적인 5단계 파이프라인은 명령어 인출(IF) -> 해독(ID) -> 실행(EX) -> 메모리 접근(MEM) -> 레지스터 쓰기(WB) 순서로 진행됩니다."
   },
   {
     "id": 304,
-    "category": "Control Hazard",
-    "question": "파이프라인 효율을 높이기 위해, 분기(Branch) 명령어 바로 다음 위치(Delay Slot)의 명령어를 분기 여부와 상관없이 항상 실행하게 만드는 기법은?",
+    "difficulty": 2,
+    "category": "Data Hazard",
+    "question": "다음 명령어 시퀀스에서 발생하는 해저드의 종류는? (add x1, x2, x3 -> sub x4, x1, x5)",
     "options": [
-      "Dynamic Branch Prediction",
-      "Delayed Branch",
-      "Loop Unrolling",
-      "Speculative Execution"
+      "Structural Hazard",
+      "Control Hazard",
+      "RAW (Read After Write) Hazard",
+      "WAW (Write After Write) Hazard"
     ],
-    "answer": 1,
-    "explanation": "Delayed Branch는 컴파일러가 분기 명령어 뒤(Delay Slot)에 유용한 명령어(또는 NOP)를 배치하여, 파이프라인을 비우지 않고 계속 실행하게 만드는 소프트웨어적 해결책입니다. (참고: 2024 중간고사 Problem 9)"
+    "answer": 2,
+    "explanation": "앞선 add 명령어가 x1에 값을 쓰기(Write) 전에, 뒤따르는 sub 명령어가 x1을 읽으려고(Read) 하므로 RAW 해저드가 발생합니다."
   },
   {
     "id": 305,
-    "category": "Synchronization",
-    "question": "RISC-V에서 멀티코어 동기화(Lock 등)를 구현하기 위해 사용하는 특수한 명령어 쌍은?",
+    "difficulty": 2,
+    "category": "Forwarding",
+    "question": "Data Hazard를 해결하기 위해, 연산 결과를 WB 단계까지 기다리지 않고 다음 명령어의 입력으로 바로 전달하는 기법은?",
     "options": [
-      "Test-and-Set",
-      "Compare-and-Swap (CAS)",
-      "Load Reserved (lr) / Store Conditional (sc)",
-      "Push / Pop"
+      "Stalling",
+      "Branch Prediction",
+      "Forwarding (Bypassing)",
+      "Cache Prefetching"
     ],
     "answer": 2,
-    "explanation": "RISC-V는 하드웨어 복잡도를 낮추기 위해 단일 원자적 명령어 대신, 실패 시 재시도할 수 있는 lr(예약 로드)과 sc(조건부 저장) 명령어 쌍을 사용하여 동기화를 구현합니다. (참고: 2025 중간고사 복기 Part 6)"
+    "explanation": "Forwarding(Bypassing)은 EX 단계나 MEM 단계에서 나온 최신 데이터를 멀티플렉서를 통해 즉시 필요한 ALU 입력으로 연결해주는 하드웨어 기법입니다."
+  },
+  {
+    "id": 306,
+    "difficulty": 2,
+    "category": "Control Hazard",
+    "question": "분기 명령어(Branch)의 결과를 알기 전까지 파이프라인이 멈추는 것을 방지하기 위해, 분기 여부를 미리 추측하는 기술은?",
+    "options": [
+      "Dynamic Branch Prediction",
+      "Loop Unrolling",
+      "Software Pipelining",
+      "Delayed Branch"
+    ],
+    "answer": 0,
+    "explanation": "동적 분기 예측(Dynamic Branch Prediction)은 과거의 분기 기록(History)을 바탕으로 분기 여부를 예측하여 파이프라인 흐름을 끊지 않고 미리 명령어를 인출합니다."
+  },
+  {
+    "id": 307,
+    "difficulty": 2,
+    "category": "Arithmetic",
+    "question": "4비트 2의 보수(2's Complement) 체계에서 표현할 수 있는 수의 범위는?",
+    "options": [
+      "-8 ~ +7",
+      "-7 ~ +7",
+      "-8 ~ +8",
+      "0 ~ 15"
+    ],
+    "answer": 0,
+    "explanation": "N비트 2의 보수 체계의 범위는 -2^(N-1) 부터 +2^(N-1)-1 까지입니다. 4비트의 경우 -8(1000)부터 +7(0111)까지입니다."
+  },
+  {
+    "id": 308,
+    "difficulty": 3,
+    "category": "Atomic Instructions",
+    "question": "RISC-V에서 멀티코어 동기화를 위해 사용하는 'lr.w / sc.w' 명령어 쌍에 대한 설명으로 틀린 것은?",
+    "options": [
+      "lr.w는 값을 읽어오고 해당 주소에 '예약(Reservation)'을 건다.",
+      "sc.w는 예약이 유효할 때만 값 저장에 성공한다.",
+      "sc.w가 실패하면 레지스터에 0이 아닌 값을 반환하여 실패했음을 알린다.",
+      "sc.w는 다른 코어가 해당 주소에 값을 썼더라도 무조건 덮어쓴다."
+    ],
+    "answer": 3,
+    "explanation": "sc.w(Store Conditional)는 lr.w로 예약한 이후에 다른 코어가 해당 주소에 값을 쓰지 않았을 때만 저장을 수행합니다. 만약 중간에 값이 바뀌었다면 실패하고, 프로그램은 이를 감지하여 재시도해야 합니다."
+  },
+  {
+    "id": 309,
+    "difficulty": 3,
+    "category": "Delayed Branch",
+    "question": "MIPS나 구형 RISC에서 사용된 'Delayed Branch' 기법에서 'Delay Slot'에 있는 명령어는 언제 실행되는가?",
+    "options": [
+      "분기가 일어날 때(Taken)만 실행된다.",
+      "분기가 일어나지 않을 때(Not Taken)만 실행된다.",
+      "분기 여부와 상관없이 항상 실행된다.",
+      "컴파일러가 삭제하므로 실행되지 않는다."
+    ],
+    "answer": 2,
+    "explanation": "Delayed Branch는 제어 해저드로 인한 스톨(Stall)을 줄이기 위해, 분기 명령어 바로 다음 슬롯(Delay Slot)의 명령어를 무조건 실행하도록 하드웨어를 설계한 것입니다. 컴파일러는 이곳에 유용한 명령어(혹은 NOP)를 채워 넣어야 합니다."
+  },
+  {
+    "id": 310,
+    "difficulty": 3,
+    "category": "Structural Hazard",
+    "question": "명령어 메모리와 데이터 메모리가 분리되지 않은(Unified Memory) 구조에서, Load 명령어 실행 시 파이프라인에서 발생할 수 있는 문제는?",
+    "options": [
+      "IF 단계와 MEM 단계가 동시에 메모리에 접근하려 하여 Structural Hazard 발생",
+      "EX 단계와 WB 단계 충돌",
+      "레지스터 파일 읽기/쓰기 충돌",
+      "발생하지 않음"
+    ],
+    "answer": 0,
+    "explanation": "폰 노이만 구조처럼 메모리가 하나라면, IF 단계(명령어 가져오기)와 MEM 단계(데이터 읽기/쓰기)가 같은 사이클에 메모리 자원을 요청하게 되어 구조적 해저드가 발생합니다. 이를 해결하기 위해 하버드 아키텍처(캐시 분리)를 사용합니다."
+  },
+  {
+    "id": 311,
+    "difficulty": 1,
+    "category": "Memory Hierarchy",
+    "question": "메모리 계층 구조에서 CPU에 가장 가까우며 가장 빠르고 비싼 메모리는?",
+    "options": [
+      "DRAM",
+      "SSD",
+      "Register",
+      "L1 Cache"
+    ],
+    "answer": 2,
+    "explanation": "가장 빠른 것은 CPU 내부의 레지스터(Register)입니다. 그 다음이 L1 캐시, L2 캐시, 메인 메모리(DRAM), 스토리지 순입니다."
+  },
+  {
+    "id": 312,
+    "difficulty": 2,
+    "category": "Addressing Mode",
+    "question": "RISC-V 명령어 'lw x10, 8(x2)'에서 사용된 주소 지정 방식은?",
+    "options": [
+      "Register Addressing",
+      "Immediate Addressing",
+      "Base-Displacement Addressing",
+      "PC-Relative Addressing"
+    ],
+    "answer": 2,
+    "explanation": "베이스 레지스터(x2)의 값에 변위(Offset 8)를 더하여 유효 주소를 계산하므로 Base-Displacement 방식입니다."
+  },
+  {
+    "id": 313,
+    "difficulty": 3,
+    "category": "Performance (Amdahl's Law)",
+    "question": "프로그램의 20%를 차지하는 부동소수점 연산 속도를 10배 빠르게 개선했다면, 전체 프로그램의 성능 향상(Speedup)은 약 얼마인가?",
+    "options": [
+      "1.22배",
+      "2.0배",
+      "5.0배",
+      "10.0배"
+    ],
+    "answer": 0,
+    "explanation": "암달의 법칙: 1 / ((1-0.2) + (0.2/10)) = 1 / (0.8 + 0.02) = 1 / 0.82 ≈ 1.219... 따라서 약 1.22배 빨라집니다."
+  },
+  {
+    "id": 314,
+    "difficulty": 1,
+    "category": "Digital Logic",
+    "question": "조합 논리 회로(Combinational Logic)와 순차 논리 회로(Sequential Logic)의 결정적인 차이는?",
+    "options": [
+      "AND 게이트 사용 여부",
+      "메모리(기억) 요소 유무",
+      "전원 공급 방식",
+      "트랜지스터 종류"
+    ],
+    "answer": 1,
+    "explanation": "순차 논리 회로는 플립플롭과 같은 메모리 소자를 포함하여 '이전 상태(State)'를 기억할 수 있다는 점이 조합 논리 회로와 다릅니다."
+  },
+  {
+    "id": 315,
+    "difficulty": 2,
+    "category": "Cache Mapping",
+    "question": "Direct Mapped Cache에서 메모리의 특정 주소가 캐시의 어느 위치에 저장될지 결정하는 식은?",
+    "options": [
+      "(Block Address) MOD (Number of Blocks in Cache)",
+      "(Block Address) / (Number of Blocks in Cache)",
+      "Random",
+      "Associative Search"
+    ],
+    "answer": 0,
+    "explanation": "Direct Mapped 방식은 메모리 블록 주소를 캐시 블록의 개수로 나눈 나머지(Modulo) 값을 인덱스로 사용하여 저장 위치를 딱 한 곳으로 정합니다."
+  },
+  {
+    "id": 316,
+    "difficulty": 3,
+    "category": "Pipeline Stalls",
+    "question": "Load-Use Data Hazard가 발생했을 때, Forwarding만으로는 해결할 수 없어 반드시 1사이클을 쉬어야 하는 상황을 무엇이라 하는가?",
+    "options": [
+      "Branch Penalty",
+      "Load-Use Stall (Bubble)",
+      "Exception",
+      "Cache Miss"
+    ],
+    "answer": 1,
+    "explanation": "Load 명령어는 MEM 단계가 끝나야 데이터가 나오는데, 바로 다음 명령어가 그 데이터를 필요로 하면(EX 단계), Forwarding을 해도 시간이 부족합니다(Time travel 불가능). 따라서 반드시 1사이클 스톨(Bubble)이 필요합니다."
+  },
+  {
+    "id": 317,
+    "difficulty": 2,
+    "category": "Calling Convention",
+    "question": "RISC-V 함수 호출 규약에서 'Callee-saved' (피호출자 저장) 레지스터는 함수가 종료될 때 어떤 상태여야 하는가?",
+    "options": [
+      "0으로 초기화되어야 한다.",
+      "함수 호출 전의 원래 값을 복구해 두어야 한다.",
+      "반환값(Return Value)을 담고 있어야 한다.",
+      "상관없다."
+    ],
+    "answer": 1,
+    "explanation": "Callee-saved 레지스터(s0~s11 등)는 함수가 내부에서 사용하려면 스택에 백업해두었다가, 리턴하기 전에 원래 값으로 복구해야 호출한 쪽(Caller)에서 문제가 생기지 않습니다."
+  },
+  {
+    "id": 318,
+    "difficulty": 1,
+    "category": "Instruction Format",
+    "question": "RISC-V 명령어 중 'R-Format'은 주로 어떤 연산에 사용되는가?",
+    "options": [
+      "메모리 적재 (Load)",
+      "조건부 분기 (Branch)",
+      "레지스터 간 산술/논리 연산 (add, sub, or)",
+      "상수 덧셈 (addi)"
+    ],
+    "answer": 2,
+    "explanation": "R-Format(Register-Register)은 opcode, rd, funct3, rs1, rs2, funct7 필드를 가지며, 주로 add, sub, and, or 같은 레지스터 간 연산에 쓰입니다."
+  },
+  {
+    "id": 319,
+    "difficulty": 3,
+    "category": "Virtual Memory",
+    "question": "가상 메모리 시스템에서 TLB(Translation Lookaside Buffer)의 주된 역할은?",
+    "options": [
+      "디스크의 데이터를 메모리로 복사한다.",
+      "가상 주소를 물리 주소로 변환하는 속도를 높이기 위해 페이지 테이블 일부를 캐싱한다.",
+      "페이지 부재(Page Fault)를 처리한다.",
+      "L1 캐시와 L2 캐시 사이를 중재한다."
+    ],
+    "answer": 1,
+    "explanation": "가상 주소를 물리 주소로 바꿀 때마다 페이지 테이블(메모리)을 참조하면 너무 느리므로, 최근 변환 정보를 CPU 내의 고속 캐시인 TLB에 저장하여 빠르게 변환합니다."
+  },
+  {
+    "id": 320,
+    "difficulty": 2,
+    "category": "System Call",
+    "question": "사용자 프로그램이 OS의 커널 모드 기능을 요청하기 위해 실행하는 RISC-V 명령어는?",
+    "options": [
+      "call",
+      "jal",
+      "ecall",
+      "ret"
+    ],
+    "answer": 2,
+    "explanation": "ecall(Environment Call) 명령어는 예외(Exception)를 발생시켜 제어권을 커널로 넘기고, 시스템 콜 핸들러를 실행하게 합니다."
+  },
+  {
+    "id": 321,
+    "difficulty": 1,
+    "category": "Cache Basics",
+    "question": "캐시 메모리가 유효한 이유는 프로그램이 가진 어떤 성질 때문인가?",
+    "options": [
+      "Locality (지역성)",
+      "Parallelism (병렬성)",
+      "Atomicity (원자성)",
+      "Volatility (휘발성)"
+    ],
+    "answer": 0,
+    "explanation": "프로그램은 한 번 접근한 데이터를 다시 접근하거나(시간 지역성), 그 인접한 데이터를 접근하는(공간 지역성) 경향이 있어 캐시가 효과적입니다."
+  },
+  {
+    "id": 322,
+    "difficulty": 2,
+    "category": "Virtual Memory",
+    "question": "페이지 부재(Page Fault)가 발생했을 때 처리 과정으로 틀린 것은?",
+    "options": [
+      "CPU는 예외(Exception)를 발생시켜 OS에게 제어권을 넘긴다.",
+      "OS는 디스크에서 필요한 페이지를 찾아 빈 프레임에 로드한다.",
+      "OS는 페이지 테이블을 업데이트하고 Valid 비트를 1로 설정한다.",
+      "해당 프로세스는 종료되고 사용자는 프로그램을 다시 실행해야 한다."
+    ],
+    "answer": 3,
+    "explanation": "Page Fault는 치명적 오류가 아닙니다. OS가 디스크에서 데이터를 가져온 후(Swap in), 중단되었던 명령어를 다시 실행(Restart)하므로 사용자는 눈치채지 못합니다."
+  },
+  {
+    "id": 323,
+    "difficulty": 3,
+    "category": "Pipeline Hazard",
+    "question": "5단계 파이프라인에서 'lw x1, 0(x2)' 뒤에 'add x3, x1, x4'가 올 때 발생하는 해저드와 해결책은?",
+    "options": [
+      "Data Hazard, Forwarding만으로 해결 가능",
+      "Load-Use Hazard, 1 사이클 Stall 후 Forwarding 필요",
+      "Control Hazard, 분기 예측 필요",
+      "Structural Hazard, 캐시 분리 필요"
+    ],
+    "answer": 1,
+    "explanation": "Load 명령어는 MEM 단계가 끝나야 값이 나오는데, 바로 다음 ADD 명령어는 EX 단계에서 그 값이 필요합니다. 이는 시간 여행이 불가능하므로 반드시 1 사이클을 쉬어야(Stall) 합니다."
+  },
+  {
+    "id": 324,
+    "difficulty": 1,
+    "category": "Floating Point",
+    "question": "IEEE 754 부동소수점 표준에서 32비트 단정밀도(Single Precision) 구성은?",
+    "options": [
+      "Sign(1) + Exponent(8) + Fraction(23)",
+      "Sign(1) + Exponent(11) + Fraction(20)",
+      "Sign(1) + Exponent(15) + Fraction(16)",
+      "Sign(1) + Exponent(8) + Fraction(32)"
+    ],
+    "answer": 0,
+    "explanation": "단정밀도(float)는 부호 1비트, 지수 8비트, 가수 23비트로 총 32비트를 사용합니다. 배정밀도(double)는 지수 11비트, 가수 52비트를 사용합니다."
+  },
+  {
+    "id": 325,
+    "difficulty": 2,
+    "category": "Amdahl's Law",
+    "question": "어떤 컴퓨터의 정수 연산 속도만 2배로 개선했다. 정수 연산이 전체 작업의 50%를 차지한다면, 전체 성능 향상은?",
+    "options": [
+      "1.33배",
+      "1.5배",
+      "2배",
+      "3배"
+    ],
+    "answer": 0,
+    "explanation": "1 / ((1-0.5) + (0.5/2)) = 1 / (0.5 + 0.25) = 1 / 0.75 = 1.333... 따라서 약 1.33배 빨라집니다."
+  },
+  {
+    "id": 326,
+    "difficulty": 3,
+    "category": "Branch Prediction",
+    "question": "2비트 포화 카운터(2-bit Saturating Counter)를 사용하는 분기 예측기에서, 예측이 'Taken(T)'에서 'Not Taken(NT)'으로 바뀌려면 실제 분기 결과가 연속으로 몇 번 NT여야 하는가? (초기 상태가 Strongly Taken일 때)",
+    "options": [
+      "1번",
+      "2번",
+      "3번",
+      "4번"
+    ],
+    "answer": 1,
+    "explanation": "Strongly Taken(11) -> Weakly Taken(10) -> Weakly Not Taken(01) 순으로 변하므로, 연속 2번 틀려야 예측 방향이 바뀝니다. 이는 일시적인 변동에 둔감하게 반응하여 정확도를 높입니다."
+  },
+  {
+    "id": 327,
+    "difficulty": 1,
+    "category": "RISC-V Registers",
+    "question": "RISC-V 레지스터 중 'Zero Register (x0)'의 특징은?",
+    "options": [
+      "항상 값 0을 가지며, 쓰기를 해도 변하지 않는다.",
+      "가장 최근 연산 결과를 자동으로 저장한다.",
+      "프로그램 카운터(PC) 값을 저장한다.",
+      "스택 포인터로 사용된다."
+    ],
+    "answer": 0,
+    "explanation": "x0 레지스터는 하드웨어적으로 0으로 고정(Hardwired)되어 있습니다. 상수 0이 필요하거나, 값을 버릴 때(목적지로 x0 지정) 유용하게 쓰입니다."
+  },
+  {
+    "id": 328,
+    "difficulty": 2,
+    "category": "Cache Miss",
+    "question": "캐시 미스의 3가지 유형(3C)에 속하지 않는 것은?",
+    "options": [
+      "Compulsory (Cold) Miss",
+      "Capacity Miss",
+      "Conflict Miss",
+      "Communication Miss"
+    ],
+    "answer": 3,
+    "explanation": "3C 모델은 Compulsory(처음 접근), Capacity(공간 부족), Conflict(충돌)입니다. Communication Miss는 멀티코어 환경(4C)에서 등장하는 개념입니다."
+  },
+  {
+    "id": 329,
+    "difficulty": 3,
+    "category": "Virtual Memory",
+    "question": "TLB Miss가 발생했지만 Page Table에는 해당 데이터가 메모리에 있다고 표시된(Valid=1) 상황을 무엇이라 하는가?",
+    "options": [
+      "Page Fault",
+      "Segmentation Fault",
+      "TLB Refill",
+      "Protection Fault"
+    ],
+    "answer": 2,
+    "explanation": "데이터가 메모리에는 있지만 TLB에만 없는 경우입니다. OS(또는 하드웨어)가 페이지 테이블을 참조하여 TLB를 업데이트해주면 되며, 이를 'TLB Refill'이라고 합니다. Page Fault보다 훨씬 가벼운 작업입니다."
+  },
+  {
+    "id": 330,
+    "difficulty": 2,
+    "category": "Instruction Execution",
+    "question": "PC-Relative 주소 지정 방식을 사용하는 분기 명령어(beq)의 타겟 주소 계산식은?",
+    "options": [
+      "Target = PC + (Immediate << 1)",
+      "Target = PC + Immediate",
+      "Target = Register + Immediate",
+      "Target = (PC & 0xF0000000) | (Immediate << 2)"
+    ],
+    "answer": 0,
+    "explanation": "RISC-V에서 분기 명령어의 오프셋은 2바이트 단위로 정렬되므로, 명령어에 포함된 즉시값(Immediate)을 왼쪽으로 1비트 시프트(x2)한 후 현재 PC에 더합니다."
+  },
+  {
+    "id": 331,
+    "difficulty": 1,
+    "category": "Logic Design Review",
+    "question": "ALU(Arithmetic Logic Unit) 내부에서 덧셈과 뺄셈을 하나의 회로로 처리하기 위해 사용하는 논리 게이트는?",
+    "options": [
+      "AND 게이트",
+      "OR 게이트",
+      "XOR 게이트",
+      "NAND 게이트"
+    ],
+    "answer": 2,
+    "explanation": "XOR 게이트는 제어 신호에 따라 입력을 그대로 내보내거나 반전(NOT)시킬 수 있습니다. 뺄셈은 2의 보수 덧셈이므로, XOR로 입력을 반전시키고 Carry-in을 1로 주면 감산기가 됩니다."
+  },
+  {
+    "id": 332,
+    "difficulty": 2,
+    "category": "Pipeline Performance",
+    "question": "이상적인 파이프라인 프로세서에서 파이프라인 깊이(Stage 수)가 N일 때, 얻을 수 있는 최대 속도 향상(Speedup)은?",
+    "options": [
+      "N배",
+      "N^2배",
+      "2N배",
+      "logN배"
+    ],
+    "answer": 0,
+    "explanation": "이상적인 조건(해저드 없음, 오버헤드 0)에서는 파이프라인 단계 수만큼의 명령어가 동시에 실행되므로 속도가 N배 빨라집니다."
+  },
+  {
+    "id": 333,
+    "difficulty": 3,
+    "category": "Multi-core",
+    "question": "멀티코어 프로세서에서 각 코어가 가진 캐시의 내용이 서로 달라지는 문제를 해결하기 위한 프로토콜은?",
+    "options": [
+      "Cache Coherence Protocol (예: MESI)",
+      "Virtual Memory Paging",
+      "Branch Prediction",
+      "Dynamic Scheduling"
+    ],
+    "answer": 0,
+    "explanation": "여러 코어가 같은 메모리 주소를 각자의 캐시에 복사해두고 수정하면 불일치가 발생합니다. 이를 실시간으로 감시하고 일치시키는 약속을 '캐시 일관성(Coherence) 프로토콜'이라 합니다."
+  },
+  {
+    "id": 334,
+    "difficulty": 1,
+    "category": "I/O System",
+    "question": "CPU가 I/O 장치의 상태를 알기 위해 반복적으로 상태 레지스터를 확인하는 방식은?",
+    "options": [
+      "Polling (폴링)",
+      "Interrupt (인터럽트)",
+      "DMA (Direct Memory Access)",
+      "Virtual I/O"
+    ],
+    "answer": 0,
+    "explanation": "폴링은 CPU가 계속해서 '작업 다 됐니?'라고 물어보는 방식으로, 구현은 쉽지만 CPU 자원 낭비가 심합니다."
+  },
+  {
+    "id": 335,
+    "difficulty": 2,
+    "category": "Interrupt",
+    "question": "인터럽트(Interrupt)가 발생했을 때 CPU가 가장 먼저 해야 할 일은?",
+    "options": [
+      "현재 실행 중인 명령어의 주소(PC)와 상태를 저장한다.",
+      "해당 인터럽트 서비스 루틴(ISR)을 실행한다.",
+      "사용자 프로그램을 종료한다.",
+      "메모리를 초기화한다."
+    ],
+    "answer": 0,
+    "explanation": "인터럽트 처리가 끝나면 원래 작업으로 돌아와야 하므로, 현재 수행 중이던 위치(PC)와 레지스터 상태 등을 스택이나 특수 레지스터(EPC)에 저장하는 것이 최우선입니다."
+  },
+  {
+    "id": 336,
+    "difficulty": 3,
+    "category": "Performance Metrics",
+    "question": "벤치마크 프로그램 A의 실행 시간이 10초, B가 15초일 때, A가 B보다 얼마나 빠른가?",
+    "options": [
+      "1.5배",
+      "0.5배",
+      "50%",
+      "0.66배"
+    ],
+    "answer": 0,
+    "explanation": "성능 비율 n = 실행시간B / 실행시간A = 15 / 10 = 1.5입니다. 즉, A는 B보다 1.5배 빠릅니다."
+  },
+  {
+    "id": 337,
+    "difficulty": 1,
+    "category": "RISC-V Instructions",
+    "question": "RISC-V 명령어 'slli x1, x2, 2'의 의미는?",
+    "options": [
+      "x2의 값을 왼쪽으로 2비트 논리 시프트하여 x1에 저장 (곱하기 4)",
+      "x2의 값을 오른쪽으로 2비트 시프트하여 x1에 저장 (나누기 4)",
+      "x2의 값에 2를 더해서 x1에 저장",
+      "x1과 x2를 교환"
+    ],
+    "answer": 0,
+    "explanation": "slli (Shift Left Logical Immediate)는 비트를 왼쪽으로 이동시키며 빈칸을 0으로 채웁니다. 2비트 이동은 2^2=4를 곱하는 것과 같습니다."
+  },
+  {
+    "id": 338,
+    "difficulty": 2,
+    "category": "Memory Alignment",
+    "question": "메모리 정렬(Alignment) 제약이 있는 시스템에서, 4바이트 정수(Word)를 읽을 때 허용되지 않는 주소는?",
+    "options": [
+      "0x1000",
+      "0x1004",
+      "0x1008",
+      "0x1002"
+    ],
+    "answer": 3,
+    "explanation": "4바이트 데이터는 주소가 4의 배수여야 합니다. 0x1002는 4로 나누어떨어지지 않으므로(나머지 2), 정렬 위반(Misaligned Access) 예외가 발생할 수 있습니다."
+  },
+  {
+    "id": 339,
+    "difficulty": 3,
+    "category": "Hazard Detection",
+    "question": "Load-Use Hazard를 감지하는 유닛(Hazard Detection Unit)은 파이프라인의 어느 단계에 위치하는가?",
+    "options": [
+      "ID (Instruction Decode) 단계",
+      "IF (Instruction Fetch) 단계",
+      "EX (Execute) 단계",
+      "WB (Write Back) 단계"
+    ],
+    "answer": 0,
+    "explanation": "해저드 감지 유닛은 ID 단계에서 '현재 해독 중인 명령어'가 '직전 명령어(EX 단계에 있는 Load)'의 결과값을 필요로 하는지 검사하여, 필요하다면 Stall 신호를 보냅니다."
+  },
+  {
+    "id": 340,
+    "difficulty": 1,
+    "category": "Computer History",
+    "question": "폰 노이만 구조(Von Neumann Architecture)의 가장 큰 특징은?",
+    "options": [
+      "프로그램 내장 방식 (Stored-program concept)",
+      "진공관 사용",
+      "마우스와 키보드 사용",
+      "인공지능 탑재"
+    ],
+    "answer": 0,
+    "explanation": "폰 노이만 구조의 핵심은 명령어(프로그램)도 데이터처럼 메모리에 저장해두고, CPU가 하나씩 꺼내와서 실행한다는 점입니다."
+  },
+  {
+    "id": 341,
+    "difficulty": 1,
+    "category": "Cache Write Policy",
+    "question": "캐시에 데이터를 쓸 때(Write), 메인 메모리에도 동시에 값을 쓰는 정책은?",
+    "options": [
+      "Write Back",
+      "Write Through",
+      "Write Allocate",
+      "No-Write Allocate"
+    ],
+    "answer": 1,
+    "explanation": "Write Through는 데이터 일관성을 위해 캐시와 메모리에 동시에 씁니다. 구현은 단순하지만 쓰기 속도가 느립니다. 반면 Write Back은 캐시에만 쓰고 나중에 쫓겨날 때 메모리에 씁니다."
+  },
+  {
+    "id": 342,
+    "difficulty": 2,
+    "category": "Virtual Memory",
+    "question": "가상 메모리에서 '페이지 크기(Page Size)'가 커질 때 발생할 수 있는 단점은?",
+    "options": [
+      "Page Fault 처리 시간이 줄어든다.",
+      "내부 단편화(Internal Fragmentation)가 증가하여 메모리가 낭비된다.",
+      "TLB Hit Rate가 감소한다.",
+      "페이지 테이블 크기가 커진다."
+    ],
+    "answer": 1,
+    "explanation": "페이지가 크면 마지막 페이지의 남는 공간(Internal Fragmentation)이 커져 메모리 낭비가 심해집니다. 반면 페이지 테이블 크기는 작아지고 TLB 효율은 좋아지는 장점이 있습니다."
+  },
+  {
+    "id": 343,
+    "difficulty": 3,
+    "category": "Pipeline Data Hazard",
+    "question": "다음 RISC-V 코드에서 Forwarding으로도 해결할 수 없는 스톨(Stall)이 발생하는 구간은?\n1: ld x10, 0(x1)\n2: add x11, x10, x2\n3: sub x12, x10, x3",
+    "options": [
+      "1번과 2번 사이",
+      "2번과 3번 사이",
+      "발생하지 않음",
+      "1번 명령어 실행 전"
+    ],
+    "answer": 0,
+    "explanation": "1번(Load) 명령어의 결과(x10)는 MEM 단계 후에 나오는데, 2번(Add) 명령어는 EX 단계에서 x10이 필요합니다. 이는 Load-Use Hazard로, 반드시 1 사이클을 쉬어야(Stall) 합니다. 3번 명령어는 Forwarding으로 해결 가능합니다."
+  },
+  {
+    "id": 344,
+    "difficulty": 1,
+    "category": "I/O Interface",
+    "question": "메모리 주소 공간의 일부를 I/O 장치 레지스터에 할당하여, 일반적인 Load/Store 명령어로 I/O를 제어하는 방식은?",
+    "options": [
+      "Memory-Mapped I/O",
+      "Isolated I/O",
+      "Interrupt-Driven I/O",
+      "DMA"
+    ],
+    "answer": 0,
+    "explanation": "Memory-Mapped I/O는 별도의 I/O 명령어 없이 메모리 주소를 통해 주변 장치에 접근하므로 프로그래밍이 간편하고, RISC 아키텍처에서 주로 사용됩니다."
+  },
+  {
+    "id": 345,
+    "difficulty": 2,
+    "category": "RISC-V Addressing",
+    "question": "RISC-V의 분기 명령어 'beq rs1, rs2, offset'에서 12비트 offset으로 점프할 수 있는 최대 범위는?",
+    "options": [
+      "±4 KiB",
+      "±2 KiB",
+      "±1 MiB",
+      "±32 bit"
+    ],
+    "answer": 0,
+    "explanation": "12비트 즉시값은 2바이트 단위(반쪽 워드)로 해석되므로 실제로는 13비트 효과를 냅니다. 따라서 -4096 ~ +4094 바이트(약 ±4KB) 범위로 점프할 수 있습니다."
+  },
+  {
+    "id": 346,
+    "difficulty": 3,
+    "category": "Cache Performance",
+    "question": "L1 캐시 접근 시간이 1ns, 미스 페널티가 100ns, 미스율이 5%일 때, 평균 메모리 접근 시간(AMAT)은?",
+    "options": [
+      "1ns",
+      "5ns",
+      "6ns",
+      "10ns"
+    ],
+    "answer": 2,
+    "explanation": "AMAT = Hit Time + (Miss Rate × Miss Penalty) = 1ns + (0.05 × 100ns) = 1 + 5 = 6ns 입니다."
+  },
+  {
+    "id": 347,
+    "difficulty": 1,
+    "category": "Instruction Set",
+    "question": "프로시저 호출 시 복귀 주소(Return Address)를 저장하는 RISC-V 레지스터는?",
+    "options": [
+      "x0 (zero)",
+      "x1 (ra)",
+      "x2 (sp)",
+      "x8 (s0)"
+    ],
+    "answer": 1,
+    "explanation": "x1 레지스터는 ra(return address)로 불리며, jal 또는 jalr 명령어 실행 시 돌아올 주소(PC+4)가 자동으로 저장됩니다."
+  },
+  {
+    "id": 348,
+    "difficulty": 2,
+    "category": "Hazard Detection",
+    "question": "컴파일러가 명령어 사이에 'nop'을 삽입하여 해저드를 해결하는 방식은 무엇을 대체하기 위함인가?",
+    "options": [
+      "Hardware Forwarding",
+      "Hardware Stall (Interlock)",
+      "Branch Prediction",
+      "Cache Miss"
+    ],
+    "answer": 1,
+    "explanation": "하드웨어가 자동으로 파이프라인을 멈추는(Interlock) 기능이 없는 초기 MIPS 같은 구조에서는, 컴파일러가 해저드 구간에 nop을 넣어 강제로 시간을 벌어야 했습니다."
+  },
+  {
+    "id": 349,
+    "difficulty": 3,
+    "category": "Amdahl's Law",
+    "question": "시스템의 50%를 차지하는 부품의 성능을 무한대로 향상시켰을 때(시간 -> 0), 전체 시스템의 최대 속도 향상(Speedup)은?",
+    "options": [
+      "2배",
+      "5배",
+      "무한대",
+      "10배"
+    ],
+    "answer": 0,
+    "explanation": "암달의 법칙 극한값입니다. 1 / ((1-0.5) + 0) = 1 / 0.5 = 2. 개선되지 않은 나머지 50%가 병목이 되어 전체 성능 향상은 2배를 넘을 수 없습니다."
+  },
+  {
+    "id": 350,
+    "difficulty": 2,
+    "category": "Virtual Memory TLB",
+    "question": "TLB(Translation Lookaside Buffer)는 어떤 종류의 지역성(Locality)을 주로 활용하는가?",
+    "options": [
+      "공간 지역성만",
+      "시간 지역성만",
+      "시간 지역성과 공간 지역성 모두",
+      "지역성을 활용하지 않음"
+    ],
+    "answer": 2,
+    "explanation": "TLB는 최근에 변환된 주소를 다시 쓸 확률(시간 지역성)과, 같은 페이지 내의 인접 주소를 참조할 확률(공간 지역성)을 모두 활용하여 주소 변환 속도를 높입니다."
+  },
+  {
+    "id": 351,
+    "difficulty": 1,
+    "category": "Logic Gate",
+    "question": "다음 중 (A + B)' 와 논리적으로 동일한 식은? (드모르간 법칙)",
+    "options": [
+      "A' + B'",
+      "A' * B'",
+      "A * B",
+      "A' + B"
+    ],
+    "answer": 1,
+    "explanation": "드모르간 법칙에 의해 합의 부정(NOR)은 부정의 곱(AND)과 같습니다. 즉, (A+B)' = A' * B' 입니다."
+  },
+  {
+    "id": 352,
+    "difficulty": 2,
+    "category": "RISC-V Pseudoinstruction",
+    "question": "RISC-V에서 'li x5, 0x12345' (Load Immediate)는 실제 기계어 명령어로 어떻게 변환되는가?",
+    "options": [
+      "하나의 I-type 명령어로 변환",
+      "lui와 addi 명령어의 조합으로 변환",
+      "ld 명령어로 변환",
+      "jal 명령어로 변환"
+    ],
+    "answer": 1,
+    "explanation": "32비트 상수를 한 번에 로드할 수 없으므로, 상위 20비트를 채우는 lui(Load Upper Immediate)와 하위 12비트를 더하는 addi로 쪼개져서 실행됩니다."
+  },
+  {
+    "id": 353,
+    "difficulty": 3,
+    "category": "Set Associative Cache",
+    "question": "4-Way Set Associative Cache에서 특정 메모리 블록이 들어갈 수 있는 자리는 몇 군데인가?",
+    "options": [
+      "1군데",
+      "4군데",
+      "캐시 전체 아무 곳이나",
+      "8군데"
+    ],
+    "answer": 1,
+    "explanation": "Set Associative 방식에서 인덱스로 '세트(Set)'는 하나로 정해지지만, 그 세트 안에는 'Way'의 개수만큼(여기선 4개) 빈자리가 있어 그중 한 곳에 들어갈 수 있습니다."
+  },
+  {
+    "id": 354,
+    "difficulty": 1,
+    "category": "Exception vs Interrupt",
+    "question": "프로그램 실행 중 내부적인 오류(0으로 나누기, 알 수 없는 명령어 등)로 발생하는 이벤트를 무엇이라 하는가?",
+    "options": [
+      "Interrupt (인터럽트)",
+      "Exception (예외)",
+      "DMA",
+      "System Call"
+    ],
+    "answer": 1,
+    "explanation": "내부적 요인(CPU 안에서 발생)은 '예외(Exception)' 또는 '트랩(Trap)'이라 하고, 외부적 요인(키보드, 타이머 등)은 '인터럽트(Interrupt)'라고 구분합니다."
+  },
+  {
+    "id": 355,
+    "difficulty": 2,
+    "category": "Hamming Code",
+    "question": "SEC-DED (Single Error Correction, Double Error Detection) 해밍 코드를 사용하기 위해 필요한 최소 해밍 거리는?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": 3,
+    "explanation": "1비트 오류를 정정하려면 해밍 거리 3이 필요하고, 여기에 2비트 오류 검출 기능까지 추가하려면 해밍 거리 4가 필요합니다."
+  },
+  {
+    "id": 356,
+    "difficulty": 3,
+    "category": "Branch Prediction",
+    "question": "Correlating Predictor(Two-level Predictor)가 기존 단순 예측기보다 우수한 점은?",
+    "options": [
+      "분기 기록을 전혀 사용하지 않는다.",
+      "다른 분기 명령어의 최근 결과(Global History)를 참조하여 패턴을 학습한다.",
+      "항상 Not Taken으로 예측한다.",
+      "하드웨어 비용이 가장 저렴하다."
+    ],
+    "answer": 1,
+    "explanation": "if (aa==2) aa=0; if (bb==2) ... 처럼 앞선 분기의 결과가 뒤의 분기에 영향을 미치는 경우, 글로벌 히스토리(GHR)를 활용하는 Correlating 예측기가 훨씬 정확합니다."
+  },
+  {
+    "id": 357,
+    "difficulty": 1,
+    "category": "Synchronous Logic",
+    "question": "플립플롭(Flip-flop)의 상태가 변하는 시점은 언제인가?",
+    "options": [
+      "클럭 신호가 1일 때 계속",
+      "클럭 신호가 0일 때 계속",
+      "클럭의 엣지(Rising or Falling Edge) 순간",
+      "입력이 변할 때마다 즉시"
+    ],
+    "answer": 2,
+    "explanation": "동기식 회로의 핵심 소자인 플립플롭은 클럭의 상승(Rising) 또는 하강(Falling) 엣지 순간에만 입력을 샘플링하여 상태를 바꿉니다. (Edge-triggered)"
+  },
+  {
+    "id": 358,
+    "difficulty": 2,
+    "category": "MIPS vs RISC-V",
+    "question": "MIPS 아키텍처와 달리 RISC-V가 가지는 특징 중 하나는?",
+    "options": [
+      "분기 지연 슬롯(Branch Delay Slot)을 제거했다.",
+      "명령어 길이가 가변적이지 않다.",
+      "전용 Condition Code 레지스터(Flags)를 사용한다.",
+      "레지스터 개수가 8개로 적다."
+    ],
+    "answer": 0,
+    "explanation": "MIPS는 파이프라인 효율을 위해 지연 슬롯을 두어 컴파일러에게 부담을 주었지만, RISC-V는 최신 하드웨어(분기 예측 등)를 믿고 지연 슬롯을 없애 설계가 더 깔끔합니다."
+  },
+  {
+    "id": 359,
+    "difficulty": 3,
+    "category": "Disk RAID",
+    "question": "RAID 5가 RAID 4보다 성능상 유리한 점은?",
+    "options": [
+      "패리티 디스크를 따로 두지 않고 모든 디스크에 분산 저장하여 병목을 없앴다.",
+      "데이터를 미러링하여 읽기 속도가 2배다.",
+      "패리티 계산을 하지 않는다.",
+      "디스크 1개가 고장 나면 복구가 불가능하다."
+    ],
+    "answer": 0,
+    "explanation": "RAID 4는 패리티 전용 디스크 하나에 쓰기 작업이 몰려 병목이 발생하지만, RAID 5는 패리티 블록을 모든 디스크에 회전하며 분산시켜 병목을 해소했습니다."
+  },
+  {
+    "id": 360,
+    "difficulty": 2,
+    "category": "Multi-cycle Implementation",
+    "question": "단일 사이클(Single-cycle) 구현 대비 멀티 사이클(Multi-cycle) 구현의 장점은?",
+    "options": [
+      "제어 유닛 설계가 쉬워진다.",
+      "모든 명령어를 가장 느린 명령어(Load 등) 주기에 맞출 필요가 없다.",
+      "CPI가 항상 1이다.",
+      "추가적인 상태 레지스터가 필요 없다."
+    ],
+    "answer": 1,
+    "explanation": "단일 사이클은 가장 느린 명령어(Critical Path)에 클럭 주기를 맞춰야 해서 비효율적이지만, 멀티 사이클은 명령어마다 필요한 만큼만 사이클을 쓰므로 평균 실행 시간을 줄일 수 있습니다."
+  },
+  {
+    "id": 361,
+    "difficulty": 1,
+    "category": "Floating Point",
+    "question": "IEEE 754 표준에서 'NaN (Not a Number)'을 표현하는 비트 패턴의 특징은?",
+    "options": [
+      "지수부(Exponent)가 모두 1이고, 가수부(Fraction)가 0이 아니다.",
+      "지수부가 모두 1이고, 가수부가 모두 0이다.",
+      "지수부가 모두 0이고, 가수부가 0이 아니다.",
+      "부호 비트가 1이다."
+    ],
+    "answer": 0,
+    "explanation": "지수부가 모두 1(255)이면서 가수부가 0이면 무한대(Infinity)이고, 가수부가 0이 아니면 NaN(예: 0/0 결과)입니다."
+  },
+  {
+    "id": 362,
+    "difficulty": 2,
+    "category": "Pipeline Hazards",
+    "question": "구조적 해저드(Structural Hazard)를 해결하기 위한 가장 일반적인 하드웨어적 방법은?",
+    "options": [
+      "파이프라인을 비운다 (Flush).",
+      "자원을 복제한다 (예: 명령어 캐시와 데이터 캐시 분리).",
+      "클럭 속도를 낮춘다.",
+      "명령어 순서를 바꾼다."
+    ],
+    "answer": 1,
+    "explanation": "자원 충돌이 원인이므로 자원을 늘리는 것이 정석입니다. 하버드 아키텍처처럼 I-Cache와 D-Cache를 분리하면 동시에 메모리 접근이 가능해집니다."
+  },
+  {
+    "id": 363,
+    "difficulty": 3,
+    "category": "Branch Prediction",
+    "question": "Tournament Predictor(토너먼트 예측기)의 작동 원리는?",
+    "options": [
+      "항상 Taken으로 예측한다.",
+      "Global Predictor와 Local Predictor 중 현재 더 정확한 예측기를 선택하여 사용한다.",
+      "랜덤하게 예측기를 선택한다.",
+      "분기 기록을 사용하지 않는다."
+    ],
+    "answer": 1,
+    "explanation": "서로 다른 특성을 가진 두 예측기(전역/지역)를 두고, 어떤 예측기가 더 잘 맞추는지 추적하는 '선택기(Selector)'를 통해 최적의 결과를 냅니다. Alpha 21264 등에서 사용되었습니다."
+  },
+  {
+    "id": 364,
+    "difficulty": 1,
+    "category": "RISC-V ABI",
+    "question": "함수 호출 시 인자(Argument)를 전달하기 위해 사용하는 RISC-V 레지스터는?",
+    "options": [
+      "x0 ~ x4",
+      "x10 ~ x17 (a0 ~ a7)",
+      "x5 ~ x7 (t0 ~ t2)",
+      "x8 ~ x9 (s0 ~ s1)"
+    ],
+    "answer": 1,
+    "explanation": "RISC-V Calling Convention에서 a0~a7 레지스터는 함수 인자 전달 및 반환값(a0, a1) 용도로 약속되어 있습니다."
+  },
+  {
+    "id": 365,
+    "difficulty": 2,
+    "category": "Cache Mapping",
+    "question": "Fully Associative Cache의 장점과 단점은?",
+    "options": [
+      "검색 속도가 빠르지만 충돌이 잦다.",
+      "충돌 미스(Conflict Miss)가 없지만 하드웨어가 복잡하고 검색이 느리다.",
+      "구현이 가장 간단하다.",
+      "인덱스 계산이 필요 없다."
+    ],
+    "answer": 1,
+    "explanation": "어디든 저장할 수 있어 충돌은 없지만, 데이터를 찾을 때 모든 블록을 동시에 비교(Comparator)해야 하므로 회로가 복잡하고 전력 소모가 큽니다."
+  },
+  {
+    "id": 366,
+    "difficulty": 3,
+    "category": "Performance",
+    "question": "클럭 속도를 2GHz에서 4GHz로 올렸지만, 전체 프로그램 실행 속도가 2배가 되지 않는 주된 이유는?",
+    "options": [
+      "메모리 접근 속도가 CPU 속도 향상을 따라가지 못하기 때문 (Memory Wall)",
+      "명령어 개수가 늘어나기 때문",
+      "파이프라인 단계가 줄어들기 때문",
+      "전력 소모가 줄어들기 때문"
+    ],
+    "answer": 0,
+    "explanation": "CPU 코어는 빨라졌지만 데이터를 가져오는 메모리(DRAM)의 속도는 그만큼 빨라지지 않아, CPU가 메모리를 기다리는 시간(Stall)이 늘어나기 때문입니다."
+  },
+  {
+    "id": 367,
+    "difficulty": 1,
+    "category": "Digital Logic",
+    "question": "N개의 선택 입력(Select inputs)을 가지는 Multiplexer(MUX)는 몇 개의 데이터 입력(Data inputs)을 가질 수 있는가?",
+    "options": [
+      "N개",
+      "2^N개",
+      "N^2개",
+      "2*N개"
+    ],
+    "answer": 1,
+    "explanation": "N비트의 선택 신호로 구분할 수 있는 경우의 수는 2^N가지이므로, 2^N개의 입력 중 하나를 선택할 수 있습니다."
+  },
+  {
+    "id": 368,
+    "difficulty": 2,
+    "category": "Exceptions",
+    "question": "RISC-V에서 예외(Exception) 처리가 끝난 후, 원래 프로그램으로 돌아가기 위해 사용하는 명령어는?",
+    "options": [
+      "ret",
+      "mret (또는 sret)",
+      "jal",
+      "ecall"
+    ],
+    "answer": 1,
+    "explanation": "일반 함수 복귀는 ret(jalr x0, ra, 0)를 쓰지만, 예외 처리 핸들러에서의 복귀는 mret(Machine-mode return) 등을 사용하여 이전 특권 모드와 PC를 복구해야 합니다."
+  },
+  {
+    "id": 369,
+    "difficulty": 3,
+    "category": "Virtual Memory",
+    "question": "페이지 테이블의 크기를 줄이기 위해 사용하는 기법은?",
+    "options": [
+      "Multi-level Page Table (계층적 페이지 테이블)",
+      "Inverted Page Table (역 페이지 테이블)",
+      "Valid Bit 제거",
+      "1번과 2번 모두"
+    ],
+    "answer": 3,
+    "explanation": "계층적 페이지 테이블은 사용하지 않는 영역의 테이블을 할당하지 않아 크기를 줄이고, 역 페이지 테이블은 물리 메모리 프레임 개수만큼만 엔트리를 만들어 크기를 획기적으로 줄입니다."
+  },
+  {
+    "id": 370,
+    "difficulty": 1,
+    "category": "RISC-V Instruction",
+    "question": "auipc x1, 0x1000 명령어의 기능은?",
+    "options": [
+      "PC 값에 0x1000을 더해 x1에 저장",
+      "PC 값에 (0x1000 << 12)를 더해 x1에 저장",
+      "상수 0x1000을 x1에 저장",
+      "메모리 0x1000 번지 값을 읽어옴"
+    ],
+    "answer": 1,
+    "explanation": "auipc (Add Upper Immediate to PC)는 상위 20비트 즉시값을 PC에 더하는 명령어로, PC 상대 주소를 계산할 때 필수적입니다."
+  },
+  {
+    "id": 371,
+    "difficulty": 2,
+    "category": "Combinational Logic",
+    "question": "Decoder와 Encoder의 관계에 대한 설명으로 옳은 것은?",
+    "options": [
+      "Decoder는 N입력을 2^N 출력으로, Encoder는 2^N 입력을 N 출력으로 변환한다.",
+      "둘 다 메모리 소자를 포함한다.",
+      "Encoder는 암호화 장치이고 Decoder는 복호화 장치이다.",
+      "기능적으로 완전히 동일하다."
+    ],
+    "answer": 0,
+    "explanation": "디코더는 이진 코드를 받아 해당하는 하나의 라인을 활성화하고, 인코더는 활성화된 라인의 위치를 이진 코드로 변환하는 반대 역할을 합니다."
+  },
+  {
+    "id": 372,
+    "difficulty": 3,
+    "category": "Loop Unrolling",
+    "question": "Loop Unrolling 기법이 성능을 향상시키는 주된 이유는?",
+    "options": [
+      "코드의 크기가 줄어들기 때문",
+      "분기 명령어(Branch)의 빈도를 줄이고 파이프라인 스톨을 감소시키기 때문",
+      "캐시 적중률을 높이기 때문",
+      "메모리 사용량을 줄이기 때문"
+    ],
+    "answer": 1,
+    "explanation": "반복문의 내용을 여러 번 복사해 펼치면, 반복 제어(루프 조건 확인 및 점프)에 드는 오버헤드가 줄어들고 명령어 스케줄링이 용이해집니다. 단, 코드 크기는 커집니다."
+  },
+  {
+    "id": 373,
+    "difficulty": 1,
+    "category": "Memory",
+    "question": "전원이 꺼져도 데이터가 지워지지 않는 메모리(Non-volatile)는?",
+    "options": [
+      "SRAM",
+      "DRAM",
+      "Flash Memory",
+      "Register"
+    ],
+    "answer": 2,
+    "explanation": "SRAM과 DRAM은 휘발성 메모리이고, 플래시 메모리(SSD, USB 등)나 ROM은 비휘발성입니다."
+  },
+  {
+    "id": 374,
+    "difficulty": 2,
+    "category": "Parallelism",
+    "question": "SIMD (Single Instruction, Multiple Data) 아키텍처의 예시는?",
+    "options": [
+      "일반적인 정수 덧셈 명령어",
+      "GPU의 벡터 연산",
+      "가상 메모리 시스템",
+      "파이프라인 제어 유닛"
+    ],
+    "answer": 1,
+    "explanation": "하나의 명령어(Instruction)로 여러 개의 데이터(Data)를 동시에 처리하는 방식은 그래픽 처리나 행렬 연산에 효율적이며, GPU가 대표적입니다."
+  },
+  {
+    "id": 375,
+    "difficulty": 3,
+    "category": "Cache Consistency",
+    "question": "Snooping 프로토콜에서 'Write Invalidate' 방식이란?",
+    "options": [
+      "값을 쓸 때 다른 코어의 캐시 값을 갱신해준다.",
+      "값을 쓸 때 다른 코어의 캐시 값을 무효화(Invalid) 시킨다.",
+      "값을 쓸 때 메모리에만 쓴다.",
+      "쓰기 작업을 금지한다."
+    ],
+    "answer": 1,
+    "explanation": "데이터를 수정할 때, 해당 데이터를 가진 다른 모든 캐시에게 '너네 데이터는 이제 쓰레기야(Invalid)'라고 알리는 방식입니다. 구현이 비교적 간단하여 많이 쓰입니다."
+  },
+  {
+    "id": 376,
+    "difficulty": 1,
+    "category": "Boolean Algebra",
+    "question": "XOR 연산(A ⊕ B)을 AND, OR, NOT으로 표현하면?",
+    "options": [
+      "AB + A'B'",
+      "A'B + AB'",
+      "A + B",
+      "(A + B)'"
+    ],
+    "answer": 1,
+    "explanation": "XOR(Exclusive OR)은 서로 다를 때 1입니다. 즉, (A가 0이고 B가 1) 이거나 (A가 1이고 B가 0) 인 경우이므로 A'B + AB' 입니다."
+  },
+  {
+    "id": 377,
+    "difficulty": 2,
+    "category": "MIPS Pipeline",
+    "question": "MIPS 5단계 파이프라인에서 분기(Branch) 결정을 ID 단계로 앞당길 때의 장점은?",
+    "options": [
+      "클럭 속도가 빨라진다.",
+      "분기 페널티(Branch Penalty)가 줄어든다.",
+      "데이터 해저드가 사라진다.",
+      "회로가 더 간단해진다."
+    ],
+    "answer": 1,
+    "explanation": "원래 EX나 MEM 단계에서 분기 여부가 결정되면 페널티가 2~3사이클이지만, ID 단계에서 비교기(Comparator)를 추가해 결정하면 페널티를 1사이클로 줄일 수 있습니다."
+  },
+  {
+    "id": 378,
+    "difficulty": 3,
+    "category": "Out-of-Order Execution",
+    "question": "비순차 실행(Out-of-Order Execution) 프로세서에서 명령어의 원래 순서를 맞춰주기 위해(Commit) 사용하는 버퍼는?",
+    "options": [
+      "Reorder Buffer (ROB)",
+      "Branch Target Buffer (BTB)",
+      "Translation Lookaside Buffer (TLB)",
+      "Instruction Buffer"
+    ],
+    "answer": 0,
+    "explanation": "명령어는 실행 유닛 상황에 따라 뒤죽박죽 실행되지만, 결과 반영(Commit/Retire)은 반드시 프로그램 순서대로 해야 예외 처리 등이 정확해집니다. 이를 위해 ROB를 사용합니다."
+  },
+  {
+    "id": 379,
+    "difficulty": 1,
+    "category": "Logic Design",
+    "question": "Clock Skew(클럭 스큐)란 무엇인가?",
+    "options": [
+      "클럭의 주파수가 변하는 현상",
+      "클럭 신호가 회로의 각 지점에 도달하는 시간 차이",
+      "클럭이 멈추는 현상",
+      "전압이 불안정한 현상"
+    ],
+    "answer": 1,
+    "explanation": "물리적인 전선 길이 차이 등으로 인해, 같은 클럭 펄스임에도 불구하고 레지스터마다 도달하는 시간이 미세하게 다른 현상을 말하며, 동기식 회로 설계의 주된 적입니다."
+  },
+  {
+    "id": 380,
+    "difficulty": 2,
+    "category": "RISC-V Pseudo",
+    "question": "nop (No Operation) 명령어는 실제로 어떤 RISC-V 명령어로 변환되는가?",
+    "options": [
+      "addi x0, x0, 0",
+      "add x0, x0, x0",
+      "and x0, x0, x0",
+      "아무 명령어도 실행되지 않는다."
+    ],
+    "answer": 0,
+    "explanation": "RISC-V에는 별도의 nop opcode가 없습니다. 대신 레지스터 x0(항상 0)에 0을 더해서 x0에 저장하는 `addi x0, x0, 0` 명령어를 nop으로 사용합니다."
+  },
+  {
+    "id": 381,
+    "difficulty": 3,
+    "category": "Dependence vs Hazard",
+    "question": "데이터 의존성(Data Dependence)과 데이터 해저드(Data Hazard)의 관계는?",
+    "options": [
+      "의존성이 있으면 항상 해저드가 발생한다.",
+      "해저드가 있으면 항상 의존성이 있다.",
+      "두 용어는 완전히 같은 뜻이다.",
+      "아무 관련이 없다."
+    ],
+    "answer": 1,
+    "explanation": "의존성은 프로그램 자체의 속성이고, 해저드는 파이프라인 하드웨어의 충돌 현상입니다. 의존성이 있어도 파이프라인 구조나 스케줄링에 따라 해저드는 발생할 수도, 안 할 수도 있습니다. 하지만 해저드가 발생했다면 그 원인은 의존성 때문입니다."
+  },
+  {
+    "id": 382,
+    "difficulty": 1,
+    "category": "Number Representation",
+    "question": "16진수 0xF의 2진수 표현은?",
+    "options": [
+      "1010",
+      "1100",
+      "1110",
+      "1111"
+    ],
+    "answer": 3,
+    "explanation": "0xF는 십진수 15이며, 이는 8+4+2+1 이므로 1111입니다."
+  },
+  {
+    "id": 383,
+    "difficulty": 2,
+    "category": "Operating System",
+    "question": "Context Switch(문맥 교환)가 발생할 때 저장해야 하는 정보가 아닌 것은?",
+    "options": [
+      "Program Counter (PC)",
+      "General Purpose Registers",
+      "Page Table Base Register",
+      "Disk에 저장된 파일 내용"
+    ],
+    "answer": 3,
+    "explanation": "문맥 교환 시에는 CPU의 상태(레지스터 값들)를 PCB(Process Control Block)에 저장해야 합니다. 디스크의 파일 내용은 이미 저장되어 있으므로 문맥 교환 시마다 백업할 필요가 없습니다."
+  },
+  {
+    "id": 384,
+    "difficulty": 3,
+    "category": "TLB & Cache",
+    "question": "VIPT (Virtually Indexed, Physically Tagged) 캐시의 장점은?",
+    "options": [
+      "TLB 접근 없이 캐시를 읽을 수 있다.",
+      "TLB 접근과 캐시 인덱싱을 동시에 수행하여 속도를 높일 수 있다.",
+      "Aliasing 문제가 전혀 발생하지 않는다.",
+      "하드웨어가 가장 간단하다."
+    ],
+    "answer": 1,
+    "explanation": "가상 주소로 먼저 인덱싱을 하고, 그동안 TLB에서 변환된 물리 주소의 태그와 비교를 수행합니다. 이를 통해 물리 주소 변환 시간을 숨길(Hiding) 수 있어 빠릅니다."
+  },
+  {
+    "id": 385,
+    "difficulty": 1,
+    "category": "Binary Arithmetic",
+    "question": "MSB (Most Significant Bit)의 위치는?",
+    "options": [
+      "가장 오른쪽 비트",
+      "가장 왼쪽 비트",
+      "가운데 비트",
+      "임의의 위치"
+    ],
+    "answer": 1,
+    "explanation": "MSB는 가장 큰 자리의 값을 나타내는 비트로, 이진수 표기에서 가장 왼쪽에 위치합니다."
+  },
+  {
+    "id": 386,
+    "difficulty": 2,
+    "category": "RISC-V Format",
+    "question": "RISC-V의 S-Format(Store) 명령어에서 즉시값(Immediate)이 두 부분으로 쪼개져 저장되는 이유는?",
+    "options": [
+      "메모리 공간을 아끼기 위해",
+      "rs1, rs2 레지스터 필드의 위치를 R-Format과 동일하게 고정하여 하드웨어를 단순화하기 위해",
+      "더 큰 숫자를 표현하기 위해",
+      "보안을 강화하기 위해"
+    ],
+    "answer": 1,
+    "explanation": "RISC 아키텍처는 명령어 디코딩 속도를 높이기 위해 레지스터 필드(rs1, rs2)의 위치를 모든 포맷에서 최대한 고정하려고 합니다. 이 때문에 Store 명령어의 즉시값 필드가 둘로 나뉘게 되었습니다."
+  },
+  {
+    "id": 387,
+    "difficulty": 3,
+    "category": "Multiprocessor",
+    "question": "UMA (Uniform Memory Access)와 NUMA (Non-Uniform Memory Access)의 차이는?",
+    "options": [
+      "UMA는 모든 프로세서의 메모리 접근 시간이 동일하고, NUMA는 로컬 메모리가 더 빠르다.",
+      "UMA는 멀티코어이고 NUMA는 싱글코어다.",
+      "UMA는 캐시가 없고 NUMA는 캐시가 있다.",
+      "UMA는 소프트웨어 방식, NUMA는 하드웨어 방식이다."
+    ],
+    "answer": 0,
+    "explanation": "NUMA는 각 프로세서가 자신만의 로컬 메모리를 가지고 있어 접근이 빠르지만, 다른 프로세서의 메모리에 접근할 때는 느립니다. 대규모 시스템 확장에 유리합니다."
+  },
+  {
+    "id": 388,
+    "difficulty": 1,
+    "category": "Logic Gates",
+    "question": "입력이 모두 1일 때만 0을 출력하는 게이트는?",
+    "options": [
+      "AND",
+      "OR",
+      "NAND",
+      "NOR"
+    ],
+    "answer": 2,
+    "explanation": "NAND(Not AND)는 AND의 결과를 반전시킨 것이므로, 입력이 모두 1일 때(AND=1)만 0이 됩니다."
+  },
+  {
+    "id": 389,
+    "difficulty": 2,
+    "category": "Static Linking",
+    "question": "링커(Linker)가 수행하는 주된 두 가지 작업은?",
+    "options": [
+      "컴파일과 실행",
+      "심볼 해석(Symbol Resolution)과 재배치(Relocation)",
+      "오류 검사와 최적화",
+      "메모리 할당과 해제"
+    ],
+    "answer": 1,
+    "explanation": "링커는 여러 목적 파일(.o)에 흩어진 변수/함수 이름을 연결(심볼 해석)하고, 실제 메모리 주소에 맞게 코드와 데이터 위치를 조정(재배치)합니다."
+  },
+  {
+    "id": 390,
+    "difficulty": 3,
+    "category": "Disk I/O",
+    "question": "디스크 스케줄링 알고리즘 중, 헤드의 진행 방향에 있는 요청만 처리하고 끝에 도달하면 방향을 바꾸는 방식은?",
+    "options": [
+      "FCFS (First Come First Served)",
+      "SSTF (Shortest Seek Time First)",
+      "SCAN (Elevator Algorithm)",
+      "Random"
+    ],
+    "answer": 2,
+    "explanation": "SCAN 알고리즘(엘리베이터 알고리즘)은 헤드가 한쪽 끝에서 다른 쪽 끝으로 이동하며 길목에 있는 요청을 처리합니다. 기아 현상(Starvation)을 줄이고 응답 시간을 균일하게 합니다."
+  },
+  {
+    "id": 391,
+    "difficulty": 1,
+    "category": "ASCII",
+    "question": "문자 'A'가 ASCII 코드로 0x41일 때, 문자 'C'의 코드는?",
+    "options": [
+      "0x42",
+      "0x43",
+      "0x44",
+      "0x63"
+    ],
+    "answer": 1,
+    "explanation": "알파벳은 순서대로 배치되므로 A(0x41) -> B(0x42) -> C(0x43) 입니다."
+  },
+  {
+    "id": 392,
+    "difficulty": 2,
+    "category": "Hazard",
+    "question": "WAW (Write After Write) 해저드는 어떤 상황에서 발생하는가?",
+    "options": [
+      "이전 명령어가 쓰기 전에 나중 명령어가 먼저 써버릴 때",
+      "이전 명령어가 읽기 전에 나중 명령어가 써버릴 때",
+      "이전 명령어가 쓰기 전에 나중 명령어가 읽을 때",
+      "두 명령어가 동시에 읽을 때"
+    ],
+    "answer": 0,
+    "explanation": "출력 의존성(Output Dependence)이라고도 하며, 명령어 순서가 뒤바뀌어 실행될 때(Out-of-Order) 나중 값이 먼저 덮어써져서 최종 결과가 엉망이 되는 상황입니다."
+  },
+  {
+    "id": 393,
+    "difficulty": 3,
+    "category": "Interrupt Handling",
+    "question": "벡터 인터럽트(Vectored Interrupt) 방식의 특징은?",
+    "options": [
+      "모든 인터럽트가 하나의 주소로 점프한 후 원인을 찾는다.",
+      "인터럽트 원인에 따라 서로 다른 핸들러 주소로 즉시 점프한다.",
+      "소프트웨어가 인터럽트 번호를 폴링한다.",
+      "인터럽트를 사용하지 않는다."
+    ],
+    "answer": 1,
+    "explanation": "하드웨어가 인터럽트 번호에 대응하는 주소(Vector Table)를 찾아 해당 코드로 바로 점프하므로, 원인을 찾는 소프트웨어 오버헤드가 없어 응답이 빠릅니다."
+  },
+  {
+    "id": 394,
+    "difficulty": 1,
+    "category": "Computer Components",
+    "question": "CPU 내부에서 연산 결과의 상태(양수, 음수, 0, 오버플로우 등)를 저장하는 레지스터는?",
+    "options": [
+      "Instruction Register (IR)",
+      "Program Counter (PC)",
+      "Status Register (Flags / PSW)",
+      "Stack Pointer (SP)"
+    ],
+    "answer": 2,
+    "explanation": "상태 레지스터(Status Register) 또는 플래그 레지스터는 ALU 연산 결과의 상태 플래그(Z, N, V, C 등)를 저장하여 조건부 분기 등에 사용됩니다."
+  },
+  {
+    "id": 395,
+    "difficulty": 2,
+    "category": "Little Endian",
+    "question": "32비트 값 0x12345678을 Little Endian 방식으로 메모리 0번지부터 저장하면 0번지에 저장되는 바이트는?",
+    "options": [
+      "0x12",
+      "0x34",
+      "0x56",
+      "0x78"
+    ],
+    "answer": 3,
+    "explanation": "Little Endian은 하위 바이트(LSB)를 낮은 주소에 저장합니다. 따라서 가장 끝자리인 0x78이 0번지에 들어갑니다. (RISC-V, x86이 이 방식을 씁니다.)"
+  },
+  {
+    "id": 396,
+    "difficulty": 3,
+    "category": "Spectre & Meltdown",
+    "question": "현대 프로세서의 보안 취약점인 Spectre와 Meltdown은 CPU의 어떤 기능을 악용한 것인가?",
+    "options": [
+      "Speculative Execution (추측 실행) 및 Cache Side-channel",
+      "Virtual Memory Paging",
+      "Interrupt Handling",
+      "DMA Transfer"
+    ],
+    "answer": 0,
+    "explanation": "성능 향상을 위해 분기 예측 등을 통해 미리 실행(추측 실행)하고, 틀리면 취소하지만, 그 흔적이 캐시에 남아 정보를 유출할 수 있다는 점(Side-channel)을 악용한 공격입니다."
+  },
+  {
+    "id": 397,
+    "difficulty": 1,
+    "category": "Boolean Logic",
+    "question": "드모르간 법칙 (A'B)' 와 같은 식은?",
+    "options": [
+      "A + B'",
+      "A' + B",
+      "AB",
+      "A + B"
+    ],
+    "answer": 0,
+    "explanation": "(A'B)' = (A')' + B' = A + B' 입니다."
+  },
+  {
+    "id": 398,
+    "difficulty": 2,
+    "category": "Synchronous Bus",
+    "question": "동기식 버스(Synchronous Bus)와 비동기식 버스(Asynchronous Bus)의 차이는?",
+    "options": [
+      "동기식은 공통 클럭에 맞춰 데이터를 전송하고, 비동기식은 핸드쉐이킹(Req/Ack)을 사용한다.",
+      "동기식은 느리고 비동기식은 빠르다.",
+      "동기식은 직렬, 비동기식은 병렬이다.",
+      "차이가 없다."
+    ],
+    "answer": 0,
+    "explanation": "동기식은 클럭에 맞춰 딱딱 보내므로 빠르고 회로가 간단하지만 클럭 스큐 문제가 있고, 비동기식은 '보냈어? 응 받았어' 확인(Handshaking)을 하므로 유연하지만 느립니다."
+  },
+  {
+    "id": 399,
+    "difficulty": 3,
+    "category": "Network I/O",
+    "question": "네트워크 패킷 처리 성능을 높이기 위해, CPU 개입 없이 메모리와 네트워크 카드 간 데이터를 주고받는 기술은?",
+    "options": [
+      "Polling",
+      "PIO (Programmed I/O)",
+      "DMA (Direct Memory Access)",
+      "Cache Snooping"
+    ],
+    "answer": 2,
+    "explanation": "DMA 컨트롤러가 CPU 대신 버스를 장악하여 대량의 데이터를 메모리로 퍼 나릅니다. CPU는 전송 시작과 끝(인터럽트)만 관여하면 되므로 효율적입니다."
+  },
+  {
+    "id": 400,
+    "difficulty": 1,
+    "category": "Computer Architecture",
+    "question": "RISC의 약자는?",
+    "options": [
+      "Reduced Instruction Set Computer",
+      "Random Instruction Set Computer",
+      "Rapid Instruction Set Computer",
+      "Reliable Instruction Set Computer"
+    ],
+    "answer": 0,
+    "explanation": "RISC는 명령어 집합(Instruction Set)을 단순화(Reduced)하여 하드웨어 복잡도를 낮추고 파이프라인 효율을 높인 컴퓨터 구조를 뜻합니다."
   }
 ]

@@ -17,38 +17,37 @@ function goHome() {
     score = 0;
 }
 
-// 퀴즈 시작하기
+// 퀴즈 시작하기 (난이도 필터링 추가)
 async function startQuiz(fileName, difficultyLevel = 0) {
     // 화면 전환
     document.getElementById('menu-screen').classList.add('hidden');
     document.getElementById('quiz-screen').classList.remove('hidden');
 
-    // 데이터 불러오기
     try {
         const response = await fetch(`data/${fileName}`);
-        if (!response.ok) throw new Error("파일 없음");
+        if (!response.ok) throw new Error(`파일을 찾을 수 없음: data/${fileName}`);
 
-        let allQuestions = await response.json();
+        const allQuestions = await response.json();
 
-        // 난이도 필터링 로직
+        // 난이도 필터링 (0이면 전체)
         if (difficultyLevel > 0) {
             questions = allQuestions.filter(q => q.difficulty === difficultyLevel);
+            // 만약 해당 난이도 문제가 하나도 없으면 전체 문제로 대체
             if (questions.length === 0) {
-                alert("해당 난이도의 문제가 아직 없습니다! 전체 문제로 진행합니다.");
+                alert("아직 해당 난이도의 문제가 준비되지 않았습니다. 전체 문제로 시작합니다!");
                 questions = allQuestions;
             }
         } else {
             questions = allQuestions;
         }
 
+        // 문제 섞기
         questions.sort(() => Math.random() - 0.5);
-        currentQuestionIndex = 0;
-        score = 0;
-        loadQuestion(); // 문제 로딩
 
+        loadQuestion();
     } catch (error) {
         console.error("데이터 로딩 실패:", error);
-        alert(`오류 발생! JSON 파일을 확인해주세요.\n(에러 내용: ${error.message})`);
+        alert("오류가 발생했습니다. 메인으로 돌아갑니다.");
         goHome();
     }
 }
@@ -56,11 +55,20 @@ async function startQuiz(fileName, difficultyLevel = 0) {
 function loadQuestion() {
     const questionData = questions[currentQuestionIndex];
 
-    document.getElementById('category-tag').innerText = questionData.category || "Quiz";
+    // 난이도 별 아이콘/텍스트 설정
+    let difficultyBadge = "";
+    if (questionData.difficulty === 1) difficultyBadge = "<span style='color:#58cc02'>[기초]</span>";
+    else if (questionData.difficulty === 2) difficultyBadge = "<span style='color:#f4a261'>[응용]</span>";
+    else if (questionData.difficulty === 3) difficultyBadge = "<span style='color:#e76f51'>[실전]</span>";
+    else difficultyBadge = ""; // 난이도 정보가 없는 경우
+
+    // 카테고리와 난이도 함께 표시
+    document.getElementById('category-tag').innerHTML = `${difficultyBadge} ${questionData.category || "Quiz"}`;
+
     document.getElementById('question-text').innerText = questionData.question;
     document.getElementById('feedback-area').classList.add('hidden');
 
-    // 프로그레스 바 업데이트 (최소 5%는 보이게)
+    // 프로그레스 바 업데이트
     let progressPercent = (currentQuestionIndex / questions.length) * 100;
     if (progressPercent < 5) progressPercent = 5;
     document.getElementById('progress-fill').style.width = `${progressPercent}%`;
@@ -76,7 +84,6 @@ function loadQuestion() {
         optionsContainer.appendChild(button);
     });
 }
-
 function checkAnswer(selectedIndex, correctIndex) {
     const optionsContainer = document.getElementById('options-container');
     const buttons = optionsContainer.getElementsByClassName('option-btn');
@@ -207,7 +214,7 @@ function deleteWrongNote(index) {
 // 오답 노트 전체 초기화 (Reset)
 function clearWrongNotes() {
     const wrongNotes = JSON.parse(localStorage.getItem('cs-tutor-wrong')) || [];
-    
+
     if (wrongNotes.length === 0) {
         alert("지울 오답이 없습니다!");
         return;
@@ -218,4 +225,28 @@ function clearWrongNotes() {
         renderWrongNotes(); // 화면 즉시 갱신
         alert("오답 노트가 초기화되었습니다.");
     }
+}
+
+// 팝업 관련 변수
+let selectedFile = ""; // 사용자가 누른 과목 파일명 저장
+
+// 팝업 열기 (HTML 버튼에서 호출)
+function openLevelPopup(fileName, subjectName) {
+    selectedFile = fileName; // 파일명 저장해두기
+    document.getElementById('popup-title').innerText = subjectName; // 제목 바꾸기
+    document.getElementById('level-popup').classList.remove('hidden');
+}
+
+// 팝업 닫기
+function closeLevelPopup() {
+    document.getElementById('level-popup').classList.add('hidden');
+    selectedFile = "";
+}
+
+// 난이도 선택 완료 -> 퀴즈 시작
+function confirmStart(difficulty) {
+    if (!selectedFile) return;
+
+    closeLevelPopup(); // 팝업 닫고
+    startQuiz(selectedFile, difficulty); // 진짜 퀴즈 시작 (기존 함수 재활용)
 }

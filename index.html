@@ -26,16 +26,41 @@
                     <h3>논리설계</h3>
                     <p>게이트, 불 대수</p>
                 </button>
-                <button class="subject-card" onclick="startQuiz('archi.json')">
+                <button class="subject-card" onclick="openLevelPopup('archi.json', '컴퓨터 구조')">
                     <span class="icon">💻</span>
                     <h3>컴퓨터 구조</h3>
-                    <p>MIPS, 파이프라인</p>
+                    <p>RISC-V, 파이프라인 (100문제)</p>
                 </button>
                 <button class="subject-card" onclick="startQuiz('linear.json')">
                     <span class="icon">💎</span>
                     <h3>선형대수학 (심화)</h3>
                     <p>선형대수와 군 (이인석 저)</p>
                 </button>
+                
+                <div id="level-popup" class="modal-overlay hidden">
+                    <div class="modal-box">
+                        <h2 id="popup-title">난이도 선택</h2>
+                        <p>자신에게 맞는 레벨을 선택하세요!</p>
+
+                        <div class="level-btn-container">
+                            <button onclick="confirmStart(1)" class="lvl-btn basic">
+                                <span>🌱</span> 기초 <span>(Basic)</span>
+                            </button>
+                            <button onclick="confirmStart(2)" class="lvl-btn applied">
+                                <span>🌿</span> 응용 <span>(Applied)</span>
+                            </button>
+                            <button onclick="confirmStart(3)" class="lvl-btn hard">
+                                <span>🔥</span> 실전 <span>(Exam)</span>
+                            </button>
+                        </div>
+
+                        <button onclick="confirmStart(0)" class="lvl-btn all">
+                            🎲 전체 문제 섞어서 풀기
+                        </button>
+
+                        <button onclick="closeLevelPopup()" class="close-popup-btn">취소</button>
+                    </div>
+                </div>
             </div>
             <button onclick="openWrongNote()" class="wrong-note-btn">
                 🔥 내 오답 노트 확인하기
