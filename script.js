@@ -85,6 +85,14 @@ function loadQuestion() {
         button.onclick = () => checkAnswer(index, questionData.answer);
         optionsContainer.appendChild(button);
     });
+
+    // 수식이 포함된 문제의 경우, MathJax로 렌더링
+    document.getElementById('question-text').innerHTML = questionData.question;
+
+    // 문제 로딩 후 수식 렌더링 업데이트
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
 }
 function checkAnswer(selectedIndex, correctIndex) {
     const optionsContainer = document.getElementById('options-container');
@@ -99,7 +107,7 @@ function checkAnswer(selectedIndex, correctIndex) {
         document.getElementById('feedback-title').style.color = "#58cc02";
         score++;
         correctSound.volume = 0.5;
-correctSound.play().catch((e) => { console.log("소리 재생 실패:", e); });
+        correctSound.play().catch((e) => { console.log("소리 재생 실패:", e); });
     } else {
         // 오답
         buttons[selectedIndex].classList.add('wrong');
